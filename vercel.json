@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.yanglao8.com"
+        }
+      ],
+      "destination": "https://yanglao8.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "aiyl.2hcy.com"
+        }
+      ],
+      "destination": "https://yanglao8.com/$1",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "fall-guardian-site",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@vercel/blob": "latest"
+  },
+  "devDependencies": {
+    "supabase": "^2.95.4"
+  }
+}

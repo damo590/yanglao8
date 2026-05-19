@@ -1,0 +1,4235 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>稳住别摔｜家庭防摔自测专题</title>
+  <script>
+    const CANONICAL_HOST = "yanglao8.com";
+    const CANONICAL_REDIRECT_HOSTS = ["fall-guardian-site.vercel.app", "www.yanglao8.com", "aiyl.2hcy.com"];
+    if (CANONICAL_REDIRECT_HOSTS.includes(location.hostname)) {
+      const target = new URL(location.href);
+      target.hostname = CANONICAL_HOST;
+      location.replace(target.toString());
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #eaf3f0;
+      --bg2: #f7fbfa;
+      --panel: #ffffff;
+      --panel-soft: #f5faf8;
+      --panel-muted: #edf5f3;
+      --line: #c8dfda;
+      --line-strong: #8abcae;
+      --text: #133a34;
+      --muted: #426963;
+      --brand: #0f6a5c;
+      --brand-strong: #0a4f45;
+      --accent: #f2b233;
+      --accent-soft: #fff4d8;
+      --danger: #a24d47;
+      --danger-soft: #fff2f0;
+      --good: #1a7a62;
+      --good-soft: #ecf8f3;
+      --shadow: 0 10px 28px rgba(20, 57, 52, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    .hidden { display: none !important; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(15, 106, 92, 0.08), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      font-size: 18px;
+      overflow: hidden;
+    }
+
+    .wrap {
+      max-width: min(1680px, 98vw);
+      height: 100vh;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(91, 176, 146, 0.35), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(253, 202, 120, 0.3), transparent 42%),
+        linear-gradient(160deg, #0a211b, #133a30);
+      transition: opacity .45s ease;
+    }
+
+    .intro-screen.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .intro-stage {
+      width: min(940px, 95vw);
+      min-height: 320px;
+      border: 1px solid #3e7d68;
+      border-radius: 22px;
+      background: linear-gradient(170deg, rgba(18, 57, 47, 0.93), rgba(13, 38, 31, 0.95));
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+      padding: 26px 18px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-title {
+      text-align: center;
+      font-size: clamp(28px, 5.2vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #e9fff4;
+      text-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .intro-track {
+      position: relative;
+      margin-top: 20px;
+      height: 160px;
+      --run-distance: clamp(220px, 52vw, 760px);
+      border-radius: 16px;
+      border: 1px solid #3d7f69;
+      background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 12px, transparent 12px 24px),
+        linear-gradient(180deg, #1b5949, #153c32);
+      overflow: hidden;
+    }
+
+    .runner {
+      position: absolute;
+      bottom: 24px;
+      width: 96px;
+      height: 110px;
+      transform-origin: 50% 90%;
+    }
+
+    .runner.left { left: -84px; animation: stuntLeft 4.6s linear infinite; }
+    .runner.right { right: -84px; animation: stuntRight 4.6s linear infinite; }
+
+    .runner .roo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.28));
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .runner .head {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #c98b5d;
+      margin: 0 auto;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .runner .head::before,
+    .runner .head::after {
+      content: "";
+      position: absolute;
+      top: -15px;
+      width: 12px;
+      height: 18px;
+      border-radius: 8px 8px 3px 3px;
+      background: #b7784d;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .runner .head::before { left: 3px; transform: rotate(-12deg); }
+    .runner .head::after { right: 3px; transform: rotate(12deg); }
+
+    .runner .body {
+      width: 34px;
+      height: 50px;
+      background: #bf8055;
+      margin: 4px auto 0;
+      border-radius: 16px 16px 20px 20px;
+      position: relative;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .runner .body::before,
+    .runner .body::after {
+      content: "";
+      position: absolute;
+      bottom: -26px;
+      width: 9px;
+      height: 28px;
+      border-radius: 5px;
+      background: #a86f49;
+    }
+
+    .runner .body::before { left: 2px; transform: rotate(16deg); }
+    .runner .body::after { right: 2px; transform: rotate(-16deg); }
+
+    .runner .pouch {
+      position: absolute;
+      width: 20px;
+      height: 15px;
+      background: #dca574;
+      border: 2px solid rgba(0, 0, 0, 0.18);
+      border-radius: 10px 10px 11px 11px;
+      left: 50%;
+      top: 64px;
+      transform: translateX(-50%);
+    }
+
+    .runner .tail {
+      content: "";
+      position: absolute;
+      width: 36px;
+      height: 8px;
+      background: #a66d48;
+      border-radius: 10px;
+      left: -22px;
+      top: 74px;
+      transform: rotate(-16deg);
+      transform-origin: right center;
+    }
+
+    .runner.right .tail {
+      left: auto;
+      right: -22px;
+      transform: rotate(16deg);
+    }
+
+    .intro-line {
+      margin-top: 16px;
+      text-align: center;
+      font-size: clamp(22px, 3.8vw, 44px);
+      font-weight: 900;
+      letter-spacing: .02em;
+      color: #ffe7a8;
+      opacity: 0;
+      transform: translateY(14px) scale(.95);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+
+    .intro-screen.phase-2 .intro-line {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .intro-enter {
+      margin: 14px auto 0;
+      display: block;
+      border: 1px solid #7ad9b0;
+      border-radius: 12px;
+      background: linear-gradient(170deg, #2d896d, #1d614e);
+      color: #edfff6;
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 900;
+      padding: 10px 16px;
+      cursor: pointer;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .28s ease, transform .28s ease;
+    }
+
+    .intro-screen.phase-3 .intro-enter {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .intro-enter:disabled { opacity: .35; cursor: not-allowed; }
+
+    .fail-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 10%, rgba(255, 181, 148, 0.25), transparent 36%),
+        radial-gradient(circle at 70% 90%, rgba(124, 176, 255, 0.2), transparent 40%),
+        rgba(5, 16, 30, 0.88);
+      backdrop-filter: blur(2px);
+    }
+
+    .fail-scene.show {
+      display: grid;
+    }
+
+    .fail-card {
+      width: min(640px, 92vw);
+      border-radius: 18px;
+      border: 1px solid #5c7ea3;
+      background: linear-gradient(165deg, #1a2d46, #131f34);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      padding: 18px 16px 14px;
+      text-align: center;
+    }
+
+    .fail-title {
+      font-size: clamp(24px, 4.2vw, 40px);
+      font-weight: 900;
+      color: #eef7ff;
+      line-height: 1.2;
+    }
+
+    .fail-sub {
+      margin-top: 6px;
+      font-size: clamp(16px, 2.3vw, 24px);
+      color: #cfe2f9;
+      line-height: 1.4;
+    }
+
+    .fail-roo-wrap {
+      margin: 14px auto 8px;
+      width: 220px;
+      height: 150px;
+      position: relative;
+    }
+
+    .fail-roo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.3));
+      transform-origin: 50% 80%;
+      animation: failFall 1.4s ease forwards;
+    }
+
+    .fail-scene.show .fail-roo {
+      animation: failFall 1.4s ease forwards;
+    }
+
+    .fail-bubble {
+      position: absolute;
+      right: -8px;
+      top: -4px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffe6bf;
+      border: 1px solid #f2b565;
+      background: rgba(89, 52, 16, 0.9);
+      opacity: 0;
+      animation: failBubble .9s ease .9s forwards;
+    }
+
+    .fail-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .fail-btn {
+      border-radius: 10px;
+      border: 1px solid #8bb8e8;
+      background: linear-gradient(165deg, #3b7ec2, #2b5f95);
+      color: #ecf6ff;
+      font-size: 16px;
+      font-weight: 900;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    .fail-btn.alt {
+      border-color: #86a5ca;
+      background: linear-gradient(165deg, #2b486e, #223a58);
+    }
+
+    @keyframes failFall {
+      0% { transform: translateY(-18px) rotate(0deg); }
+      38% { transform: translateY(12px) rotate(70deg); }
+      56% { transform: translateY(18px) rotate(86deg); }
+      80% { transform: translateY(18px) rotate(82deg); }
+      100% { transform: translateY(18px) rotate(84deg); }
+    }
+
+    @keyframes failBubble {
+      0% { opacity: 0; transform: translateY(10px) scale(.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes stuntLeft {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(calc(var(--run-distance) * .5)) rotate(0deg); }
+      34% { transform: translateX(calc(var(--run-distance) * .72)) rotate(52deg); }
+      44% { transform: translateX(calc(var(--run-distance) * .78)) rotate(84deg); }
+      56% { transform: translateX(calc(var(--run-distance) * .84)) rotate(0deg); }
+      100% { transform: translateX(var(--run-distance)) rotate(0deg); }
+    }
+
+    @keyframes stuntRight {
+      0% { transform: scaleX(-1) translateX(0) rotate(0deg); }
+      25% { transform: scaleX(-1) translateX(calc(var(--run-distance) * .5)) rotate(0deg); }
+      34% { transform: scaleX(-1) translateX(calc(var(--run-distance) * .72)) rotate(52deg); }
+      44% { transform: scaleX(-1) translateX(calc(var(--run-distance) * .78)) rotate(84deg); }
+      56% { transform: scaleX(-1) translateX(calc(var(--run-distance) * .84)) rotate(0deg); }
+      100% { transform: scaleX(-1) translateX(var(--run-distance)) rotate(0deg); }
+    }
+
+    .runner.left .body,
+    .runner.right .body {
+      animation: rooHop .34s linear infinite;
+    }
+
+    .runner .roo-img {
+      animation: rooHop .34s linear infinite;
+    }
+
+    @keyframes rooHop {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .screenGame.active { height: 100%; }
+
+    .hero {
+      padding: 26px;
+      background: linear-gradient(180deg, #f9fffd, #eef7f4);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      color: var(--brand);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: .01em;
+      white-space: nowrap;
+    }
+
+    .hero .sub {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: clamp(20px, 2.4vw, 30px);
+      line-height: 1.5;
+      max-width: 860px;
+    }
+
+    .danger-box {
+      margin-top: 16px;
+      border: 2px solid #e3b2ab;
+      border-radius: 16px;
+      background: linear-gradient(170deg, #fff7f5, #ffefec);
+      padding: 14px 16px;
+    }
+
+    .danger-box strong {
+      display: block;
+      font-size: clamp(24px, 4.8vw, 40px);
+      color: #8d3f39;
+      line-height: 1.12;
+      margin-bottom: 8px;
+    }
+
+    .danger-box p {
+      font-size: clamp(20px, 2.2vw, 28px);
+      color: #7a4f49;
+      line-height: 1.5;
+    }
+
+    .cost-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 7px;
+      color: #7a4f49;
+      font-size: clamp(18px, 1.9vw, 24px);
+      line-height: 1.45;
+    }
+
+    .content { padding: 16px; }
+
+    #screenGame .content {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: grid;
+      grid-template-rows: auto auto auto auto 1fr;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    #screenResult .content {
+      height: calc(100% - 164px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 12px 12px 88px;
+    }
+
+    #screenHome {
+      height: 100%;
+      overflow: auto;
+      padding: 14px;
+      background: linear-gradient(180deg, #e9f3f1 0%, #dceceb 100%);
+      color: #1f3f3b;
+    }
+
+    #screenHome .home-shell {
+      border: 1px solid #b8d9d3;
+      border-radius: 18px;
+      background: #f6fbfa;
+      box-shadow: 0 10px 24px rgba(34, 76, 69, 0.08);
+      overflow: hidden;
+    }
+
+    #screenHome .home-head {
+      display: grid;
+      grid-template-columns: 1fr minmax(320px, 540px);
+      gap: 14px;
+      padding: 18px;
+      border-bottom: 1px solid #d0e7e2;
+      background: linear-gradient(180deg, #f9fffe, #edf7f4);
+    }
+
+    #screenHome .home-brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    #screenHome .home-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: #1f8f76;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    #screenHome .hero h1,
+    #screenHome .home-brand h1 {
+      font-size: clamp(34px, 3vw, 54px);
+      line-height: 1.1;
+      color: #103833;
+      white-space: normal;
+    }
+
+    #screenHome .hero .sub,
+    #screenHome .home-brand .sub {
+      margin-top: 4px;
+      font-size: clamp(17px, 1.4vw, 24px);
+      color: #2a5b54;
+      max-width: 900px;
+    }
+
+    .risk-strip {
+      border: 1px solid #c8e0db;
+      border-radius: 12px;
+      background: #f3faf8;
+      padding: 10px 12px;
+    }
+
+    .risk-toggle {
+      width: 100%;
+      border: 1px solid #c7dfda;
+      border-radius: 10px;
+      background: #eef7f5;
+      color: #2d5c54;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: left;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    .risk-body {
+      margin-top: 8px;
+      font-size: 15px;
+      color: #2f6259;
+      line-height: 1.45;
+      display: grid;
+      gap: 4px;
+    }
+
+    #screenHome .content,
+    #screenHome .home-main {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 12px;
+      padding: 16px;
+      overflow: visible;
+      align-items: start;
+    }
+
+    #screenHome .home-left {
+      display: grid;
+      gap: 12px;
+    }
+
+    #screenHome .home-right {
+      display: grid;
+      gap: 12px;
+    }
+
+    #screenHome .home-triplet {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    #screenHome .home-card,
+    #screenHome .panel {
+      margin: 0;
+      min-height: 0;
+      border: 1px solid #c8e0db;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 14px;
+      color: #1f423d;
+      box-shadow: 0 6px 14px rgba(34, 76, 69, 0.06);
+    }
+
+    #screenHome .panel h2,
+    #screenHome .panel h3 {
+      color: #14584f;
+    }
+
+    #screenHome .home-card h3 {
+      font-size: clamp(22px, 1.8vw, 28px);
+      line-height: 1.2;
+    }
+
+    #screenHome .mode-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    #screenHome .mode-btn {
+      min-height: 62px;
+      padding: 10px 12px;
+      font-size: clamp(20px, 1.1vw, 26px);
+      border: 1px solid #c8dfda;
+      border-radius: 12px;
+      background: #f7fbfa;
+      color: #174b43;
+      box-shadow: none;
+      text-align: left;
+    }
+
+    #screenHome .mode-btn:hover {
+      border-color: #86c7ba;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(39, 96, 86, 0.12);
+    }
+
+    #screenHome .mode-btn.mode-primary {
+      border-color: #d6a238;
+      background: linear-gradient(180deg, #fff7df, #ffffff);
+      box-shadow: 0 6px 14px rgba(196, 139, 28, 0.14);
+    }
+
+    #screenHome .mode-btn.mode-danger {
+      color: #7a3a38;
+      background: #fff7f7;
+      border-color: #efcdcb;
+    }
+
+    #screenHome .mode-title {
+      display: block;
+      font-size: 1em;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    #screenHome .mode-desc {
+      display: block;
+      margin-top: 4px;
+      color: #4d716b;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    #screenHome .mini,
+    #screenHome .hint {
+      color: #426963;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    #screenHome .talent-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    #screenHome .talent-btn {
+      border: 1px solid #d4e7e3;
+      border-radius: 12px;
+      background: #fafdfc;
+      color: #1f473f;
+      padding: 10px 12px;
+    }
+
+    #screenHome .talent-btn.active {
+      border-color: #e5bf63;
+      background: linear-gradient(165deg, #fff8e7, #fef3d5);
+    }
+
+    #screenHome .custom-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      align-items: end;
+    }
+
+    #screenHome .custom-field label {
+      color: #4f7069;
+    }
+
+    #screenHome .custom-field input,
+    #screenHome .custom-field select,
+    #screenHome #playerName {
+      border: 1px solid #c8dfda;
+      border-radius: 10px;
+      background: #f8fcfb;
+      color: #19453e;
+      padding: 9px 10px;
+      font-size: 15px;
+      font-weight: 700;
+      width: 100%;
+    }
+
+    #screenHome .speed-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    #screenHome .speed-pill {
+      border: 1px solid #c8dfda;
+      border-radius: 999px;
+      background: #f6fbfa;
+      color: #2c5d55;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 6px 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #screenHome .speed-pill.active {
+      background: #1f8f76;
+      color: #ffffff;
+      border-color: #1f8f76;
+    }
+
+    #screenHome .action-btn {
+      border: 1px solid #d3ab41;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffca4a, #f6ad1a);
+      color: #693d00;
+      font-size: 22px;
+      font-weight: 900;
+      min-height: 52px;
+      box-shadow: none;
+    }
+
+    #screenHome .side-box {
+      border: 1px solid #c8e0db;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 12px;
+      box-shadow: 0 6px 14px rgba(34, 76, 69, 0.06);
+    }
+
+    #screenHome .side-box h3 {
+      font-size: 26px;
+      line-height: 1.2;
+      color: #1b5f55;
+    }
+
+    #screenHome .name-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    #screenHome .save-name-btn {
+      border: 0;
+      border-radius: 999px;
+      background: #19876f;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 800;
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    #screenHome .weekly-top {
+      margin-top: 8px;
+      display: grid;
+      gap: 8px;
+      font-size: 15px;
+      color: #305c54;
+    }
+
+    #screenHome .rank-tabs {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    #screenHome .rank-tab {
+      border: 1px solid #c8dfda;
+      border-radius: 999px;
+      background: #f6fbfa;
+      color: #275951;
+      font-size: 14px;
+      font-weight: 800;
+      min-height: 36px;
+      cursor: pointer;
+    }
+
+    #screenHome .rank-tab.active {
+      border-color: #1f8f76;
+      background: #1f8f76;
+      color: #ffffff;
+    }
+
+    #screenHome .rank-meta {
+      margin-top: 8px;
+      color: #5a7a74;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    #screenHome .weekly-top > div {
+      border: 1px solid #d7e8e4;
+      border-radius: 10px;
+      background: #f8fcfb;
+      padding: 8px 10px;
+    }
+
+    #screenHome .custom-topic-row {
+      margin-top: 8px;
+    }
+
+    #screenHome .topic-btn {
+      text-align: left;
+      min-height: 70px;
+    }
+
+    #screenHome .mini-ops {
+      margin-top: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    #screenHome .mini-box {
+      border: 1px solid #c8e0db;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 10px;
+    }
+
+    #screenHome .mini-box .t {
+      color: #1a5e55;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    #screenHome .mini-box .d {
+      color: #426b64;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .day-grid {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .day-btn {
+      border: 1px solid #c8dfda;
+      border-radius: 9px;
+      background: #f6fbfa;
+      color: #245850;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 4px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+
+    .day-btn.done {
+      border-color: #62bfa8;
+      background: #e8f7f2;
+    }
+
+    #screenHome .game-preview {
+      border: 1px solid #c8e0db;
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 12px;
+      box-shadow: 0 6px 14px rgba(34, 76, 69, 0.06);
+    }
+
+    #screenHome .preview-shell {
+      margin-top: 8px;
+      border: 1px solid #d4e5e1;
+      border-radius: 12px;
+      background: #f8fcfb;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    #screenHome .preview-hud {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    #screenHome .preview-chip {
+      border: 1px solid #d5e7e3;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: 8px;
+      font-size: 14px;
+      color: #2d5d54;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    #screenHome .preview-question {
+      border: 1px solid #d5e7e3;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: 10px;
+      color: #214c45;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    #screenHome .preview-options {
+      display: grid;
+      gap: 6px;
+    }
+
+    #screenHome .preview-option {
+      border: 1px solid #d7e9e5;
+      border-radius: 9px;
+      background: #ffffff;
+      padding: 8px 10px;
+      color: #3b625b;
+      font-size: 14px;
+    }
+
+    #screenHome .preview-option.right {
+      border-color: #72c6b2;
+      background: #eaf8f4;
+      color: #175c4e;
+      font-weight: 800;
+    }
+
+    .home-hidden-data {
+      display: none;
+    }
+/* 结果页单屏化，避免底部内容溢出可点 */
+    #screenResult .source {
+      display: none;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      box-shadow: 0 6px 18px rgba(20, 57, 52, 0.06);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .mode-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-ops {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 10px;
+    }
+
+    .mini-box .t {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--brand-strong);
+    }
+
+    .mini-box .d {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .weekly-top {
+      margin-top: 8px;
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+      color: #d5ffeb;
+    }
+
+    .day-grid {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .day-btn {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel-soft);
+      color: var(--brand-strong);
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 4px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+
+    .day-btn.done {
+      border-color: var(--line-strong);
+      background: var(--good-soft);
+    }
+
+    .mode-btn,
+    .action-btn,
+    .option-btn {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+      color: var(--brand-strong);
+      font-size: clamp(20px, 1.8vw, 30px);
+      font-weight: 800;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+      line-height: 1.3;
+    }
+
+    .mode-btn:hover,
+    .action-btn:hover,
+    .option-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      box-shadow: 0 8px 18px rgba(20, 57, 52, 0.12);
+    }
+
+    .mode-btn:disabled,
+    .action-btn:disabled,
+    .option-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .action-btn {
+      border: 1px solid #d8a130;
+      background: linear-gradient(180deg, #ffc84f, var(--accent));
+      color: #6c4300;
+    }
+
+    .hud {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(18, minmax(0, 1fr));
+      margin-bottom: 4px;
+    }
+
+    .hud-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 6px 8px;
+      min-height: 54px;
+      overflow: hidden;
+    }
+
+    .hud-item .k {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    .hud-item .v {
+      font-size: clamp(20px, 1.35vw, 32px);
+      font-weight: 900;
+      line-height: 1.08;
+      word-break: break-word;
+      color: var(--brand-strong);
+    }
+
+    .hud-item.compact .v {
+      font-size: clamp(16px, 1.05vw, 24px);
+    }
+
+    .hud-item.tiny .v {
+      font-size: clamp(14px, .92vw, 20px);
+    }
+
+    .hud-item[data-hud="mode"] { grid-column: span 2; }
+    .hud-item[data-hud="index"] { grid-column: span 2; }
+    .hud-item[data-hud="hp"] { grid-column: span 3; }
+    .hud-item[data-hud="streak"] { grid-column: span 1; }
+    .hud-item[data-hud="score"] { grid-column: span 2; }
+    .hud-item[data-hud="timer"] { grid-column: span 1; }
+    .hud-item[data-hud="buff"] { grid-column: span 2; }
+    .hud-item[data-hud="age"] { grid-column: span 2; }
+    .hud-item[data-hud="gate"] { grid-column: span 2; }
+    .hud-item[data-hud="talent"] { grid-column: span 1; }
+
+    #hudHp {
+      letter-spacing: 1px;
+      font-size: clamp(18px, 1.2vw, 26px);
+      color: var(--brand);
+    }
+
+    .hud-item .v.warn {
+      color: #a66b00;
+    }
+
+    .hud-item .v.danger {
+      color: var(--danger);
+    }
+
+    .progress {
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel-muted);
+      height: 22px;
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--good), #94dbc3);
+      transition: width .28s ease;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .question-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      box-shadow: 0 8px 20px rgba(20, 57, 52, 0.06);
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
+    .question-title {
+      font-size: clamp(34px, 2.9vw, 56px);
+      line-height: 1.22;
+      margin-bottom: 8px;
+      font-weight: 900;
+      color: var(--brand-strong);
+    }
+
+    .question-sub {
+      color: var(--muted);
+      font-size: clamp(20px, 1.8vw, 30px);
+      line-height: 1.45;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .option-btn {
+      text-align: left;
+      font-size: clamp(24px, 2.1vw, 38px);
+      line-height: 1.35;
+      min-height: 88px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .option-code {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: rgba(15, 106, 92, 0.12);
+      color: var(--brand);
+      font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .option-btn.right {
+      border-color: #78c3af;
+      background: #eef8f4;
+    }
+
+    .option-btn.wrong {
+      border-color: #e4b0ab;
+      background: var(--danger-soft);
+      color: #7f433d;
+    }
+
+    .feedback {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      background: var(--panel-soft);
+      color: var(--brand-strong);
+      font-size: clamp(20px, 1.8vw, 30px);
+      line-height: 1.45;
+      min-height: 76px;
+    }
+
+    .feedback.good { border-color: #7dc5b1; background: var(--good-soft); }
+    .feedback.bad { border-color: #e0aba6; background: var(--danger-soft); color: #7f433d; }
+
+    .explain-box {
+      border: 1px dashed var(--line-strong);
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-top: 6px;
+      background: #fbfefd;
+      color: var(--text);
+      font-size: clamp(15px, 1.1vw, 20px);
+      line-height: 1.45;
+    }
+
+    .explain-box.hidden {
+      display: none;
+    }
+
+    .ctrl-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .result-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 10px;
+    }
+
+    .result-item .k { color: var(--muted); font-size: 17px; }
+    .result-item .v { font-size: clamp(30px, 2.3vw, 46px); font-weight: 900; color: var(--brand-strong); }
+
+    .result-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .result-ctrl-row {
+      position: sticky;
+      bottom: 0;
+      z-index: 4;
+      padding-top: 10px;
+      padding-bottom: 4px;
+      background: linear-gradient(180deg, rgba(247, 251, 250, 0), rgba(247, 251, 250, 0.96) 28%, rgba(247, 251, 250, 1));
+    }
+
+    .result-step {
+      border: 1px solid #d2e5e0;
+      border-radius: 14px;
+      background: #fbfefd;
+      padding: 12px 14px;
+    }
+
+    .result-step .t {
+      font-size: clamp(18px, 1.3vw, 24px);
+      font-weight: 900;
+      color: #14584f;
+      line-height: 1.2;
+    }
+
+    .result-step .d {
+      margin-top: 6px;
+      font-size: clamp(15px, 1.05vw, 19px);
+      color: #355f58;
+      line-height: 1.55;
+    }
+
+    .mini {
+      font-size: clamp(17px, 1.2vw, 22px);
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .source {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .age-road {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .age-road-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 9px 10px;
+    }
+
+    .age-road-item .t {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--brand-strong);
+      line-height: 1.25;
+    }
+
+    .age-road-item .d {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .age-road-item.done {
+      border-color: #87c7b4;
+      background: var(--good-soft);
+    }
+
+    .age-road-item.current {
+      border-color: #e0b85e;
+      background: var(--accent-soft);
+    }
+
+    .age-track {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .age-node {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 6px;
+      min-height: 72px;
+    }
+
+    .age-node .r {
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .age-node .n {
+      color: var(--brand-strong);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+
+    .age-node .m {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    .age-node.done {
+      border-color: #87c7b4;
+      background: var(--good-soft);
+    }
+
+    .age-node.now {
+      border-color: #e0b85e;
+      background: var(--accent-soft);
+    }
+
+    .talent-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .custom-row {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 8px;
+      align-items: end;
+    }
+
+    .custom-field label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .custom-field input,
+    .custom-field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-soft);
+      color: var(--brand-strong);
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .talent-btn {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+      color: var(--brand-strong);
+      text-align: left;
+      padding: 12px 12px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .talent-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+    }
+
+    .talent-btn.active {
+      border-color: #e0b85e;
+      background: var(--accent-soft);
+    }
+
+    .talent-btn .t {
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .talent-btn .d {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .story-box {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+      padding: 8px 10px;
+      margin-bottom: 6px;
+    }
+
+    .story-title {
+      font-size: clamp(18px, 1.4vw, 24px);
+      font-weight: 900;
+      color: var(--brand-strong);
+      line-height: 1.25;
+    }
+
+    .story-line {
+      margin-top: 4px;
+      font-size: clamp(14px, 1vw, 18px);
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .story-meme {
+      margin-top: 4px;
+      font-size: clamp(12px, .9vw, 15px);
+      color: var(--brand);
+      line-height: 1.4;
+    }
+
+    #screenGame .question-box {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto auto;
+      overflow: visible;
+      padding-bottom: 18px;
+    }
+
+    #screenGame .question-title {
+      font-size: clamp(34px, 2.3vw, 52px);
+      margin-bottom: 4px;
+    }
+
+    #screenGame .question-sub {
+      font-size: clamp(20px, 1.4vw, 28px);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    #screenGame .options {
+      gap: 8px;
+      overflow: visible;
+    }
+
+    #screenGame .option-btn {
+      min-height: 64px;
+      font-size: clamp(20px, 1.6vw, 32px);
+      padding: 10px 12px;
+    }
+
+    #screenGame .feedback {
+      margin-top: 6px;
+      min-height: 50px;
+      font-size: clamp(16px, 1.2vw, 22px);
+      padding: 8px 10px;
+    }
+
+    #screenGame .ctrl-row {
+      position: sticky;
+      bottom: 0;
+      z-index: 4;
+      margin-top: 10px;
+      margin-left: -14px;
+      margin-right: -14px;
+      margin-bottom: -14px;
+      padding: 12px 14px 14px;
+      border-top: 1px solid rgba(138, 188, 174, 0.6);
+      background: linear-gradient(180deg, rgba(247, 251, 250, 0.82), rgba(255, 255, 255, 0.96));
+      box-shadow: 0 -10px 22px rgba(20, 57, 52, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-height: 900px) {
+      #screenGame .age-track { display: none; }
+      #screenGame .story-box { display: none; }
+      #screenGame .question-title { font-size: clamp(28px, 2vw, 40px); }
+      #screenGame .question-sub { font-size: clamp(16px, 1.2vw, 22px); }
+      #screenGame .option-btn { min-height: 56px; font-size: clamp(18px, 1.3vw, 26px); }
+    }
+
+    @media (max-width: 640px) {
+      html, body { font-size: 16px; overflow: auto; }
+      .wrap { height: auto; min-height: 100vh; padding: 10px 8px 26px; }
+      .card { height: auto; }
+      .hero { padding: 16px; }
+      .content { padding: 10px; }
+      #screenHome { padding: 10px 8px 16px; }
+      #screenHome .home-head { grid-template-columns: 1fr; }
+      #screenHome .home-brand { align-items: flex-start; }
+      #screenHome .home-logo { width: 48px; height: 48px; border-radius: 12px; font-size: 24px; }
+      #screenHome .home-brand h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.13; }
+      #screenHome .home-main { grid-template-columns: 1fr; padding: 10px; }
+      #screenHome .home-triplet { grid-template-columns: 1fr; }
+      #screenHome .mode-row { grid-template-columns: 1fr; }
+      #screenHome .mini-ops { grid-template-columns: 1fr; }
+      #screenHome .preview-hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #screenResult .source { display: block; }
+      .mini-ops { grid-template-columns: 1fr; }
+      .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hud-item[data-hud] { grid-column: span 1; }
+      .hud-item { min-height: 66px; }
+      .option-btn { min-height: 68px; }
+      .age-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .badge { font-size: 14px; }
+      .hero .sub { font-size: clamp(16px, 3.5vw, 20px); }
+      .hero h1 { white-space: normal; }
+      .danger-box p { font-size: clamp(15px, 3.3vw, 20px); }
+      .cost-list { font-size: clamp(14px, 3vw, 18px); }
+      .mode-btn, .action-btn, .option-btn { font-size: clamp(17px, 4vw, 22px); padding: 12px 12px; }
+      .hud-item .k { font-size: 14px; }
+      .hud-item .v { font-size: clamp(22px, 5vw, 30px); }
+      .chip { font-size: 14px; }
+      .question-title { font-size: clamp(28px, 7vw, 34px); }
+      .question-sub { font-size: clamp(16px, 3.6vw, 20px); }
+      .option-btn { font-size: clamp(20px, 4.6vw, 26px); }
+      .feedback { font-size: clamp(16px, 3.4vw, 20px); min-height: 62px; }
+      .mini { font-size: 14px; }
+      .source { font-size: 13px; }
+      .age-road-item .t { font-size: 15px; }
+      .age-road-item .d { font-size: 13px; }
+      .age-node .r { font-size: 13px; }
+      .age-node .n { font-size: 14px; }
+      .age-node .m { font-size: 12px; }
+      .talent-btn .t { font-size: 15px; }
+      .talent-btn .d { font-size: 12px; }
+      .story-title { font-size: 18px; }
+      .story-line { font-size: 14px; }
+      .story-meme { font-size: 13px; }
+    }
+
+    @media (min-width: 1600px) {
+      .wrap { max-width: min(1700px, 99vw); }
+      .hero h1 { font-size: clamp(50px, 4.2vw, 86px); }
+      .danger-box strong { font-size: clamp(34px, 2.6vw, 52px); }
+    }
+  </style>
+</head>
+<body>
+  <section id="introScreen" class="intro-screen">
+    <div class="intro-stage">
+      <div class="intro-title">稳住别摔｜家庭防摔自测专题</div>
+      <div class="intro-track">
+        <div class="runner left">
+          <img class="roo-img" src="./kangaroo-twemoji.svg" alt="袋鼠卡通" />
+        </div>
+        <div class="runner right">
+          <img class="roo-img" src="./kangaroo-twemoji.svg" alt="袋鼠卡通" />
+        </div>
+      </div>
+      <div id="introLine" class="intro-line">先把家里的摔倒风险测清楚，再决定今天改哪里。</div>
+      <button id="introEnter" class="intro-enter">开始 3 分钟家庭防摔自测</button>
+    </div>
+  </section>
+  <section id="failScene" class="fail-scene">
+    <div class="fail-card">
+      <div class="fail-title">这次摔倒了，先稳住</div>
+      <div class="fail-sub">袋鼠没爬起来，但你可以立刻重开一局。</div>
+      <div class="fail-roo-wrap">
+        <img class="fail-roo" src="./kangaroo-twemoji.svg" alt="失败袋鼠" />
+        <div class="fail-bubble">这波先不行，马上再来</div>
+      </div>
+      <div class="fail-actions">
+        <button id="failRetryBtn" class="fail-btn">立即再来一次</button>
+        <button id="failSummaryBtn" class="fail-btn alt">查看本轮总结</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="card">
+      <section id="screenHome" class="screen active">
+        <div class="home-shell">
+          <div class="home-head">
+            <div class="home-brand">
+              <div class="home-logo">🛡️</div>
+              <div>
+                <h1>稳住别摔｜家庭防摔自测专题</h1>
+                <p class="sub">老人一旦摔倒，后果往往不是小事。先测一测家里有没有关键风险点，再决定先改哪里。</p>
+              </div>
+            </div>
+            <div class="risk-strip">
+              <button id="riskToggle" class="risk-toggle" aria-expanded="false" aria-controls="riskBody">风险提示：点击展开</button>
+              <div id="riskBody" class="risk-body hidden" aria-hidden="true">
+                <div>老人摔倒髋部骨折后，一年内死亡风险约 20%-30%。防摔重于补救。</div>
+                <div>建议优先：夜间动线清障、浴室防滑、药物复核、家庭应急清单。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-main">
+            <div class="home-left">
+              <div class="home-triplet">
+                <div class="panel home-card">
+                  <h3>A 自测方式</h3>
+                  <div class="mini" style="margin-top:4px;">先选一种适合当前家庭状态的自测方式。</div>
+                  <div class="mode-row">
+                    <button id="btnCampaign" class="mode-btn mode-primary"><span class="mode-title">标准自测</span><span class="mode-desc">推荐先测，快速找到今天最该改的风险点。</span></button>
+                    <button id="btnWeekly" class="mode-btn"><span class="mode-title">本周 5 题自测</span><span class="mode-desc">轻量复盘，适合发给家人一起做。</span></button>
+                    <button id="btnCustom" class="mode-btn"><span class="mode-title">自定义自测</span><span class="mode-desc">自己设题量和节奏，先测最关心的部分。</span></button>
+                    <button id="btnInfinite" class="mode-btn"><span class="mode-title">连续练习</span><span class="mode-desc">用于巩固知识点，不追求一次做完。</span></button>
+                    <button id="btnMarathon" class="mode-btn"><span class="mode-title">完整自测（100题）</span><span class="mode-desc">深度排查，适合已有改造计划时使用。</span></button>
+                    <button id="btnReset" class="mode-btn mode-danger"><span class="mode-title">清空历史记录</span><span class="mode-desc">只清除本机昵称、得分和进度。</span></button>
+                  </div>
+                </div>
+
+                <div class="panel home-card">
+                  <h3>B 角色选择</h3>
+                  <div class="mini" style="margin-top:4px;">按你在家庭中的身份，选择更贴合的提示节奏。</div>
+                  <div id="roleRow" class="talent-row"></div>
+                </div>
+
+                <div class="panel home-card">
+                  <h3>C 自定义自测</h3>
+                  <div class="mini" style="margin-top:4px;">自由设置题量与节奏，先测最关心的部分。</div>
+                  <div class="custom-row">
+                    <div class="custom-field">
+                      <label for="customCount">题目数量</label>
+                      <input id="customCount" type="number" min="5" max="300" value="20" />
+                    </div>
+                    <div class="custom-field">
+                      <label for="customSpeed">题目节奏</label>
+                      <select id="customSpeed">
+                        <option value="easy">舒缓</option>
+                        <option value="normal" selected>适中</option>
+                        <option value="hard">紧凑</option>
+                      </select>
+                    </div>
+                    <button id="btnCustomStart" class="action-btn">开始家庭防摔自测</button>
+                  </div>
+                  <div class="mini" style="margin-top:8px;">想先测哪几类（可多选）</div>
+                  <div id="customTopicRow" class="talent-row custom-topic-row"></div>
+                  <div class="mini" style="margin-top:8px;">开局天赋（三选一）</div>
+                  <div id="talentRow" class="talent-row"></div>
+                </div>
+              </div>
+
+              <div class="mini-ops">
+                <div class="mini-box">
+                  <div class="t">本周 5 题自测</div>
+                  <div class="d" id="weeklyMeta">本周主题加载中...</div>
+                </div>
+                <div class="mini-box">
+                  <div class="t">7天改造清单</div>
+                  <div class="d" id="dayMeta">完成 0 / 7 天</div>
+                  <div class="day-grid" id="dayGrid"></div>
+                </div>
+              </div>
+
+              <div class="game-preview">
+                <h3>页面预览</h3>
+                <div class="mini" style="margin-top:4px;">界面示例，实际内容以答题过程为准。</div>
+                <div class="preview-shell">
+                  <div class="preview-hud">
+                    <div class="preview-chip">生命 ❤❤❤</div>
+                    <div class="preview-chip">得分 860</div>
+                    <div class="preview-chip">限时 28s</div>
+                    <div class="preview-chip">状态 连击x2</div>
+                    <div class="preview-chip">第12/20题</div>
+                  </div>
+                  <div class="preview-question">浴室地面湿滑时，最安全的做法是什么？</div>
+                  <div class="preview-options">
+                    <div class="preview-option">A 在地上铺厚毛巾吸水</div>
+                    <div class="preview-option right">B 穿防滑拖鞋，并使用防滑垫</div>
+                    <div class="preview-option">C 直接穿袜子快速通过</div>
+                    <div class="preview-option">D 用大量水冲洗干净</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="home-hidden-data">
+                <div id="homeProgressText"></div>
+                <div id="homeAgeRoad"></div>
+              </div>
+            </div>
+
+            <aside class="home-right">
+              <div class="side-box">
+                <h3>排行榜昵称</h3>
+                <div class="mini" style="margin-top:4px;">参与全网榜单，用一个名字记录你的自测结果。</div>
+                <div class="name-row">
+                  <input id="playerName" type="text" maxlength="12" placeholder="请输入你的昵称（2-12字）" />
+                  <button id="saveNameBtn" class="save-name-btn">保存昵称</button>
+                </div>
+              </div>
+
+              <div class="side-box">
+                <h3>全网排行榜</h3>
+                <div id="rankScopeTabs" class="rank-tabs">
+                  <button type="button" class="rank-tab" data-rank-scope="day">日榜</button>
+                  <button type="button" class="rank-tab active" data-rank-scope="week">周榜</button>
+                  <button type="button" class="rank-tab" data-rank-scope="month">月榜</button>
+                </div>
+                <div id="rankScopeMeta" class="rank-meta">按全网用户当前榜单排序。</div>
+                <div class="weekly-top" id="weeklyTop"></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <section id="screenGame" class="screen">
+        <div class="content">
+          <div class="hud">
+            <div class="hud-item compact" data-hud="mode"><div class="k">模式</div><div class="v" id="hudMode">闯关</div></div>
+            <div class="hud-item compact" data-hud="index"><div class="k">当前题号</div><div class="v" id="hudIndex">1 / 100</div></div>
+            <div class="hud-item" data-hud="hp"><div class="k">生命值</div><div class="v" id="hudHp">❤❤❤❤❤</div></div>
+            <div class="hud-item tiny" data-hud="streak"><div class="k">连击</div><div class="v" id="hudStreak">0</div></div>
+            <div class="hud-item compact" data-hud="score"><div class="k">得分</div><div class="v" id="hudScore">0</div></div>
+            <div class="hud-item tiny" data-hud="timer"><div class="k">限时</div><div class="v" id="hudTimer">--</div></div>
+            <div class="hud-item tiny" data-hud="buff"><div class="k">状态</div><div class="v" id="hudBuff">无</div></div>
+            <div class="hud-item compact" data-hud="age"><div class="k">当前年龄</div><div class="v" id="hudAge">50.0岁</div></div>
+            <div class="hud-item compact" data-hud="gate"><div class="k">长线阶段</div><div class="v" id="hudGate">50-60</div></div>
+            <div class="hud-item tiny" data-hud="talent"><div class="k">当前天赋</div><div class="v" id="hudTalent">稳健底盘</div></div>
+          </div>
+
+          <div class="progress"><span id="progressFill"></span></div>
+
+          <div class="meta">
+            <span class="chip" id="chipChapter">第一章</span>
+            <span class="chip" id="chipRegion">台湾经验</span>
+            <span class="chip" id="chipType">居家改造</span>
+            <span class="chip" id="chipAge">50-60岁</span>
+            <span class="chip" id="chipRoute">处理得比较稳</span>
+          </div>
+          <div class="age-track" id="ageTrack"></div>
+          <div class="story-box">
+            <div id="storyTitle" class="story-title">第一阶段：先把家里明显风险找出来</div>
+            <div id="storyLine" class="story-line">先别急着大改，先看清家里最容易让老人摔倒的地方在哪里。</div>
+            <div id="storyMeme" class="story-meme">先排查，再动手改，顺序对了才省事。</div>
+          </div>
+
+          <div class="question-box">
+            <div class="question-title" id="questionTitle">题目加载中...</div>
+            <div class="question-sub" id="questionSub">请从下面选择最优先的一步。</div>
+            <div class="options" id="options"></div>
+            <div class="ctrl-row">
+              <button class="action-btn" id="nextBtn" disabled>下一题</button>
+              <button class="action-btn" id="quitBtn">返回专题首页</button>
+            </div>
+            <div class="feedback" id="feedback">自测开始：先把最关键的一步判断清楚。</div>
+            <div class="explain-box hidden" id="explainBox"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screenResult" class="screen">
+        <div class="hero">
+          <div class="badge-row">
+            <span class="badge">自测总结</span>
+            <span class="badge" id="resultBadge">继续升级</span>
+          </div>
+          <h2 id="resultTitle" style="font-size:clamp(34px,6vw,54px);line-height:1.1;">这一轮家庭防摔自测已完成</h2>
+          <p id="resultDesc" class="sub">先把最容易出事的场景改掉，再谈更复杂的训练和设备。</p>
+        </div>
+        <div class="content">
+          <div class="result-grid">
+            <div class="result-item"><div class="k">总分</div><div class="v" id="rScore">0</div></div>
+            <div class="result-item"><div class="k">正确率</div><div class="v" id="rAcc">0%</div></div>
+            <div class="result-item"><div class="k">最高连击</div><div class="v" id="rStreak">0</div></div>
+            <div class="result-item"><div class="k">已解锁</div><div class="v" id="rUnlock">0 / 100</div></div>
+            <div class="result-item"><div class="k">推进到年龄</div><div class="v" id="rAge">50岁</div></div>
+          </div>
+          <div class="panel">
+            <h3 style="font-size:clamp(20px,3.7vw,30px);line-height:1.2;">下一步行动建议</h3>
+            <div id="resultActions" class="result-actions" style="margin-top:10px;"></div>
+          </div>
+          <div class="ctrl-row result-ctrl-row">
+            <button class="action-btn" id="againBtn">再测一轮</button>
+            <button class="action-btn" id="homeBtn">返回专题首页</button>
+          </div>
+          <div class="source">
+            参考思路：目标、规则、反馈、自愿参与（游戏化四要素）；并结合中国、日本、韩国、台湾地区防跌实践进行题库化改写。
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "fall_guardian_100_v1";
+    const LEADERBOARD_API = "/api/leaderboard";
+    const CHALLENGE_7D_TASKS = [
+      "夜灯+清障",
+      "浴室防滑",
+      "稳鞋底",
+      "扶手检查",
+      "药物复核",
+      "5分钟练习",
+      "应急清单"
+    ];
+
+    const ageGateDefs = [
+      {
+        key: "G1",
+        min: 50,
+        max: 60,
+        label: "50-60岁",
+        title: "预防启动期",
+        quest: "完成风险认知 + 居家隐患排查"
+      },
+      {
+        key: "G2",
+        min: 60,
+        max: 70,
+        label: "60-70岁",
+        title: "隐患清零期",
+        quest: "浴室先补防滑垫、扶手、洗澡凳 + 夜里通道清障"
+      },
+      {
+        key: "G3",
+        min: 70,
+        max: 80,
+        label: "70-80岁",
+        title: "肌力稳住期",
+        quest: "每天练一练 + 看看药会不会让人发晕"
+      },
+      {
+        key: "G4",
+        min: 80,
+        max: 90,
+        label: "80-90岁",
+        title: "外出守稳期",
+        quest: "出门先站稳再走 + 需要时加提醒"
+      },
+      {
+        key: "G5",
+        min: 90,
+        max: 100,
+        label: "90-100岁",
+        title: "百岁冲刺期",
+        quest: "把应急联系人和家里分工先定好"
+      }
+    ];
+
+    function gateByChapter(chapterNo) {
+      const idx = Math.max(0, Math.min(ageGateDefs.length - 1, Math.floor((chapterNo - 1) / 2)));
+      return ageGateDefs[idx];
+    }
+
+    const TALENTS = [
+      {
+        id: "steady",
+        name: "稳健底盘",
+        desc: "初始生命+1，上限6，适合稳推。",
+        maxHp: 6,
+        scoreFlat: 0,
+        comboExtra: 0,
+        luckyGuard: false
+      },
+      {
+        id: "combo",
+        name: "连击火力",
+        desc: "每次答对额外+3分，连击更能拉开差距。",
+        maxHp: 5,
+        scoreFlat: 3,
+        comboExtra: 1,
+        luckyGuard: false
+      },
+      {
+        id: "rescue",
+        name: "急救直觉",
+        desc: "首次濒死时自动保留1点生命（仅一次）。",
+        maxHp: 5,
+        scoreFlat: 0,
+        comboExtra: 0,
+        luckyGuard: true
+      }
+    ];
+
+    const ROLES = [
+      { id: "child", name: "子女照护者", desc: "更稳：额外+1生命，节奏略宽松。", hpDelta: 1, scoreFlat: 0, timeDelta: 1 },
+      { id: "senior", name: "长者本人", desc: "更谨慎：基础分+2，但容错不变。", hpDelta: 0, scoreFlat: 2, timeDelta: 0 },
+      { id: "caregiver", name: "护理者", desc: "专业节奏：分数更高，时间更紧。", hpDelta: 0, scoreFlat: 4, timeDelta: -1 }
+    ];
+
+    const BOSS_GATES = {
+      20: {
+        title: "60岁关键题",
+        stem: "关键题：父母夜里老要起床，最先该改哪里最有用？",
+        sub: "这是这一阶段最要紧的一题，判断对了，后面会顺很多。",
+        options: [
+          { text: "床到厕所动线清障 + 感应夜灯 + 防滑拖鞋", ok: true, route: "steady", fb: "先控高频夜间风险，收益最大。" },
+          { text: "先买高价智能设备，基础动线先不动", ok: false, route: "delay", fb: "跳过基础改造，风险依旧在。" },
+          { text: "先观望半年，摔过再改", ok: false, route: "chaos", fb: "延后处理会放大后续损失。" }
+        ]
+      },
+      40: {
+        title: "70岁关键题",
+        stem: "关键题：老人因为怕摔不敢动了，最合适的处理办法是什么？",
+        sub: "需要同时保安全和可持续执行。",
+        options: [
+          { text: "上强度训练，一周练爆发", ok: false, route: "chaos", fb: "过猛容易中断执行。" },
+          { text: "每日5分钟微训练 + 每周复盘一次", ok: true, route: "steady", fb: "低门槛高频率，最容易长期坚持。" },
+          { text: "完全静养，避免一切活动", ok: false, route: "delay", fb: "越不动，越容易跌倒。" }
+        ]
+      },
+      60: {
+        title: "80岁关键题",
+        stem: "关键题：老人病多、药也多时，防摔第一步先做什么？",
+        sub: "药物副作用是隐形跌倒源。",
+        options: [
+          { text: "药物清单复核，先查头晕嗜睡副作用", ok: true, route: "steady", fb: "先把药物风险降下来。" },
+          { text: "只看血压数字，其他先忽略", ok: false, route: "delay", fb: "单指标无法覆盖跌倒风险。" },
+          { text: "自行减药停药，先试几天", ok: false, route: "chaos", fb: "自行改药风险很高。" }
+        ]
+      },
+      80: {
+        title: "90岁关键题",
+        stem: "关键题：老人外出少了，但还得去医院，最先要抓哪件事？",
+        sub: "关键是“先稳后移”规则化。",
+        options: [
+          { text: "停稳再走、先扶后移、雨天减速", ok: true, route: "steady", fb: "这是外出防摔的核心动作链。" },
+          { text: "抢时间快走，减少停留", ok: false, route: "chaos", fb: "赶路会叠加失衡风险。" },
+          { text: "不好意思求助，尽量自己扛", ok: false, route: "delay", fb: "求助是成熟策略，不是示弱。" }
+        ]
+      },
+      100: {
+        title: "长期照护关键题",
+        stem: "关键题：想让老人长期维持生活能力，家里最关键的一步是什么？",
+        sub: "重点不是临时救火，而是把家里长期协作的办法先定下来。",
+        options: [
+          { text: "每月固定看一次：风险点、锻炼、设备、用药有没有变化", ok: true, route: "steady", fb: "家里有人固定看一眼，很多问题能提前发现。" },
+          { text: "靠单一照护者硬撑到底", ok: false, route: "chaos", fb: "单人照护最容易耗竭。" },
+          { text: "想到哪改到哪，不做复盘", ok: false, route: "delay", fb: "无复盘会让问题循环重现。" }
+        ]
+      }
+    };
+
+    const REVIVE_BRANCHES = [
+      {
+        title: "复活分支：3分钟急救判断",
+        stem: "跌倒后疼痛明显，第一动作应该是？",
+        options: [
+          { text: "先评估伤情并呼救，必要时120", ok: true, fb: "正确，先保命再移动。" },
+          { text: "立刻把人拉起来走两步试试", ok: false, fb: "错误搬运可能加重损伤。" },
+          { text: "先拍照发群，等人回复", ok: false, fb: "先救治，再沟通。" }
+        ]
+      },
+      {
+        title: "复活分支：夜间动线突击",
+        stem: "床边到厕所第一优先应该清掉什么？",
+        options: [
+          { text: "地面杂物和绊脚电线", ok: true, fb: "先移除直接绊倒源。" },
+          { text: "先换窗帘颜色", ok: false, fb: "视觉优化不能替代安全改造。" },
+          { text: "先买按摩椅", ok: false, fb: "和跌倒主风险不匹配。" }
+        ]
+      },
+      {
+        title: "复活分支：用药核查冲刺",
+        stem: "老人新加安眠药后晨起发晕，先做什么？",
+        options: [
+          { text: "带药单复诊，核查副作用", ok: true, fb: "先确认药物风险源。" },
+          { text: "自行停药一周观察", ok: false, fb: "自行改药不可取。" },
+          { text: "继续原样，不做处理", ok: false, fb: "会持续累积风险。" }
+        ]
+      }
+    ];
+
+    const ROUTE_CONFIG = {
+      steady: {
+        label: "处理得比较稳",
+        tone: "前一步处理得对，家里的风险现在相对可控。",
+        riskyHint: "这题要是判断错了，前面刚稳住的效果会被拉回去。"
+      },
+      delay: {
+        label: "有些地方在拖着没改",
+        tone: "前一步有点犹豫，家里还有隐患在慢慢积着。",
+        riskyHint: "这题答对了能拉回来，答错了就会越拖越危险。"
+      },
+      chaos: {
+        label: "风险已经比较高",
+        tone: "前一步没处理好，现在更容易出事。",
+        riskyHint: "这题不是慢慢想的时候，先把最危险的那一步处理掉。"
+      }
+    };
+
+    const STORY_ARCS = {
+      G1: {
+        title: "第一阶段：先把家里明显风险找出来",
+        core: "你现在要做的，是先把家里最容易让老人摔倒的地方一一找出来。",
+        meme: "先排查，再动手改。"
+      },
+      G2: {
+        title: "第二阶段：先把夜里起身这条路弄安全",
+        core: "夜里起床、摸黑走路、赶着上厕所，是家里很常见的摔倒场景。",
+        meme: "重点看灯光、通道和防滑。"
+      },
+      G3: {
+        title: "第三阶段：药、腿脚和日常习惯一起看",
+        core: "除了环境，药物、副作用、体力下降和久坐不动，也会把摔倒风险慢慢抬高。",
+        meme: "不是只看地面，要连人本身的状态一起看。"
+      },
+      G4: {
+        title: "第四阶段：把外出时容易摔的情况提前管住",
+        core: "公交、台阶、地滑、转身太快，都是老人出门时最容易出问题的地方。",
+        meme: "记住一条：先站稳，再动。"
+      },
+      G5: {
+        title: "第五阶段：把应急联系人和家里分工提前定好",
+        core: "真出事时，谁先到、谁打电话、证件放哪，都要提前说清楚。",
+        meme: "提前商量好，真遇到事才不会乱。"
+      }
+    };
+
+    const MEME_FEEDBACK = {
+      good: [
+        "这一步做得对，能直接减少摔倒风险。",
+        "判断到位，先把最要紧的事做了。",
+        "这个顺序是对的，家里会更稳一些。",
+        "做法靠谱，继续按这个思路往下走。"
+      ],
+      bad: [
+        "这一步抓偏了，先回到最危险的点上。",
+        "别先做不着急的事，先处理最容易摔倒的原因。",
+        "方向有点偏，先把最关键的一步补上。",
+        "先别拖，马上改最容易出事的那一项。"
+      ],
+      boss: [
+        "这一关判断对了，后面会轻松一些。",
+        "关键点处理对了，可以继续往下做。",
+        "这一步过关，说明你抓住重点了。"
+      ],
+      revive: [
+        "这次纠正回来了，可以继续往下做。",
+        "刚才那步补救成功，继续完成这轮自测。",
+        "关键点改对了，这轮还能继续。"
+      ]
+    };
+
+    function pickBySeed(arr, seed) {
+      if (!arr || !arr.length) return "";
+      return arr[hash32(seed) % arr.length];
+    }
+
+    function routeLabel(route) {
+      const cfg = ROUTE_CONFIG[route] || ROUTE_CONFIG.steady;
+      return cfg.label;
+    }
+
+    const chapterDefs = [
+      {
+        no: 1,
+        name: "开幕雷击：跌倒代价认知",
+        region: "基础共识",
+        type: "风险认知",
+        correct: "先做风险筛查 + 居家隐患排查",
+        wrongA: "先观望，等真摔了再说",
+        wrongB: "先纠结预算，什么都不改",
+        good: "先识别高风险点，才能少走弯路。",
+        badA: "等到跌倒再处理，通常已经太晚。",
+        badB: "预算可以分步做，但不能零行动。",
+        cases: [
+          "72岁陈叔最近起夜两次差点滑倒，最优先动作是？",
+          "69岁林阿姨说自己腿脚还行，家里却有很多电线，先做什么？",
+          "独居老人近三个月有头晕史，子女每周只来一次，第一步是？",
+          "老人刚出院，家里地砖光滑反光，最该先推进哪一步？",
+          "老人常穿松垮拖鞋，走路拖步明显，下一步应先做什么？",
+          "子女觉得防摔是恐吓营销，如何先落地行动？",
+          "老人夜间不愿开灯，理由是怕费电，先处理什么？",
+          "老人有轻度骨质疏松但仍登高取物，优先策略是？",
+          "家里说等装修再一起改，短期内最先做什么？",
+          "老人一年未体检，偶有低血压，防摔起点应是什么？"
+        ]
+      },
+      {
+        no: 2,
+        name: "台湾经验：长照评估与分层",
+        region: "台湾经验",
+        type: "分层管理",
+        correct: "先按风险分层：低/中/高，再定改造顺序",
+        wrongA: "所有老人统一同一套方案",
+        wrongB: "只看年龄，不看病史和步态",
+        good: "分层后资源配置更精准，投入也更有效。",
+        badA: "同一方案无法覆盖个体差异。",
+        badB: "年龄只是参考，不是全部风险。",
+        cases: [
+          "65岁和82岁老人同住一屋，如何安排防摔资源优先级？",
+          "老人有糖尿病和周围神经异常，下一步应先做什么？",
+          "老人认知功能下降但行动还行，防摔策略应先落在哪？",
+          "子女预算有限，只能先改两处，依据应是什么？",
+          "老人白天稳、夜里不稳，如何做风险分层？",
+          "老人近一年无跌倒但有两次险些跌倒，怎么判定等级？",
+          "长期服用安眠药的老人，防摔评估先关注什么？",
+          "老人常说“我没事”，家庭沟通的起手动作是什么？",
+          "同一家庭两位老人，一人高危一人低危，如何推进改造？",
+          "准备做防摔课程，先收集哪类信息最关键？"
+        ]
+      },
+      {
+        no: 3,
+        name: "日本经验：浴室先补哪三样",
+        region: "日本经验",
+        type: "卫浴改造",
+        correct: "先把浴室这三样补上：防滑垫、扶手、洗澡凳",
+        wrongA: "先买香薰和装饰提升氛围",
+        wrongB: "只装一个扶手就结束",
+        good: "浴室是最容易滑倒的地方，先把防滑垫、扶手、洗澡凳补齐最有效。",
+        badA: "美观不能替代防滑和支撑。",
+        badB: "单点改造覆盖不到完整动作链。",
+        cases: [
+          "老人洗澡要跨高门槛，进出时最容易失衡，先做什么？",
+          "马桶旁起身吃力，膝盖打软，优先改造方案是？",
+          "浴室地面易积水，老人穿布底拖鞋，第一步怎么做？",
+          "老人冬天洗澡怕冷会抢快动作，风险控制先抓哪里？",
+          "老人洗澡中途会头晕，家庭应先补哪项设施？",
+          "卫生间夜间照明盲区明显，优先动作是什么？",
+          "老人站着洗澡时间长，疲劳明显，最优先建议是？",
+          "老人浴室转身空间小，助行器进不去，先改什么？",
+          "家里想上智能设备但基础防护未做，先后顺序应是？",
+          "洗澡后地面残水经常未及时清理，优先管控方式是？"
+        ]
+      },
+      {
+        no: 4,
+        name: "夜间动线：从床到厕所",
+        region: "台湾+日本",
+        type: "夜间场景",
+        correct: "先打通夜间动线：夜灯、无障碍通道、稳固拖鞋",
+        wrongA: "让老人摸黑走快点就好",
+        wrongB: "把杂物先堆床尾，明天再收",
+        good: "夜间跌倒高发，先把通路做成“零绊点”。",
+        badA: "摸黑+赶路是经典风险叠加。",
+        badB: "床尾和通道杂物是直接绊倒源。",
+        cases: [
+          "老人夜尿频繁，卧室到厕所要拐两次弯，最先做什么？",
+          "床边常放快递箱，老人半夜下床会踢到，先改哪里？",
+          "老人喜欢穿无后跟拖鞋起夜，风险控制先做什么？",
+          "走廊有地毯翘边，夜里看不清，优先动作是什么？",
+          "老人半夜找开关慢，容易急走，最该先补什么？",
+          "卧室到厕所间有门槛，老人抬脚不足，先处理哪项？",
+          "老人睡醒就猛起身，站立后发晕，先改哪条习惯？",
+          "夜里照明太刺眼导致眩目，解决方案应优先是什么？",
+          "老人把常用药放在高处柜子，夜里会踮脚取，先改什么？",
+          "厕所门口常有湿脚印，夜里滑倒风险高，先处理哪一步？"
+        ]
+      },
+      {
+        no: 5,
+        name: "肌力平衡：5×5微训练",
+        region: "日本经验",
+        type: "运动营养",
+        correct: "先做每日5分钟可持续训练，再逐步加量",
+        wrongA: "一次练到很累，隔几天再说",
+        wrongB: "完全不练，只靠补品",
+        good: "小剂量高频率更适合老人持续执行。",
+        badA: "过度训练会降低依从性和安全性。",
+        badB: "不训练会让肌力持续下滑。",
+        cases: [
+          "老人下蹲起身困难，第一周训练策略应是什么？",
+          "老人怕摔就减少活动，越不动越虚，先做哪步？",
+          "膝关节轻度疼痛，如何安排防摔训练起点？",
+          "老人早晨起床腿软，哪种干预应优先长期坚持？",
+          "老人平衡差但自尊心强，不愿去健身房，先选哪路？",
+          "老人饭后爱坐着看电视两小时，防摔方案应先加什么？",
+          "老人近期体重下降、肌肉流失，防摔策略优先是什么？",
+          "老人做训练三天停两天，效果差，最应调整哪点？",
+          "老人有轻度骨质疏松，运动与补充策略先后如何？",
+          "子女想一次性安排复杂课程，老人排斥，最佳做法是？"
+        ]
+      },
+      {
+        no: 6,
+        name: "药物与慢病：防晕防跌",
+        region: "台湾经验",
+        type: "用药管理",
+        correct: "先做药物清单复核，重点查头晕/嗜睡副作用",
+        wrongA: "不问医生，自行加减药",
+        wrongB: "只盯血压，不看整体状态",
+        good: "用药评估是减少跌倒的重要环节。",
+        badA: "自行改药风险极高。",
+        badB: "单指标无法反映跌倒全貌。",
+        cases: [
+          "老人近期新增安眠药后晨起更晕，首要动作是什么？",
+          "老人同时吃多种慢病药，家属防摔介入先做什么？",
+          "老人偶发低血糖步态不稳，优先干预点应是？",
+          "老人服药时间混乱，容易重复吃药，先搭哪套管理？",
+          "老人说药吃久了“都一样”，跌倒预防先抓哪一步？",
+          "老人换药后一周出现站立发飘，家庭该先做什么？",
+          "老人因便秘自行加药，夜间上厕次数增多，先处理哪环？",
+          "老人有帕金森前驱步态异常，防摔管理先做哪件事？",
+          "老人白天犯困，夜里清醒，跌倒风险上升，先查什么？",
+          "老人常把药分装在不同角落，容易漏服误服，先改什么？"
+        ]
+      },
+      {
+        no: 7,
+        name: "外出场景：公交与台阶",
+        region: "日本经验",
+        type: "外出安全",
+        correct: "先做“停稳再走、先扶后移”外出规则",
+        wrongA: "车一进站就快步冲门",
+        wrongB: "不好意思求助，自己硬扛",
+        good: "外出防摔核心是节奏控制和支撑点管理。",
+        badA: "抢时间会放大失衡风险。",
+        badB: "求助是成熟策略，不是示弱。",
+        cases: [
+          "老人上公交时车门与路沿有落差，第一条规则是什么？",
+          "公交起步后老人还在找座位，最应先执行哪步？",
+          "雨天路面湿滑要去复诊，外出优先动作是什么？",
+          "老人下车前就急着转身拿包，防摔提醒先说什么？",
+          "地铁换乘楼梯多、扶手拥挤，最优先策略是？",
+          "老人在商场地砖上穿平底袜行走，先改哪一项？",
+          "老人提重物回家步态变慢晃，先调整哪个行为？",
+          "老人出门喜欢边走边看手机，家庭先立哪条规则？",
+          "老人过斑马线赶信号灯，防摔策略第一句是什么？",
+          "老人腿力下降仍坚持不带手杖，先怎么沟通落地？"
+        ]
+      },
+      {
+        no: 8,
+        name: "先把基础做好，再加提醒设备",
+        region: "台湾+日本",
+        type: "智能设备",
+        correct: "先完成基础改造，再上智能监测与报警",
+        wrongA: "只买设备，忽略环境隐患",
+        wrongB: "设备越贵越好，不做试用",
+        good: "设备是加分项，不是基础防护替代品。",
+        badA: "地面和动线没改，监测再强也晚一步。",
+        badB: "适配家庭才是关键。",
+        cases: [
+          "家里想装毫米波雷达，卫生间仍很滑，先做哪件事？",
+          "老人拒绝穿戴设备，但愿意改环境，先推进什么？",
+          "预算2000元内想提升安全，优先顺序应是什么？",
+          "报警腕表常忘充电，系统失效，先补哪个动作？",
+          "家庭想装摄像头但老人介意隐私，先怎么做？",
+          "地面湿度传感器常误报，防摔体系先排查什么？",
+          "智能鞋垫提示步态异常，下一步应先做什么？",
+          "多设备通知太多，家属疲劳忽视，先优化哪环？",
+          "老人夜间离床多次，设备联动应优先接哪类提醒？",
+          "新设备装好没人会用，最先补齐的动作是什么？"
+        ]
+      },
+      {
+        no: 9,
+        name: "应急准备：跌倒后先联系谁",
+        region: "基础共识",
+        type: "紧急响应",
+        correct: "先把120、紧急联系人和一键呼救流程定好",
+        wrongA: "先把人硬拉起来再说",
+        wrongB: "先拍照发群里再判断",
+        good: "流程清晰比临场慌乱更关键。",
+        badA: "错误搬运可能加重损伤。",
+        badB: "先救治，再信息分享。",
+        cases: [
+          "老人浴室跌倒后喊疼，家属到场第一优先是？",
+          "独居老人家中摔倒，手机在客厅，平时应先准备什么？",
+          "老人跌倒后说没事但明显站不稳，应急流程先做哪步？",
+          "家属担心误报不敢打120，正确优先级应是什么？",
+          "社区电梯口常有人，救援联络机制先怎么建？",
+          "老人有抗凝药史，一旦摔到头部，首要动作是什么？",
+          "跌倒后出现剧痛疑似骨折，家属先做哪项而不是拖动？",
+          "老人意识清醒但冒冷汗，救援圈该先启动哪一步？",
+          "家里只有一个紧急联系人，防摔应急体系应先补什么？",
+          "家属从未演练过呼救流程，第一件要落实的事是什么？"
+        ]
+      },
+      {
+        no: 10,
+        name: "家庭配合：把家里分工提前说清楚",
+        region: "台湾+日本",
+        type: "家庭管理",
+        correct: "先定每月看一次：风险点、锻炼、设备、用药有没有变化",
+        wrongA: "想到哪改到哪，没有复盘",
+        wrongB: "完全交给某一个家庭成员",
+        good: "长期机制比一次性冲刺更有效。",
+        badA: "无复盘会让风险反复出现。",
+        badB: "单人照护最容易耗竭。",
+        cases: [
+          "家庭改造做完三个月后松懈，如何保持效果？",
+          "兄弟姐妹意见不一，防摔执行总拖延，先建什么机制？",
+          "老人觉得扶手“像医院”不愿装，沟通重点先放哪里？",
+          "预算只够先做一部分，如何避免方案半途而废？",
+          "护工与家属交接信息混乱，持续防摔先补哪一环？",
+          "老人认知轻度下降，防摔计划应增加哪类提醒机制？",
+          "家里每次出问题才讨论，如何改成常态管理？",
+          "老人状态波动大，计划执行不稳定，先落哪条规则？",
+          "家里希望把防摔和慢病管理合并，起步方式应是什么？",
+          "准备一年期家庭防摔计划，第一件落地动作该做什么？"
+        ]
+      }
+    ];
+
+    const OPTION_LAYOUTS = [
+      [0, 1, 2],
+      [1, 0, 2],
+      [2, 1, 0],
+      [0, 2, 1],
+      [1, 2, 0],
+      [2, 0, 1]
+    ];
+
+    function hash32(n) {
+      let x = (Number(n) | 0) ^ 0x9e3779b9;
+      x ^= x >>> 16;
+      x = Math.imul(x, 0x7feb352d);
+      x ^= x >>> 15;
+      x = Math.imul(x, 0x846ca68b);
+      x ^= x >>> 16;
+      return x >>> 0;
+    }
+
+    function arrangeQuestionOptions(c, seed) {
+      const raw = [
+        { text: c.correct, ok: true, fb: c.good },
+        { text: c.wrongA, ok: false, fb: c.badA },
+        { text: c.wrongB, ok: false, fb: c.badB }
+      ];
+      const layout = OPTION_LAYOUTS[hash32(seed) % OPTION_LAYOUTS.length];
+      return layout.map((i) => raw[i]);
+    }
+
+    function buildQuestionBank() {
+      const out = [];
+      chapterDefs.forEach((c) => {
+        const gate = gateByChapter(c.no);
+        c.cases.forEach((stem, idx) => {
+          const serial = out.length + 1;
+          const seed = serial * serial + c.no * 11 + idx * 17;
+          const options = arrangeQuestionOptions(c, seed);
+          out.push({
+            id: `C${c.no}Q${idx + 1}`,
+            serial,
+            chapterNo: c.no,
+            chapterName: c.name,
+            region: c.region,
+            type: c.type,
+            ageBand: gate.label,
+            gateTitle: gate.title,
+            longQuest: gate.quest,
+            stem,
+            sub: "选择最优先的一步，先做对方向再谈花费。",
+            options
+          });
+        });
+      });
+      Object.keys(BOSS_GATES).forEach((k) => {
+        const serial = Number(k);
+        const boss = BOSS_GATES[serial];
+        const target = out.find((q) => q.serial === serial);
+        if (!target || !boss) return;
+        target.isBoss = true;
+        target.bossTitle = boss.title;
+        target.stem = boss.stem;
+        target.sub = boss.sub;
+        target.options = boss.options;
+        target.type = "Boss关";
+      });
+      return out;
+    }
+
+    const questionBank = buildQuestionBank();
+
+    const GLOBAL_SNIPPETS = [
+      {
+        region: "日本经验",
+        type: "社区联动",
+        chapterName: "通いの場",
+        stem: "老人最近活动量下降，最先要补哪一步？",
+        correct: "每周固定参加社区活动点，并做简易跌倒风险筛查",
+        wrongA: "先等状态更差再介入",
+        wrongB: "只买设备，不建立固定参与频率",
+        good: "先把参与频率稳定，后续干预才有抓手。",
+        badA: "拖延会错过最佳窗口。",
+        badB: "没有稳定参与，设备价值会打折。"
+      },
+      {
+        region: "日本经验",
+        type: "家庭改造",
+        chapterName: "夜间动线",
+        stem: "日本居家防跌里，夜间起夜场景优先改哪里？",
+        correct: "床到厕所动线：照明、防滑、无门槛先齐套",
+        wrongA: "先改客厅美观，再看卧室",
+        wrongB: "先买按摩椅替代动线整改",
+        good: "高频场景先改，收益最大。",
+        badA: "低频区域优先级不高。",
+        badB: "功能性不能替代安全动线。"
+      },
+      {
+        region: "韩国经验",
+        type: "数据驱动",
+        chapterName: "伤害监测",
+        stem: "家里要建立防摔台账，第一列最关键写什么？",
+        correct: "记录跌倒发生场景、时间、诱因和结局",
+        wrongA: "只记录花了多少钱",
+        wrongB: "只记录谁负责，不记事件细节",
+        good: "先有结构化记录，才能精准改进。",
+        badA: "只有费用无法定位风险源。",
+        badB: "责任记录不能替代风险数据。"
+      },
+      {
+        region: "韩国经验",
+        type: "复盘机制",
+        chapterName: "72小时复盘",
+        stem: "老人轻微跌倒后，家庭复盘最好在多久内完成？",
+        correct: "72小时内完成一次小复盘并调整措施",
+        wrongA: "等一个月统一再看",
+        wrongB: "没受伤就不用复盘",
+        good: "短闭环复盘能防止重复跌倒。",
+        badA: "复盘太晚，细节容易丢失。",
+        badB: "无伤不等于无风险。"
+      },
+      {
+        region: "台湾地区经验",
+        type: "筛查评估",
+        chapterName: "先评估后干预",
+        stem: "要借鉴台湾地区传播最广的防跌路径，第一步是？",
+        correct: "先做长者功能与跌倒风险评估，再定训练与改造",
+        wrongA: "直接上高强度训练",
+        wrongB: "先囤保健品，后续再说",
+        good: "先评估能减少无效投入。",
+        badA: "未评估就加压，容易中断。",
+        badB: "补品不等于防摔方案。"
+      },
+      {
+        region: "台湾地区经验",
+        type: "传播文案",
+        chapterName: "防跌5步",
+        stem: "做社区宣教海报，哪种文案更容易落地？",
+        correct: "短句动作化：先清障、再照明、稳鞋底、练平衡、定复盘",
+        wrongA: "长段理论，缺少可执行动作",
+        wrongB: "只强调恐惧，不给解决步骤",
+        good: "动作化文案更容易转成家庭执行。",
+        badA: "认知有了但执行弱。",
+        badB: "只有恐惧难以持续行动。"
+      },
+      {
+        region: "中国经验",
+        type: "基层管理",
+        chapterName: "家庭台账",
+        stem: "家庭版防摔管理，第一周最该完成什么？",
+        correct: "建立一页台账：风险点、责任人、完成日期、复盘时间",
+        wrongA: "先讨论预算，动作先不定",
+        wrongB: "等社区上门再启动",
+        good: "一页台账能快速形成执行闭环。",
+        badA: "只有预算讨论会延误执行。",
+        badB: "被动等待会放大风险。"
+      },
+      {
+        region: "中国经验",
+        type: "医疗协同",
+        chapterName: "多药复核",
+        stem: "老人多药并用且偶尔头晕，防跌优先动作是？",
+        correct: "带完整用药清单做一次药物风险复核",
+        wrongA: "自己先停一半药观察",
+        wrongB: "只补钙，不看药物副作用",
+        good: "药物复核是高性价比止损点。",
+        badA: "自行减停药风险高。",
+        badB: "单一补充不能替代风险评估。"
+      },
+      {
+        region: "国际共识",
+        type: "训练执行",
+        chapterName: "小剂量高频",
+        stem: "家属总说没时间训练，最实用的起步法是？",
+        correct: "每日5分钟平衡与下肢力量，先连续28天",
+        wrongA: "周末一次练够一小时",
+        wrongB: "先不练，等空下来再开始",
+        good: "低门槛高频最容易长期坚持。",
+        badA: "低频大剂量更难坚持。",
+        badB: "拖延会让风险持续。"
+      },
+      {
+        region: "国际共识",
+        type: "应急准备",
+        chapterName: "跌倒后先联系谁",
+        stem: "家庭防摔方案里，应急机制最低配置是？",
+        correct: "120快捷呼叫 + 2名联系人 + 医保证件固定位置",
+        wrongA: "只留一人电话，其他不准备",
+        wrongB: "全靠临场发挥",
+        good: "应急三件套能显著减少慌乱成本。",
+        badA: "单点联系人容易失联。",
+        badB: "无预案时最容易出错。"
+      }
+    ];
+
+    function buildGlobalQuestionBank() {
+      return GLOBAL_SNIPPETS.map((c, idx) => {
+        const seed = 5000 + idx * 19;
+        return {
+          id: `GQ${idx + 1}`,
+          serial: ((idx % 100) + 1),
+          chapterNo: 11 + (idx % 5),
+          chapterName: c.chapterName,
+          region: c.region,
+          type: c.type,
+          ageBand: "50-100岁",
+          gateTitle: "跨国高频问题",
+          longQuest: "先评估、先改高频风险、再做训练复盘",
+          stem: c.stem,
+          sub: "借鉴传播广、可执行的防摔策略，优先做第一步。",
+          options: arrangeQuestionOptions({
+            correct: c.correct,
+            wrongA: c.wrongA,
+            wrongB: c.wrongB,
+            good: c.good,
+            badA: c.badA,
+            badB: c.badB
+          }, seed)
+        };
+      });
+    }
+
+    const globalQuestionBank = buildGlobalQuestionBank();
+
+    const CUSTOM_TOPICS = [
+      { id: "home", name: "家里环境", desc: "地面、电线、浴室、防滑、扶手" },
+      { id: "night", name: "夜里起身", desc: "床边到厕所、夜灯、拖鞋" },
+      { id: "medicine", name: "药和头晕", desc: "安眠药、多药并用、嗜睡发晕" },
+      { id: "exercise", name: "腿脚和平衡", desc: "力量、平衡、每天练几分钟" },
+      { id: "outing", name: "出门防摔", desc: "公交、台阶、雨天、看病路上" },
+      { id: "emergency", name: "应急联系人", desc: "120、联系人、跌倒后先找谁" },
+      { id: "family", name: "家里怎么配合", desc: "谁负责、什么时候看一次" }
+    ];
+
+    const INFINITE_SCENES = [
+      "夜间起夜", "厨房湿滑", "浴室转身", "门口换鞋", "电梯口等候", "公园台阶", "医院走廊", "雨天出门", "卧室起床", "阳台晾衣"
+    ];
+    const INFINITE_RISKS = [
+      "地面湿滑", "照明不足", "鞋底打滑", "药后头晕", "扶手缺失", "通道杂物", "步态不稳", "急走赶路", "视力波动", "夜尿频繁"
+    ];
+    const INFINITE_CORRECT = [
+      "先做环境排险，再做动作训练",
+      "先清障并补照明，马上可执行",
+      "先复核用药风险，再安排训练强度",
+      "先把高频场景改到位，再扩展到低频场景",
+      "先定责任人和复盘日，形成闭环",
+      "先做5分钟低强度训练，连续四周复盘"
+    ];
+    const INFINITE_WRONG = [
+      "先观望一段时间，暂不处理",
+      "先买设备，基础动作以后再说",
+      "先强调意志力，不改环境",
+      "先省预算，关键点先搁置",
+      "先一次高强度训练，后续再看",
+      "先让老人自己适应，家属不介入"
+    ];
+
+    function infiniteDifficultyByDisplay(displaySerial) {
+      const stage = Math.floor((Math.max(1, displaySerial) - 1) / 25) + 1;
+      return Math.min(12, stage);
+    }
+
+    function infiniteTimeLimitSec(displaySerial) {
+      const d = infiniteDifficultyByDisplay(displaySerial);
+      return Math.max(6, 17 - d);
+    }
+
+    function buildSyntheticInfiniteQuestion(displaySerial) {
+      const seed = hash32(displaySerial * 131 + 77);
+      const scene = INFINITE_SCENES[seed % INFINITE_SCENES.length];
+      const risk = INFINITE_RISKS[(seed >>> 4) % INFINITE_RISKS.length];
+      const hard = infiniteDifficultyByDisplay(displaySerial);
+      const correct = INFINITE_CORRECT[(seed >>> 7) % INFINITE_CORRECT.length];
+      const wrongA = INFINITE_WRONG[(seed >>> 10) % INFINITE_WRONG.length];
+      const wrongB = INFINITE_WRONG[(seed >>> 13) % INFINITE_WRONG.length];
+      const region = pickBySeed(["中国经验", "日本经验", "韩国经验", "台湾地区经验", "国际共识"], seed + 9);
+      const type = hard >= 7 ? "刁钻题" : "高频题";
+      const stem = `第${displaySerial}题｜${scene}出现“${risk}”，最该先做哪一步？`;
+      const sub = hard >= 7
+        ? `难度Lv.${hard}：这题容易被表面信息带偏，关键是先抓最危险的那一步。`
+        : `难度Lv.${hard}：先把最常见、最容易出事的风险处理掉，再考虑后面的优化。`;
+      return {
+        id: `INF_SYN_${displaySerial}`,
+        serial: ((displaySerial - 1) % 100) + 1,
+        displaySerial,
+        chapterNo: 20 + (hard % 6),
+        chapterName: `连续练习 Lv.${hard}`,
+        region,
+        type,
+        ageBand: "50-100岁",
+        gateTitle: "连续练习",
+        longQuest: "高频风险先止损，持续执行再升级",
+        stem,
+        sub,
+        options: arrangeQuestionOptions({
+          correct,
+          wrongA,
+          wrongB,
+          good: "这步能直接降低当前场景跌倒概率。",
+          badA: "拖延会增加重复跌倒风险。",
+          badB: "看似努力，但优先级错位。"
+        }, seed + 31)
+      };
+    }
+
+    function buildInfiniteChunk(startDisplaySerial, count) {
+      const out = [];
+      const base = Math.max(1, Number(startDisplaySerial || 1));
+      for (let i = 0; i < count; i++) {
+        const displaySerial = base + i;
+        const src = displaySerial % 4 === 0
+          ? buildSyntheticInfiniteQuestion(displaySerial)
+          : pickBySeed([...questionBank, ...globalQuestionBank], hash32(displaySerial * 97 + 11));
+        out.push({
+          ...src,
+          id: `${src.id}_INF_${displaySerial}`,
+          serial: ((displaySerial - 1) % 100) + 1,
+          displaySerial
+        });
+      }
+      return out;
+    }
+
+    const ui = {
+      introScreen: document.getElementById("introScreen"),
+      introLine: document.getElementById("introLine"),
+      introEnter: document.getElementById("introEnter"),
+      riskToggle: document.getElementById("riskToggle"),
+      riskBody: document.getElementById("riskBody"),
+      failScene: document.getElementById("failScene"),
+      failRetryBtn: document.getElementById("failRetryBtn"),
+      failSummaryBtn: document.getElementById("failSummaryBtn"),
+      screenHome: document.getElementById("screenHome"),
+      screenGame: document.getElementById("screenGame"),
+      screenResult: document.getElementById("screenResult"),
+      btnCampaign: document.getElementById("btnCampaign"),
+      btnMarathon: document.getElementById("btnMarathon"),
+      btnInfinite: document.getElementById("btnInfinite"),
+      btnWeekly: document.getElementById("btnWeekly"),
+      btnCustom: document.getElementById("btnCustom"),
+      btnCustomStart: document.getElementById("btnCustomStart"),
+      playerName: document.getElementById("playerName"),
+      saveNameBtn: document.getElementById("saveNameBtn"),
+      btnReset: document.getElementById("btnReset"),
+      weeklyMeta: document.getElementById("weeklyMeta"),
+      rankScopeTabs: document.getElementById("rankScopeTabs"),
+      rankScopeMeta: document.getElementById("rankScopeMeta"),
+      weeklyTop: document.getElementById("weeklyTop"),
+      dayMeta: document.getElementById("dayMeta"),
+      dayGrid: document.getElementById("dayGrid"),
+      roleRow: document.getElementById("roleRow"),
+      customCount: document.getElementById("customCount"),
+      customSpeed: document.getElementById("customSpeed"),
+      customTopicRow: document.getElementById("customTopicRow"),
+      talentRow: document.getElementById("talentRow"),
+      homeProgressText: document.getElementById("homeProgressText"),
+      homeAgeRoad: document.getElementById("homeAgeRoad"),
+      hudMode: document.getElementById("hudMode"),
+      hudIndex: document.getElementById("hudIndex"),
+      hudHp: document.getElementById("hudHp"),
+      hudStreak: document.getElementById("hudStreak"),
+      hudScore: document.getElementById("hudScore"),
+      hudTimer: document.getElementById("hudTimer"),
+      hudBuff: document.getElementById("hudBuff"),
+      hudAge: document.getElementById("hudAge"),
+      hudGate: document.getElementById("hudGate"),
+      hudTalent: document.getElementById("hudTalent"),
+      progressFill: document.getElementById("progressFill"),
+      chipChapter: document.getElementById("chipChapter"),
+      chipRegion: document.getElementById("chipRegion"),
+      chipType: document.getElementById("chipType"),
+      chipAge: document.getElementById("chipAge"),
+      chipRoute: document.getElementById("chipRoute"),
+      ageTrack: document.getElementById("ageTrack"),
+      storyTitle: document.getElementById("storyTitle"),
+      storyLine: document.getElementById("storyLine"),
+      storyMeme: document.getElementById("storyMeme"),
+      questionTitle: document.getElementById("questionTitle"),
+      questionSub: document.getElementById("questionSub"),
+      options: document.getElementById("options"),
+      feedback: document.getElementById("feedback"),
+      explainBox: document.getElementById("explainBox"),
+      nextBtn: document.getElementById("nextBtn"),
+      quitBtn: document.getElementById("quitBtn"),
+      resultBadge: document.getElementById("resultBadge"),
+      resultTitle: document.getElementById("resultTitle"),
+      resultDesc: document.getElementById("resultDesc"),
+      rScore: document.getElementById("rScore"),
+      rAcc: document.getElementById("rAcc"),
+      rStreak: document.getElementById("rStreak"),
+      rUnlock: document.getElementById("rUnlock"),
+      rAge: document.getElementById("rAge"),
+      resultActions: document.getElementById("resultActions"),
+      againBtn: document.getElementById("againBtn"),
+      homeBtn: document.getElementById("homeBtn")
+    };
+
+    const profileDefault = {
+      unlocked: 1,
+      bestScore: 0,
+      bestAcc: 0,
+      played: 0,
+      playerName: "玩家",
+      preferredTalent: "steady",
+      preferredRole: "child",
+      customConfig: { count: 30, speed: "normal", topics: CUSTOM_TOPICS.map((item) => item.id) },
+      weeklyAttempts: {},
+      weeklyRecords: {},
+      leaderboardRecords: { day: {}, week: {}, month: {} },
+      challenge7: { cycleStart: "", done: [false, false, false, false, false, false, false] }
+    };
+
+    let profile = loadProfile();
+    let selectedTalentId = profile.preferredTalent || "steady";
+    let selectedRoleId = profile.preferredRole || "child";
+    let selectedCustomTopicIds = new Set(normalizeCustomTopics(profile.customConfig && profile.customConfig.topics));
+    let selectedRankScope = "week";
+    let globalLeaderboard = null;
+    let leaderboardLoading = false;
+    let leaderboardError = "";
+    let game = null;
+    let failSceneTimer = null;
+    let questionTimerHandle = null;
+    let reviveTimerHandle = null;
+
+    function activeBuffText() {
+      if (!game) return "无";
+      const parts = [];
+      if (game.buffShield > 0) parts.push(`护盾x${game.buffShield}`);
+      if (game.buffFocus > 0) parts.push(`专注x${game.buffFocus}`);
+      if (game.buffFury > 0) parts.push(`爆发x${game.buffFury}`);
+      return parts.length ? parts.join(" ") : "无";
+    }
+
+    function normalizeCustomTopics(topics) {
+      const validIds = new Set(CUSTOM_TOPICS.map((item) => item.id));
+      const list = Array.isArray(topics) ? topics.filter((item) => validIds.has(item)) : [];
+      return list.length ? [...new Set(list)] : CUSTOM_TOPICS.map((item) => item.id);
+    }
+
+    function expandExplanation(text) {
+      if (!text) return "";
+      return text
+        .replace(
+          "浴室是最容易滑倒的地方，先把防滑垫、扶手、洗澡凳补齐最有效。",
+          "浴室是最容易滑倒的地方，先把防滑垫、扶手、洗澡凳补齐最有效。防滑垫是防地面打滑，扶手是起身和转身时有地方借力，洗澡凳是避免久站不稳。"
+        )
+        .replace(
+          "先把浴室这三样补上：防滑垫、扶手、洗澡凳",
+          "先把浴室这三样补上：防滑垫、扶手、洗澡凳。先从淋浴区和马桶旁边开始补。"
+        );
+    }
+
+    function awardRandomBuff(seed) {
+      if (!game) return "";
+      const pick = hash32(seed + game.correct * 17 + game.wrong * 13) % 3;
+      if (pick === 0) {
+        game.buffShield += 1;
+        return "连击奖励：护盾+1（可抵消一次扣血）";
+      }
+      if (pick === 1) {
+        game.buffFocus += 2;
+        return "连击奖励：专注+2（后续2题额外+3秒）";
+      }
+      game.buffFury += 1;
+      return "连击奖励：爆发+1（下一题答对额外+12分）";
+    }
+
+    function loadProfile() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...profileDefault };
+        const parsed = JSON.parse(raw);
+        const leaderboardRecords = parsed.leaderboardRecords && typeof parsed.leaderboardRecords === "object" ? parsed.leaderboardRecords : {};
+        return {
+          unlocked: Math.min(101, Math.max(1, Number(parsed.unlocked || 1))),
+          bestScore: Number(parsed.bestScore || 0),
+          bestAcc: Number(parsed.bestAcc || 0),
+          played: Number(parsed.played || 0),
+          playerName: String(parsed.playerName || "玩家").slice(0, 12) || "玩家",
+          preferredTalent: TALENTS.some((t) => t.id === parsed.preferredTalent) ? parsed.preferredTalent : "steady",
+          preferredRole: ROLES.some((r) => r.id === parsed.preferredRole) ? parsed.preferredRole : "child",
+          customConfig: parsed.customConfig && parsed.customConfig.count ? {
+            count: parsed.customConfig.count,
+            speed: parsed.customConfig.speed,
+            topics: normalizeCustomTopics(parsed.customConfig.topics)
+          } : { count: 30, speed: "normal", topics: CUSTOM_TOPICS.map((item) => item.id) },
+          weeklyAttempts: parsed.weeklyAttempts && typeof parsed.weeklyAttempts === "object" ? parsed.weeklyAttempts : {},
+          weeklyRecords: parsed.weeklyRecords && typeof parsed.weeklyRecords === "object" ? parsed.weeklyRecords : {},
+          leaderboardRecords: {
+            day: leaderboardRecords.day && typeof leaderboardRecords.day === "object" ? leaderboardRecords.day : {},
+            week: leaderboardRecords.week && typeof leaderboardRecords.week === "object" ? leaderboardRecords.week : {},
+            month: leaderboardRecords.month && typeof leaderboardRecords.month === "object" ? leaderboardRecords.month : {}
+          },
+          challenge7: parsed.challenge7 && parsed.challenge7.done ? parsed.challenge7 : { cycleStart: "", done: [false, false, false, false, false, false, false] }
+        };
+      } catch (e) {
+        return { ...profileDefault };
+      }
+    }
+
+    function saveProfile() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+    }
+
+    function normalizeName(s) {
+      const name = String(s || "").trim().replace(/\s+/g, " ");
+      if (!name) return "玩家";
+      return name.slice(0, 12);
+    }
+
+    function updateWeeklyRecordNames() {
+      const name = normalizeName(profile.playerName);
+      Object.keys(profile.weeklyRecords || {}).forEach((wk) => {
+        if (!Array.isArray(profile.weeklyRecords[wk])) return;
+        profile.weeklyRecords[wk] = profile.weeklyRecords[wk].map((record) => ({
+          ...record,
+          name
+        }));
+      });
+      ["day", "week", "month"].forEach((scope) => {
+        const bucket = profile.leaderboardRecords && profile.leaderboardRecords[scope];
+        if (!bucket || typeof bucket !== "object") return;
+        Object.keys(bucket).forEach((key) => {
+          if (!Array.isArray(bucket[key])) return;
+          bucket[key] = bucket[key].map((record) => ({
+            ...record,
+            name
+          }));
+        });
+      });
+    }
+
+    function pad2(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function dayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+    }
+
+    function weekKey() {
+      const d = new Date();
+      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = date.getUTCDay() || 7;
+      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+      return `${date.getUTCFullYear()}-W${pad2(weekNo)}`;
+    }
+
+    function monthKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}`;
+    }
+
+    function leaderboardScopeLabel(scope) {
+      if (scope === "day") return "日榜";
+      if (scope === "month") return "月榜";
+      return "周榜";
+    }
+
+    function localLeaderboardForScope(scope) {
+      const key = scope === "day" ? dayKey() : (scope === "month" ? monthKey() : weekKey());
+      const bucket = profile.leaderboardRecords && profile.leaderboardRecords[scope] ? profile.leaderboardRecords[scope] : {};
+      return Array.isArray(bucket[key]) ? bucket[key].slice(0, 3) : [];
+    }
+
+    async function fetchGlobalLeaderboard() {
+      leaderboardLoading = true;
+      leaderboardError = "";
+      renderLeaderboard();
+      try {
+        const response = await fetch(LEADERBOARD_API, { cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok || !data || !data.ok || !data.leaderboard) {
+          throw new Error("leaderboard_read_failed");
+        }
+        globalLeaderboard = data.leaderboard;
+      } catch (error) {
+        leaderboardError = "global_failed";
+      } finally {
+        leaderboardLoading = false;
+        renderLeaderboard();
+      }
+    }
+
+    async function submitGlobalLeaderboardResult(score, acc, costSec) {
+      try {
+        const response = await fetch(LEADERBOARD_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: normalizeName(profile.playerName),
+            score,
+            acc,
+            cost: costSec
+          })
+        });
+        const data = await response.json();
+        if (!response.ok || !data || !data.ok || !data.leaderboard) {
+          throw new Error("leaderboard_write_failed");
+        }
+        globalLeaderboard = data.leaderboard;
+        leaderboardError = "";
+        renderLeaderboard();
+      } catch (error) {
+        leaderboardError = "global_failed";
+        renderLeaderboard();
+      }
+    }
+
+    function recordLeaderboardResult(score, acc, costSec) {
+      const name = normalizeName(profile.playerName);
+      const entry = { score, acc, cost: costSec, ts: Date.now(), name };
+      const scopes = [
+        { scope: "day", key: dayKey() },
+        { scope: "week", key: weekKey() },
+        { scope: "month", key: monthKey() }
+      ];
+      scopes.forEach(({ scope, key }) => {
+        const bucket = profile.leaderboardRecords[scope];
+        const list = Array.isArray(bucket[key]) ? bucket[key] : [];
+        list.push({ ...entry });
+        bucket[key] = list.sort((a, b) => b.score - a.score || a.cost - b.cost).slice(0, 20);
+      });
+    }
+
+    function renderLeaderboard() {
+      const scope = selectedRankScope || "week";
+      const top = globalLeaderboard && globalLeaderboard[scope] && Array.isArray(globalLeaderboard[scope].entries)
+        ? globalLeaderboard[scope].entries.slice(0, 3)
+        : localLeaderboardForScope(scope);
+      if (ui.rankScopeTabs) {
+        ui.rankScopeTabs.querySelectorAll("[data-rank-scope]").forEach((btn) => {
+          btn.classList.toggle("active", btn.getAttribute("data-rank-scope") === scope);
+        });
+      }
+      if (ui.rankScopeMeta) {
+        if (leaderboardLoading) {
+          ui.rankScopeMeta.textContent = `${leaderboardScopeLabel(scope)}加载中...`;
+        } else if (globalLeaderboard && globalLeaderboard[scope]) {
+          ui.rankScopeMeta.textContent = `${leaderboardScopeLabel(scope)}按全网成绩排序，分数高的排前面；同分时，用时更短的更靠前。`;
+        } else if (leaderboardError) {
+          ui.rankScopeMeta.textContent = `${leaderboardScopeLabel(scope)}暂时没连上全网榜，当前先显示你这台设备上的成绩。`;
+        } else {
+          ui.rankScopeMeta.textContent = `${leaderboardScopeLabel(scope)}按全网用户当前榜单排序。`;
+        }
+      }
+      if (leaderboardLoading && !top.length) {
+        ui.weeklyTop.innerHTML = `<div>${leaderboardScopeLabel(scope)}正在加载全网成绩...</div>`;
+        return;
+      }
+      if (!top.length) {
+        ui.weeklyTop.innerHTML = `<div>${leaderboardScopeLabel(scope)}还没有成绩，先测一轮就会上榜。</div>`;
+        return;
+      }
+      ui.weeklyTop.innerHTML = top.map((r, i) => `<div>#${i + 1} ${r.name || "玩家"}｜${r.score}分｜${r.cost}s</div>`).join("");
+    }
+
+    function buildWeeklyOrder() {
+      const wk = weekKey();
+      const base = hash32(wk.length * 97 + wk.charCodeAt(0));
+      const picked = [];
+      for (let i = 0; i < 5; i++) {
+        const idx = (base + i * 37) % questionBank.length;
+        picked.push(questionBank[idx]);
+      }
+      return shuffle(picked);
+    }
+
+    function ensureChallenge7Cycle() {
+      if (!profile.challenge7 || !Array.isArray(profile.challenge7.done)) {
+        profile.challenge7 = { cycleStart: dayKey(), done: [false, false, false, false, false, false, false] };
+        return;
+      }
+      if (!profile.challenge7.cycleStart) {
+        profile.challenge7.cycleStart = dayKey();
+      }
+      const start = new Date(profile.challenge7.cycleStart);
+      const now = new Date(dayKey());
+      const diff = Math.floor((now - start) / 86400000);
+      if (Number.isNaN(diff) || diff < 0 || diff >= 7) {
+        profile.challenge7 = { cycleStart: dayKey(), done: [false, false, false, false, false, false, false] };
+      }
+      if (profile.challenge7.done.length !== 7) {
+        profile.challenge7.done = [false, false, false, false, false, false, false];
+      }
+    }
+
+    function renderWeeklyAnd7d() {
+      ensureChallenge7Cycle();
+      const wk = weekKey();
+      const today = dayKey();
+      const unlockText = profile.unlocked > 100 ? "已完成100题，可重新自测" : `已解锁到第 ${profile.unlocked} 题`;
+      const role = getRole(selectedRoleId);
+      ui.weeklyMeta.textContent = `${unlockText}｜历史最高 ${profile.bestScore} 分｜已玩 ${profile.played} 局｜当前角色 ${role.name}｜周编号 ${wk}｜这 5 题可以反复做，用来轻量复盘`;
+      renderLeaderboard();
+      const doneCount = profile.challenge7.done.filter(Boolean).length;
+      ui.dayMeta.textContent = `完成 ${doneCount} / 7 天｜起始 ${profile.challenge7.cycleStart}`;
+      ui.dayGrid.innerHTML = CHALLENGE_7D_TASKS.map((t, i) => {
+        const done = !!profile.challenge7.done[i];
+        const cls = `day-btn${done ? " done" : ""}`;
+        return `<button class="${cls}" data-day="${i}">D${i + 1}<br/>${t}</button>`;
+      }).join("");
+      ui.dayGrid.querySelectorAll("button[data-day]").forEach((b) => {
+        b.addEventListener("click", () => {
+          const i = Number(b.getAttribute("data-day"));
+          if (!Number.isInteger(i) || i < 0 || i > 6) return;
+          profile.challenge7.done[i] = !profile.challenge7.done[i];
+          saveProfile();
+          renderWeeklyAnd7d();
+        });
+      });
+    }
+
+    function switchScreen(name) {
+      ui.screenHome.classList.remove("active");
+      ui.screenGame.classList.remove("active");
+      ui.screenResult.classList.remove("active");
+      if (name === "home") ui.screenHome.classList.add("active");
+      if (name === "game") ui.screenGame.classList.add("active");
+      if (name === "result") ui.screenResult.classList.add("active");
+    }
+
+    function shuffle(arr) {
+      const out = [...arr];
+      for (let i = out.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [out[i], out[j]] = [out[j], out[i]];
+      }
+      return out;
+    }
+
+    function hearts(n, maxHp) {
+      if (n <= 0) return "×0";
+      const cap = Math.max(1, Number(maxHp || 5));
+      return "❤".repeat(Math.min(cap, n));
+    }
+
+    function clampSerial(serial) {
+      return Math.max(1, Math.min(100, Number(serial || 1)));
+    }
+
+    function ageBySerial(serial) {
+      const s = clampSerial(serial);
+      if (s === 1) return 50.0;
+      const age = 50 + ((s - 1) / 99) * 50;
+      return Number(age.toFixed(1));
+    }
+
+    function gateByAge(age) {
+      const n = Number(age || 50);
+      const last = ageGateDefs[ageGateDefs.length - 1];
+      for (let i = 0; i < ageGateDefs.length; i++) {
+        const g = ageGateDefs[i];
+        if (i === ageGateDefs.length - 1) {
+          if (n >= g.min) return g;
+        } else if (n >= g.min && n < g.max) {
+          return g;
+        }
+      }
+      return last;
+    }
+
+    function gateBySerial(serial) {
+      const s = clampSerial(serial);
+      const idx = Math.max(0, Math.min(ageGateDefs.length - 1, Math.floor((s - 1) / 20)));
+      return ageGateDefs[idx];
+    }
+
+    function nextGateKeyBySerial(serial) {
+      const s = clampSerial(serial);
+      if (s % 20 !== 0) return null;
+      const idx = Math.floor((s - 1) / 20);
+      if (idx >= ageGateDefs.length - 1) return null;
+      return ageGateDefs[idx + 1].key;
+    }
+
+    function routeForSerial(serial) {
+      if (!game || !game.routeByGate) return "steady";
+      const gate = gateBySerial(serial);
+      return game.routeByGate[gate.key] || "steady";
+    }
+
+    function isBranchSlot(serial) {
+      const s = clampSerial(serial);
+      const mod = s % 10;
+      return mod === 3 || mod === 6 || mod === 9;
+    }
+
+    function makeBranchOptions(route, serial, quest) {
+      const seed = hash32(serial * 97 + route.length * 13);
+      let options = [];
+      if (route === "steady") {
+        options = [
+          { text: `先把这件事做掉：${quest}`, ok: true, fb: "顺序对了，先处理关键点最有效。" },
+          { text: "先商量商量，改天再做", ok: false, fb: "这类事越拖，前面做的效果越容易打折。" },
+          { text: "先做别的，最关键的先不动", ok: false, fb: "看起来也在改，其实没有先碰到重点。" }
+        ];
+      } else if (route === "delay") {
+        options = [
+          { text: `先定下来今天或这周就做：${quest}`, ok: true, fb: "答对了，重点是别再拖，马上落地。" },
+          { text: "先再看看，一个月后再说", ok: false, fb: "这种想法最容易把小风险拖成大问题。" },
+          { text: "先买设备，别的先不改", ok: false, fb: "设备能帮忙，但不能代替最基本的环境和动作调整。" }
+        ];
+      } else {
+        options = [
+          { text: `先马上处理这个高风险点：${quest}`, ok: true, fb: "现在最重要的就是先止住最危险的地方。" },
+          { text: "先照老样子来，看看会不会出事", ok: false, fb: "风险已经高了，再靠运气最容易出问题。" },
+          { text: "先省钱，所有改动都停掉", ok: false, fb: "真要省，也该先省次要的，不能把最关键的也停掉。" }
+        ];
+      }
+      const layout = OPTION_LAYOUTS[seed % OPTION_LAYOUTS.length];
+      return layout.map((i) => options[i]);
+    }
+
+    function composeQuestion(baseQ) {
+      if (!baseQ) return baseQ;
+      const route = routeForSerial(baseQ.serial);
+      const routeCfg = ROUTE_CONFIG[route] || ROUTE_CONFIG.steady;
+      const gate = gateBySerial(baseQ.serial);
+
+      if (baseQ.isBoss) {
+        return {
+          ...baseQ,
+          route,
+          routeLabel: routeCfg.label,
+          sub: `${baseQ.sub} 当前分支：${routeCfg.label}。`
+        };
+      }
+
+      if (!isBranchSlot(baseQ.serial)) {
+        return {
+          ...baseQ,
+          route,
+          routeLabel: routeCfg.label
+        };
+      }
+
+      const slot = baseQ.serial % 10;
+      const slotTag = slot === 3 ? "环境突发" : slot === 6 ? "行为偏差" : "应急压力";
+      const branchStem = `${gate.label}${slotTag}：现在最该先做哪一步？`;
+      const branchSub = `${routeCfg.tone} ${routeCfg.riskyHint}`;
+      const branchOptions = makeBranchOptions(route, baseQ.serial, baseQ.longQuest);
+
+      return {
+        ...baseQ,
+        stem: branchStem,
+        sub: branchSub,
+        options: branchOptions,
+        isBranch: true,
+        route,
+        routeLabel: routeCfg.label,
+        type: "情景判断"
+      };
+    }
+
+    function storyArcBySerial(serial) {
+      const gate = gateBySerial(serial);
+      return STORY_ARCS[gate.key] || STORY_ARCS.G1;
+    }
+
+    function storyRouteLine(route) {
+      if (route === "steady") return "当前状态：家里这阶段处理得比较稳，继续按重点往下做就行。";
+      if (route === "delay") return "当前状态：有些地方还在拖着没改，要尽快把重点项补上。";
+      return "当前状态：风险已经偏高，先把最危险的地方压下来。";
+    }
+
+    function renderStoryPanel(q) {
+      if (!q) return;
+      const arc = storyArcBySerial(q.serial);
+      const gate = gateBySerial(q.serial);
+      const route = q.route || routeForSerial(q.serial);
+      const extra = q.isBoss
+        ? "这是这一阶段的关键题，判断对了，后面会顺很多。"
+        : (q.isBranch ? "这是情景判断题，重点看你会不会先做最要紧的那一步。" : "这是常规推进题，抓住优先顺序就行。");
+      ui.storyTitle.textContent = arc.title;
+      ui.storyLine.textContent = `${arc.core} ${storyRouteLine(route)} ${extra}`;
+      ui.storyMeme.textContent = `${arc.meme}`;
+      ui.chipRoute.textContent = routeLabel(route);
+      ui.chipAge.textContent = `${gate.label}·${gate.title}`;
+    }
+
+    function renderHomeAgeRoad() {
+      const unlockedSerial = profile.unlocked > 1 ? clampSerial(profile.unlocked - 1) : 1;
+      const ageNow = ageBySerial(unlockedSerial);
+      const gateNow = gateByAge(ageNow);
+      const talent = getTalent(selectedTalentId);
+
+      ui.homeProgressText.textContent = `当前长线进度：${ageNow}岁 · ${gateNow.label} ${gateNow.title}（目标100岁）｜本局天赋：${talent.name}`;
+      ui.homeAgeRoad.innerHTML = ageGateDefs.map((g) => {
+        const done = ageNow >= g.max;
+        const current = gateNow.key === g.key;
+        const cls = `age-road-item${done ? " done" : ""}${current ? " current" : ""}`;
+        return `<div class="${cls}">
+          <div class="t">${g.label}｜${g.title}</div>
+          <div class="d">这一阶段重点：${g.quest}</div>
+        </div>`;
+      }).join("");
+    }
+
+    function renderAgeTrack(ageNow) {
+      const gateNow = gateByAge(ageNow);
+      ui.ageTrack.innerHTML = ageGateDefs.map((g) => {
+        const done = ageNow >= g.max;
+        const now = gateNow.key === g.key;
+        const cls = `age-node${done ? " done" : ""}${now ? " now" : ""}`;
+        return `<div class="${cls}">
+          <div class="r">${g.label}</div>
+          <div class="n">${g.title}</div>
+          <div class="m">${g.quest}</div>
+        </div>`;
+      }).join("");
+    }
+
+    function getTalent(talentId) {
+      return TALENTS.find((t) => t.id === talentId) || TALENTS[0];
+    }
+
+    function getRole(roleId) {
+      return ROLES.find((r) => r.id === roleId) || ROLES[0];
+    }
+
+    function renderRoles() {
+      ui.roleRow.innerHTML = ROLES.map((r) => {
+        const active = selectedRoleId === r.id ? " active" : "";
+        return `<button class="talent-btn${active}" data-role="${r.id}">
+          <div class="t">${r.name}</div>
+          <div class="d">${r.desc}</div>
+        </button>`;
+      }).join("");
+      ui.roleRow.querySelectorAll(".talent-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-role");
+          if (!id) return;
+          selectedRoleId = id;
+          profile.preferredRole = id;
+          saveProfile();
+          renderRoles();
+          updateHomeButtons();
+        });
+      });
+    }
+
+    function saveCustomConfigFromUI() {
+      const countRaw = Number(ui.customCount.value || 30);
+      const count = Math.max(5, Math.min(300, countRaw));
+      const speed = ["easy", "normal", "hard"].includes(ui.customSpeed.value) ? ui.customSpeed.value : "normal";
+      const topics = normalizeCustomTopics([...selectedCustomTopicIds]);
+      ui.customCount.value = String(count);
+      ui.customSpeed.value = speed;
+      profile.customConfig = { count, speed, topics };
+      saveProfile();
+      return profile.customConfig;
+    }
+
+    function inferTopicTags(question) {
+      const text = [
+        question.chapterName,
+        question.type,
+        question.region,
+        question.stem,
+        question.correct,
+        question.longQuest
+      ].join(" ");
+      const tags = new Set();
+      if (/[地面电线浴室防滑扶手清障拖鞋家里隐患夜灯厕所动线门槛]/.test(text) || /居家|卫浴|夜间/.test(text)) {
+        tags.add("home");
+      }
+      if (/夜灯|夜间|起夜|厕所|床边|摸黑/.test(text)) {
+        tags.add("night");
+      }
+      if (/药|用药|头晕|嗜睡|慢病|安眠药/.test(text)) {
+        tags.add("medicine");
+      }
+      if (/训练|平衡|肌力|下肢|活动量|练/.test(text)) {
+        tags.add("exercise");
+      }
+      if (/外出|公交|台阶|雨天|就医|出门/.test(text)) {
+        tags.add("outing");
+      }
+      if (/120|联系人|呼救|应急|跌倒后|先联系谁|证件/.test(text)) {
+        tags.add("emergency");
+      }
+      if (/家庭|家属|分工|复盘|台账|责任人|每月|协作/.test(text)) {
+        tags.add("family");
+      }
+      if (!tags.size) tags.add("home");
+      return [...tags];
+    }
+
+    function buildCustomOrder(count, topics) {
+      const selected = new Set(normalizeCustomTopics(topics));
+      const pool = [...questionBank, ...globalQuestionBank].filter((question) => {
+        const tags = inferTopicTags(question);
+        return tags.some((tag) => selected.has(tag));
+      });
+      const source = pool.length ? pool : [...questionBank, ...globalQuestionBank];
+      const picked = [];
+      while (picked.length < count) {
+        picked.push(...shuffle(source));
+      }
+      return picked.slice(0, count);
+    }
+
+    function renderCustomTopics() {
+      if (!ui.customTopicRow) return;
+      ui.customTopicRow.innerHTML = CUSTOM_TOPICS.map((topic) => {
+        const active = selectedCustomTopicIds.has(topic.id) ? " active" : "";
+        return `<button type="button" class="talent-btn topic-btn${active}" data-topic="${topic.id}">
+          <div class="t">${topic.name}</div>
+          <div class="d">${topic.desc}</div>
+        </button>`;
+      }).join("");
+      ui.customTopicRow.querySelectorAll("[data-topic]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-topic");
+          if (!id) return;
+          if (selectedCustomTopicIds.has(id) && selectedCustomTopicIds.size > 1) {
+            selectedCustomTopicIds.delete(id);
+          } else {
+            selectedCustomTopicIds.add(id);
+          }
+          profile.customConfig = {
+            ...(profile.customConfig || {}),
+            count: Number(ui.customCount.value || 30),
+            speed: ["easy", "normal", "hard"].includes(ui.customSpeed.value) ? ui.customSpeed.value : "normal",
+            topics: normalizeCustomTopics([...selectedCustomTopicIds])
+          };
+          saveProfile();
+          renderCustomTopics();
+        });
+      });
+    }
+
+    function renderTalents() {
+      ui.talentRow.innerHTML = TALENTS.map((t) => {
+        const active = selectedTalentId === t.id ? " active" : "";
+        return `<button class="talent-btn${active}" data-talent="${t.id}">
+          <div class="t">${t.name}</div>
+          <div class="d">${t.desc}</div>
+        </button>`;
+      }).join("");
+      ui.talentRow.querySelectorAll(".talent-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-talent");
+          if (!id) return;
+          selectedTalentId = id;
+          profile.preferredTalent = id;
+          saveProfile();
+          renderTalents();
+          updateHomeButtons();
+        });
+      });
+    }
+
+    function routeSummaryText() {
+      if (!game || !game.routeByGate) return "";
+      const keys = ["G1", "G2", "G3", "G4", "G5"];
+      return keys.map((k) => `${k}:${routeLabel(game.routeByGate[k] || "steady")}`).join(" / ");
+    }
+
+    function updateHomeButtons() {
+      const unlockText = profile.unlocked > 100 ? "已通关100题，可重开" : `已解锁到第 ${profile.unlocked} 题`;
+      const talent = getTalent(selectedTalentId);
+      const role = getRole(selectedRoleId);
+      ui.btnCustomStart.textContent = "开始家庭防摔自测";
+      ui.playerName.value = normalizeName(profile.playerName);
+      ui.customCount.value = String(profile.customConfig && profile.customConfig.count ? profile.customConfig.count : 30);
+      ui.customSpeed.value = (profile.customConfig && profile.customConfig.speed) ? profile.customConfig.speed : "normal";
+      selectedCustomTopicIds = new Set(normalizeCustomTopics(profile.customConfig && profile.customConfig.topics));
+      renderCustomTopics();
+      renderHomeAgeRoad();
+      renderWeeklyAnd7d();
+    }
+
+    function clearQuestionTimer() {
+      if (questionTimerHandle) {
+        clearInterval(questionTimerHandle);
+        questionTimerHandle = null;
+      }
+    }
+
+    function clearReviveTimer() {
+      if (reviveTimerHandle) {
+        clearInterval(reviveTimerHandle);
+        reviveTimerHandle = null;
+      }
+    }
+
+    function renderTimerOnly() {
+      if (!game || !ui.hudTimer) return;
+      if (game.mode !== "infinite") {
+        ui.hudTimer.textContent = "--";
+        ui.hudTimer.classList.remove("warn", "danger");
+        return;
+      }
+      const rest = Math.max(0, Math.ceil((game.questionDeadlineTs - Date.now()) / 1000));
+      ui.hudTimer.textContent = `${rest}s`;
+      ui.hudTimer.classList.toggle("warn", rest <= 5 && rest > 2);
+      ui.hudTimer.classList.toggle("danger", rest <= 2);
+    }
+
+    function forceTimeoutWrong() {
+      if (!game || game.mode !== "infinite" || game.answered || game.inRevive) return;
+      const q = game.currentRenderedQuestion || currentQuestion();
+      if (!q) return;
+      const rightIdx = q.options.findIndex((o) => o.ok);
+      const choose = rightIdx === 0 ? 1 : 0;
+      submitAnswer(choose, true);
+    }
+
+    function startQuestionTimer(displayIndex) {
+      clearQuestionTimer();
+      if (!game || game.mode !== "infinite") return;
+      const limitSec = Math.max(5, infiniteTimeLimitSec(displayIndex) + (game.questionExtraTime || 0) + (game.roleTimeDelta || 0));
+      game.questionDeadlineTs = Date.now() + limitSec * 1000;
+      renderTimerOnly();
+      questionTimerHandle = setInterval(() => {
+        if (!game || game.mode !== "infinite") {
+          clearQuestionTimer();
+          return;
+        }
+        if (game.answered || game.inRevive) {
+          clearQuestionTimer();
+          return;
+        }
+        if (Date.now() >= game.questionDeadlineTs) {
+          clearQuestionTimer();
+          forceTimeoutWrong();
+          return;
+        }
+        renderTimerOnly();
+      }, 250);
+    }
+
+    function startGame(mode) {
+      let customCfg = null;
+      if (mode === "custom") {
+        customCfg = saveCustomConfigFromUI();
+      }
+      const order = mode === "marathon"
+        ? shuffle(questionBank)
+        : (mode === "infinite"
+          ? buildInfiniteChunk(1, 120)
+          : (mode === "weekly"
+            ? buildWeeklyOrder()
+            : (mode === "custom"
+              ? buildCustomOrder((customCfg && customCfg.count) ? customCfg.count : 30, (customCfg && customCfg.topics) ? customCfg.topics : CUSTOM_TOPICS.map((item) => item.id))
+              : [...questionBank])));
+      const startIndex = mode === "campaign"
+        ? Math.min(99, Math.max(0, (profile.unlocked > 100 ? 0 : profile.unlocked - 1)))
+        : 0;
+      const talent = getTalent(selectedTalentId);
+      const role = getRole(selectedRoleId);
+      const customSpeed = mode === "custom" && customCfg ? customCfg.speed : "normal";
+      const speedFactor = customSpeed === "easy" ? 1 : (customSpeed === "hard" ? -1 : 0);
+      const maxHp = Math.max(3, talent.maxHp + role.hpDelta);
+
+      game = {
+        mode,
+        order,
+        idx: startIndex,
+        hp: maxHp,
+        maxHp,
+        talentId: talent.id,
+        talentName: talent.name,
+        roleId: role.id,
+        roleName: role.name,
+        talentScoreFlat: talent.scoreFlat,
+        roleScoreFlat: role.scoreFlat,
+        roleTimeDelta: role.timeDelta + speedFactor,
+        talentComboExtra: talent.comboExtra,
+        talentLuckyGuard: talent.luckyGuard,
+        luckyGuardUsed: false,
+        score: 0,
+        streak: 0,
+        maxStreak: 0,
+        correct: 0,
+        wrong: 0,
+        bossCleared: 0,
+        reviveUsed: false,
+        revivedSuccess: false,
+        inRevive: false,
+        reviveBranch: null,
+        routeByGate: { G1: "steady" },
+        currentRenderedQuestion: null,
+        maxDisplay: 0,
+        questionShownTs: 0,
+        questionDeadlineTs: 0,
+        questionExtraTime: 0,
+        buffShield: 0,
+        buffFocus: 0,
+        buffFury: 0,
+        answered: false,
+        reason: "",
+        startedAt: Date.now()
+      };
+      clearQuestionTimer();
+      clearReviveTimer();
+
+      ui.hudMode.textContent = mode === "campaign" ? "标准自测" : (mode === "marathon" ? "完整自测" : (mode === "weekly" ? "本周自测" : (mode === "custom" ? "自定义自测" : "连续练习")));
+      ui.hudTalent.textContent = `${role.name}`;
+      ui.feedback.className = "feedback";
+      ui.feedback.textContent = "自测开始：先把最关键的一步判断清楚。";
+      ui.nextBtn.disabled = true;
+      ui.nextBtn.textContent = "下一题";
+
+      switchScreen("game");
+      renderQuestion();
+    }
+
+    function currentQuestion() {
+      if (!game) return null;
+      return game.order[game.idx] || null;
+    }
+
+    function currentDisplayIndex(q) {
+      if (!q) return 0;
+      if (game.mode === "campaign") return q.serial;
+      if (game.mode === "infinite") return q.displaySerial || (game.idx + 1);
+      return game.idx + 1;
+    }
+
+    function renderHud(q) {
+      const displayIndex = currentDisplayIndex(q);
+      game.maxDisplay = Math.max(game.maxDisplay || 0, displayIndex);
+      const ageNow = ageBySerial(displayIndex);
+      const gateNow = gateByAge(ageNow);
+
+      if (game.mode === "infinite") ui.hudIndex.textContent = `第 ${displayIndex} 题`;
+      else if (game.mode === "weekly") ui.hudIndex.textContent = `${game.idx + 1} / 5`;
+      else ui.hudIndex.textContent = `${displayIndex} / 100`;
+      ui.hudHp.textContent = hearts(game.hp, game.maxHp);
+      ui.hudStreak.textContent = String(game.streak);
+      ui.hudScore.textContent = String(game.score);
+      ui.hudBuff.textContent = activeBuffText();
+      ui.hudAge.textContent = `${ageNow}岁`;
+      ui.hudGate.textContent = `${gateNow.label}`;
+      ui.hudTalent.textContent = game.talentName || "稳健底盘";
+      if (game.mode !== "infinite") {
+        ui.hudTimer.textContent = "--";
+        ui.hudTimer.classList.remove("warn", "danger");
+      } else {
+        renderTimerOnly();
+      }
+      const progressPct = game.mode === "infinite"
+        ? ((((displayIndex - 1) % 100) + 1) / 100) * 100
+        : Math.min(100, (displayIndex / 100) * 100);
+      ui.progressFill.style.width = `${progressPct}%`;
+      ui.chipAge.textContent = `${gateNow.label}·${gateNow.title}`;
+      renderAgeTrack(ageNow);
+    }
+
+    function renderQuestion() {
+      if (game && game.inRevive) {
+        renderReviveBranch();
+        return;
+      }
+      const baseQ = currentQuestion();
+      if (!baseQ) {
+        finishGame("完成全部题目");
+        return;
+      }
+      const q = composeQuestion(baseQ);
+      game.currentRenderedQuestion = q;
+      const displayIndex = currentDisplayIndex(q);
+      game.questionShownTs = Date.now();
+      game.questionExtraTime = 0;
+      if (game.mode === "infinite" && game.buffFocus > 0) {
+        game.questionExtraTime = 3;
+        game.buffFocus -= 1;
+      }
+
+      const prev = game.order[game.idx - 1];
+      if (!prev || prev.chapterNo !== baseQ.chapterNo) {
+        ui.feedback.className = "feedback";
+        ui.feedback.textContent = `进入主题：${q.chapterName}（${q.ageBand} ${q.gateTitle}）`;
+      }
+
+      ui.chipChapter.textContent = `第${q.chapterNo}章 ${q.chapterName}`;
+      ui.chipRegion.textContent = q.region;
+      ui.chipType.textContent = q.isBoss ? `关键题·${q.bossTitle || "阶段重点"}` : q.type;
+      ui.questionTitle.textContent = q.stem;
+      const extraInfinite = game.mode === "infinite"
+        ? ` 连续练习难度 Lv.${infiniteDifficultyByDisplay(displayIndex)}，本题限时 ${infiniteTimeLimitSec(displayIndex) + (game.questionExtraTime || 0)} 秒。`
+        : "";
+      ui.questionSub.textContent = `${q.sub} 这一阶段先盯：${q.longQuest}。家里现在的状态：${q.routeLabel || routeLabel(routeForSerial(q.serial))}。${extraInfinite}`;
+      renderHud(q);
+      renderStoryPanel(q);
+
+      ui.options.innerHTML = "";
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerHTML = `<span class="option-code">${String.fromCharCode(65 + idx)}</span><span>${opt.text}</span>`;
+        btn.addEventListener("click", () => submitAnswer(idx));
+        ui.options.appendChild(btn);
+      });
+
+      game.answered = false;
+      ui.explainBox.classList.add("hidden");
+      ui.explainBox.textContent = "";
+      ui.nextBtn.disabled = true;
+      ui.nextBtn.textContent = game.hp <= 0 ? "进入复活关" : "下一题";
+      startQuestionTimer(displayIndex);
+    }
+
+    function pickReviveBranch(displayIndex) {
+      const n = Number(displayIndex || 1);
+      const idx = n % REVIVE_BRANCHES.length;
+      return REVIVE_BRANCHES[idx];
+    }
+
+    function renderReviveBranch() {
+      if (!game || !game.inRevive || !game.reviveBranch) return;
+      clearQuestionTimer();
+      clearReviveTimer();
+      const rb = game.reviveBranch;
+      const q = currentQuestion();
+      renderHud(q);
+      ui.chipType.textContent = "复活分支";
+      const qForStory = composeQuestion(q || { serial: 1, chapterNo: 1, chapterName: "复活分支", region: "基础共识", type: "复活分支", longQuest: "先保命再推进", sub: "", options: [] });
+      renderStoryPanel({ ...qForStory, isBranch: true });
+      ui.questionTitle.textContent = rb.title;
+      ui.questionSub.textContent = rb.stem;
+      ui.options.innerHTML = "";
+      rb.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerHTML = `<span class="option-code">${String.fromCharCode(65 + idx)}</span><span>${opt.text}</span>`;
+        btn.addEventListener("click", () => submitReviveAnswer(idx));
+        ui.options.appendChild(btn);
+      });
+      ui.feedback.className = "feedback";
+      const deadline = Date.now() + 8000;
+      ui.feedback.textContent = "生命值归零，触发复活分支：8 秒内答对才能继续本轮自测。";
+      reviveTimerHandle = setInterval(() => {
+        if (!game || !game.inRevive || game.answered) {
+          clearReviveTimer();
+          return;
+        }
+        const rest = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+        ui.feedback.textContent = `生命值归零，复活倒计时 ${rest}s：答对才能继续本轮自测。`;
+        if (Date.now() >= deadline) {
+          clearReviveTimer();
+          const firstWrong = rb.options.findIndex((o) => !o.ok);
+          submitReviveAnswer(firstWrong >= 0 ? firstWrong : 0);
+        }
+      }, 250);
+      ui.nextBtn.disabled = true;
+      ui.nextBtn.textContent = "等待作答";
+      game.answered = false;
+    }
+
+    function startReviveBranch() {
+      if (!game || game.reviveUsed) {
+        finishGame("生命值耗尽");
+        return;
+      }
+      const q = currentQuestion();
+      game.inRevive = true;
+      game.reviveUsed = true;
+      game.reviveBranch = pickReviveBranch(currentDisplayIndex(q));
+      renderReviveBranch();
+    }
+
+    function submitReviveAnswer(index) {
+      if (!game || !game.inRevive || !game.reviveBranch) return;
+      clearReviveTimer();
+      const rb = game.reviveBranch;
+      const chosen = rb.options[index];
+      if (!chosen) return;
+
+      const buttons = Array.from(ui.options.querySelectorAll("button"));
+      buttons.forEach((b) => { b.disabled = true; });
+
+      if (chosen.ok) {
+        const heal = game.talentId === "steady" ? 3 : 2;
+        game.hp = Math.min(game.maxHp, Math.max(1, heal));
+        game.revivedSuccess = true;
+        game.inRevive = false;
+        game.reviveBranch = null;
+        ui.feedback.className = "feedback good";
+        ui.feedback.textContent = `复活成功，恢复 ${game.hp} 点生命。${chosen.fb} ${pickBySeed(MEME_FEEDBACK.revive, game.idx + 31)}`;
+        renderHud(currentQuestion());
+        ui.nextBtn.disabled = false;
+        ui.nextBtn.textContent = "继续自测";
+      } else {
+        const rightIdx = rb.options.findIndex((o) => o.ok);
+        if (rightIdx >= 0 && buttons[rightIdx]) buttons[rightIdx].classList.add("right");
+        if (buttons[index]) buttons[index].classList.add("wrong");
+        ui.feedback.className = "feedback bad";
+        ui.feedback.textContent = `复活失败。${chosen.fb} ${pickBySeed(MEME_FEEDBACK.bad, game.idx + 47)}`;
+        ui.nextBtn.disabled = false;
+        ui.nextBtn.textContent = "查看结算";
+      }
+      game.answered = true;
+    }
+
+    function submitAnswer(index, isTimeout) {
+      if (!game || game.answered || game.inRevive) return;
+      clearQuestionTimer();
+      const q = game.currentRenderedQuestion || currentQuestion();
+      if (!q) return;
+
+      const chosen = q.options[index];
+      if (!chosen) return;
+      game.answered = true;
+
+      const buttons = Array.from(ui.options.querySelectorAll("button"));
+      buttons.forEach((b) => { b.disabled = true; });
+
+      if (chosen.ok) {
+        game.correct += 1;
+        game.streak += 1;
+        game.maxStreak = Math.max(game.maxStreak, game.streak);
+        let gain = 10 + Math.min(20, (game.streak - 1) * (2 + game.talentComboExtra));
+        const answerMs = Math.max(0, Date.now() - (game.questionShownTs || Date.now()));
+        const quickThreshold = game.mode === "infinite" ? 3200 : 4200;
+        let bonusText = "";
+        if (game.mode === "infinite") {
+          const displayIndex = currentDisplayIndex(q);
+          gain += Math.floor(infiniteDifficultyByDisplay(displayIndex) / 2);
+        }
+        if (answerMs <= quickThreshold) {
+          gain += 6;
+          bonusText += " 快答奖励+6分。";
+        }
+        if (game.buffFury > 0) {
+          game.buffFury -= 1;
+          gain += 12;
+          bonusText += " 爆发加成+12分。";
+        }
+        gain += game.talentScoreFlat + (game.roleScoreFlat || 0);
+        const displayIndex = currentDisplayIndex(q);
+        let memeText = pickBySeed(MEME_FEEDBACK.good, q.serial + game.streak);
+        if (q.isBoss) {
+          gain += 18;
+          game.bossCleared += 1;
+          const nextGateKey = nextGateKeyBySerial(q.serial);
+          if (nextGateKey) {
+            const nextRoute = chosen.route || "steady";
+            game.routeByGate[nextGateKey] = nextRoute;
+            bonusText += ` 后续进入【${routeLabel(nextRoute)}】。`;
+          }
+          bonusText += " Boss通关额外+18分。";
+          memeText = pickBySeed(MEME_FEEDBACK.boss, q.serial + game.bossCleared);
+        }
+        game.score += gain;
+        buttons[index].classList.add("right");
+        ui.feedback.className = "feedback good";
+        if ((displayIndex % 10 === 0 || q.isBoss) && game.hp < game.maxHp) {
+          game.hp += 1;
+          bonusText += " 里程碑奖励 +1 生命。";
+        }
+        if (game.streak > 0 && game.streak % 5 === 0) {
+          bonusText += ` ${awardRandomBuff(q.serial + game.streak)}。`;
+        }
+        ui.feedback.textContent = `答对 +${gain} 分。${chosen.fb}${bonusText} ${memeText}`;
+
+        if (game.mode === "campaign") {
+          profile.unlocked = Math.min(101, Math.max(profile.unlocked, q.serial + 1));
+        }
+      } else {
+        game.wrong += 1;
+        game.streak = 0;
+        let hpLoss = q.isBoss ? 2 : 1;
+        if (game.mode === "infinite") {
+          const displayIndex = currentDisplayIndex(q);
+          const d = infiniteDifficultyByDisplay(displayIndex);
+          if (d >= 6) hpLoss = Math.max(hpLoss, 2);
+        }
+        if (game.buffShield > 0) {
+          game.buffShield -= 1;
+          hpLoss = 0;
+        }
+        game.hp -= hpLoss;
+        buttons[index].classList.add("wrong");
+        const rightIdx = q.options.findIndex((o) => o.ok);
+        if (rightIdx >= 0 && buttons[rightIdx]) buttons[rightIdx].classList.add("right");
+
+        if (q.isBoss) {
+          const nextGateKey = nextGateKeyBySerial(q.serial);
+          if (nextGateKey) {
+            const nextRoute = chosen.route || "chaos";
+            game.routeByGate[nextGateKey] = nextRoute;
+          }
+        }
+
+        if (game.hp <= 0 && game.talentLuckyGuard && !game.luckyGuardUsed) {
+          game.luckyGuardUsed = true;
+          game.hp = 1;
+          ui.feedback.className = "feedback good";
+          ui.feedback.textContent = `天赋【${game.talentName}】触发：濒死免疫一次。${chosen.fb}（剩余 ${game.hp}） ${pickBySeed(MEME_FEEDBACK.revive, q.serial + 7)}`;
+        } else {
+          ui.feedback.className = "feedback bad";
+          const timeoutText = isTimeout ? "超时判错。" : "答错";
+          const shieldText = hpLoss === 0 ? " 护盾生效，本次不掉血。" : "";
+          ui.feedback.textContent = `${timeoutText} -${hpLoss} 生命。${chosen.fb}${shieldText}（剩余 ${Math.max(0, game.hp)}） ${pickBySeed(MEME_FEEDBACK.bad, q.serial + game.wrong)}`;
+        }
+      }
+
+      const rightIdx = q.options.findIndex((o) => o.ok);
+      const rightOpt = rightIdx >= 0 ? q.options[rightIdx] : null;
+      const wrongReasons = q.options
+        .map((o, i) => ({ ...o, idx: i }))
+        .filter((o) => !o.ok)
+        .slice(0, 2)
+        .map((o) => `${String.fromCharCode(65 + o.idx)}：${expandExplanation(o.fb)}`);
+      if (rightOpt) {
+        const rightCode = String.fromCharCode(65 + rightIdx);
+        ui.explainBox.innerHTML = `正确答案：<strong>${rightCode}</strong>。解析：${expandExplanation(rightOpt.fb)}<br/>不优先选项：${wrongReasons.join("；")}`;
+      } else {
+        ui.explainBox.textContent = "解析：本题请优先选择能立刻降低高频跌倒风险的动作。";
+      }
+      ui.explainBox.classList.remove("hidden");
+
+      renderHud(q);
+      ui.nextBtn.disabled = false;
+      ui.nextBtn.textContent = game.hp <= 0 ? (game.reviveUsed ? "查看结算" : "进入复活关") : "下一题";
+    }
+
+    function nextQuestion() {
+      if (!game || !game.answered) return;
+      if (game.hp <= 0) {
+        if (!game.reviveUsed) {
+          startReviveBranch();
+        } else {
+          finishGame("生命值耗尽");
+        }
+        return;
+      }
+      if (game.inRevive) return;
+
+      game.idx += 1;
+      if (game.idx >= game.order.length) {
+        if (game.mode === "infinite") {
+          const last = game.order[game.order.length - 1];
+          const nextStart = (last && last.displaySerial ? last.displaySerial : game.order.length) + 1;
+          game.order.push(...buildInfiniteChunk(nextStart, 80));
+        } else {
+          finishGame("完成全部题目");
+          return;
+        }
+      }
+      if (game.idx >= game.order.length) {
+        finishGame("完成全部题目");
+        return;
+      }
+      renderQuestion();
+    }
+
+    function buildResultActionItems(acc, reachedGate, reachedAge) {
+      const intro = {
+        title: `你现在先盯住 ${reachedGate.label} 这段，别急着全屋大改`,
+        desc: `这一阶段先做这件事：${reachedGate.quest}。今天先别想着一次全改完，先把最容易出事、最容易马上动手的地方处理掉。`
+      };
+
+      if (acc < 60) {
+        return [
+          intro,
+          {
+            title: "今天先把 3 个最容易摔的点处理掉",
+            desc: `直接照着做：床边和去厕所那段路加夜灯，浴室先铺防滑垫，常穿的拖鞋换成鞋底不打滑、后跟不松的那种。先把这 3 样补上，今天就算没白做。`
+          },
+          {
+            title: "这周把“出事后找谁”提前准备好",
+            desc: `把 120 设成手机快捷拨号，再拉一个家属或邻居的小群，群里固定一句话：谁离得近、谁先上门、谁负责打电话。真出事时，照这个顺序做，不用现场慌。`
+          },
+          {
+            title: "下周再补一次核对，避免前面白忙",
+            desc: `抽 20 分钟看看老人最近吃的药、走路是不是发飘、夜里起床会不会摸黑。能约社区医生或门诊就顺手问一句：这几种药会不会让人头晕、腿软、容易摔。`
+          }
+        ];
+      }
+
+      if (acc < 80) {
+        return [
+          intro,
+          {
+            title: "先把卫浴和卧室这两块做到更稳",
+            desc: `浴室别再拖着，优先补防滑垫、扶手、洗澡时能坐的凳子。卧室到厕所这条路尽量留出一条顺畅通道，地上的小凳子、杂物箱、松动地毯先挪开。`
+          },
+          {
+            title: "每天练 5 分钟，不求狠，只求能坚持",
+            desc: `就做最简单的：扶着桌边站立抬脚、靠墙半蹲、原地抬腿。每次 5 分钟，连着做 4 周，比偶尔练半小时更有用。家里人看见了也更容易一起配合。`
+          },
+          {
+            title: `到 ${reachedAge} 岁这一段，重点不是买更多，是把习惯做顺`,
+            desc: `每周固定一天看一眼：夜灯亮不亮、防滑垫滑不滑、拖鞋还稳不稳、老人最近有没有说头晕腿软。哪一项开始不对劲，就优先补那一项。`
+          }
+        ];
+      }
+
+      return [
+        intro,
+        {
+          title: "基础改造先别停，接下来开始练外出场景",
+          desc: `家里已经比多数家庭做得更靠前了，下一步不是猛买设备，而是把“出门时也不容易摔”练出来。先从公交上下车、下雨天地滑、坡道转身这些场景开始想。`
+        },
+        {
+          title: "每月做一次小复盘，看看哪一步开始松了",
+          desc: `一个月挑一天，家里一起过一遍：最近有没有差点滑倒、有没有起夜更频繁、有没有药吃完后人更飘。发现苗头就立刻补，不要等真的摔了再回头查。`
+        },
+        {
+          title: "智能提醒可以加，但别替代人和基础动作",
+          desc: `如果后面想加报警器、智能手环、跌倒监测，前提还是前面的灯、垫子、扶手、鞋子、联系人这些都在。设备是加分项，不是拿来替代基本防摔动作的。`
+        }
+      ];
+    }
+
+    function finishGame(reason, bypassFailScene) {
+      if (!game) return;
+      clearQuestionTimer();
+      clearReviveTimer();
+      if (reason === "生命值耗尽" && !bypassFailScene) {
+        showFailScene(() => finishGame(reason, true));
+        return;
+      }
+      game.reason = reason;
+
+      const total = Math.max(1, game.correct + game.wrong);
+      const acc = Math.round((game.correct / total) * 100);
+      const costSec = Math.max(1, Math.round((Date.now() - (game.startedAt || Date.now())) / 1000));
+
+      profile.bestScore = Math.max(profile.bestScore, game.score);
+      profile.bestAcc = Math.max(profile.bestAcc, acc);
+      profile.played += 1;
+      recordLeaderboardResult(game.score, acc, costSec);
+      submitGlobalLeaderboardResult(game.score, acc, costSec);
+      if (game.mode === "weekly") {
+        const wk = weekKey();
+        const arr = Array.isArray(profile.weeklyRecords[wk]) ? profile.weeklyRecords[wk] : [];
+        arr.push({ score: game.score, acc, cost: costSec, ts: Date.now(), name: normalizeName(profile.playerName) });
+        profile.weeklyRecords[wk] = arr.sort((a, b) => b.score - a.score || a.cost - b.cost).slice(0, 20);
+      }
+      saveProfile();
+      updateHomeButtons();
+
+      ui.rScore.textContent = String(game.score);
+      ui.rAcc.textContent = `${acc}%`;
+      ui.rStreak.textContent = String(game.maxStreak);
+      ui.rUnlock.textContent = `${Math.min(100, profile.unlocked - 1)} / 100`;
+      const reachedSerial = clampSerial(game.maxDisplay || 1);
+      const reachedAge = ageBySerial(reachedSerial);
+      const reachedGate = gateByAge(reachedAge);
+      ui.rAge.textContent = `${reachedAge}岁`;
+
+      if (game.mode === "weekly") {
+        ui.resultBadge.textContent = "本周自测";
+        ui.resultTitle.textContent = "本周 5 题家庭自测已完成";
+      } else if (game.mode === "infinite" && reason !== "生命值耗尽") {
+        ui.resultBadge.textContent = "连续练习总结";
+        ui.resultTitle.textContent = "这一轮连续练习已完成";
+      } else if (reason === "完成全部题目" && game.mode === "marathon") {
+        ui.resultBadge.textContent = "完整自测总结";
+        ui.resultTitle.textContent = "100 题完整家庭自测已完成";
+      } else if (reason === "完成全部题目") {
+        ui.resultBadge.textContent = "阶段自测完成";
+        ui.resultTitle.textContent = "这一阶段家庭防摔自测已完成";
+      } else {
+        ui.resultBadge.textContent = "阶段总结";
+        ui.resultTitle.textContent = "这一轮家庭防摔自测已完成";
+      }
+
+      const reviveText = game.revivedSuccess ? "，完成过一次复活翻盘" : "";
+      ui.resultDesc.textContent = game.mode === "weekly"
+        ? `你完成了本周 5 题自测：总用时 ${costSec} 秒，正确率 ${acc}% 。看一眼哪些题最容易犹豫，再补家里的关键风险点。`
+        : `你这轮测到 ${reachedAge}岁这一段（${reachedGate.label} ${reachedGate.title}），当前角色偏向：${game.talentName}，阶段关键题做对了 ${game.bossCleared}/5${reviveText}。下一步优先补夜灯、防滑和应急联系人，不必一次花很多钱。`;
+
+      const actionList = buildResultActionItems(acc, reachedGate, reachedAge);
+      ui.resultActions.innerHTML = actionList.map((item) => `
+        <div class="result-step">
+          <div class="t">${item.title}</div>
+          <div class="d">${item.desc}</div>
+        </div>
+      `).join("");
+
+      switchScreen("result");
+    }
+
+    function resetAll() {
+      if (!confirm("确认清空本机历史记录、昵称和排行榜吗？此操作不可恢复。")) {
+        return;
+      }
+      clearQuestionTimer();
+      clearReviveTimer();
+      localStorage.removeItem(STORAGE_KEY);
+      profile = { ...profileDefault };
+      selectedTalentId = profile.preferredTalent;
+      selectedRoleId = profile.preferredRole;
+      renderTalents();
+      renderRoles();
+      updateHomeButtons();
+      ui.feedback.className = "feedback";
+      ui.feedback.textContent = "历史记录已清空。";
+      alert("已清空历史记录。");
+    }
+
+    function playIntro() {
+      if (!ui.introScreen) return;
+      ui.introScreen.classList.remove("phase-2", "phase-3", "hide");
+      setTimeout(() => ui.introScreen && ui.introScreen.classList.add("phase-2"), 400);
+      setTimeout(() => {
+        if (!ui.introScreen) return;
+        ui.introScreen.classList.add("phase-3");
+      }, 700);
+    }
+
+    function closeIntro() {
+      if (!ui.introScreen) return;
+      ui.introScreen.classList.add("hide");
+      setTimeout(() => {
+        if (ui.introScreen && ui.introScreen.parentNode) {
+          ui.introScreen.parentNode.removeChild(ui.introScreen);
+        }
+      }, 460);
+    }
+
+    function hideFailScene() {
+      if (failSceneTimer) {
+        clearTimeout(failSceneTimer);
+        failSceneTimer = null;
+      }
+      if (ui.failScene) ui.failScene.classList.remove("show");
+    }
+
+    function showFailScene(onSummary) {
+      if (!ui.failScene) {
+        if (typeof onSummary === "function") onSummary();
+        return;
+      }
+      hideFailScene();
+      ui.failScene.classList.add("show");
+      failSceneTimer = setTimeout(() => {
+        hideFailScene();
+        if (typeof onSummary === "function") onSummary();
+      }, 3200);
+    }
+
+    ui.btnCampaign.addEventListener("click", () => startGame("campaign"));
+    ui.btnMarathon.addEventListener("click", () => startGame("marathon"));
+    ui.btnInfinite.addEventListener("click", () => startGame("infinite"));
+    ui.btnWeekly.addEventListener("click", () => startGame("weekly"));
+    ui.btnCustom.addEventListener("click", () => startGame("custom"));
+    ui.btnCustomStart.addEventListener("click", () => startGame("custom"));
+    function persistPlayerName() {
+      profile.playerName = normalizeName(ui.playerName.value);
+      ui.playerName.value = profile.playerName;
+      updateWeeklyRecordNames();
+      saveProfile();
+      renderWeeklyAnd7d();
+    }
+    ui.playerName.addEventListener("change", persistPlayerName);
+    if (ui.saveNameBtn) {
+      ui.saveNameBtn.addEventListener("click", persistPlayerName);
+    }
+    if (ui.rankScopeTabs) {
+      ui.rankScopeTabs.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-rank-scope]");
+        if (!target || !ui.rankScopeTabs.contains(target)) return;
+        const scope = target.getAttribute("data-rank-scope");
+        if (!scope || scope === selectedRankScope) return;
+        selectedRankScope = scope;
+        renderLeaderboard();
+      });
+    }
+    ui.btnReset.addEventListener("click", resetAll);
+    ui.nextBtn.addEventListener("click", nextQuestion);
+    ui.quitBtn.addEventListener("click", () => {
+      if (!game) {
+        switchScreen("home");
+        return;
+      }
+      finishGame("中途返回");
+    });
+    ui.againBtn.addEventListener("click", () => {
+      const mode = game && game.mode ? game.mode : "campaign";
+      startGame(mode);
+    });
+    ui.homeBtn.addEventListener("click", () => switchScreen("home"));
+    ui.introEnter.addEventListener("click", closeIntro);
+    ui.failSummaryBtn.addEventListener("click", () => {
+      hideFailScene();
+      finishGame("生命值耗尽", true);
+    });
+    ui.failRetryBtn.addEventListener("click", () => {
+      hideFailScene();
+      const mode = game && game.mode ? game.mode : "campaign";
+      startGame(mode);
+    });
+    ui.riskToggle.addEventListener("click", () => {
+      const isHidden = ui.riskBody.classList.contains("hidden");
+      if (isHidden) {
+        ui.riskBody.classList.remove("hidden");
+        ui.riskBody.setAttribute("aria-hidden", "false");
+        ui.riskToggle.setAttribute("aria-expanded", "true");
+        ui.riskToggle.textContent = "收起风险提示";
+      } else {
+        ui.riskBody.classList.add("hidden");
+        ui.riskBody.setAttribute("aria-hidden", "true");
+        ui.riskToggle.setAttribute("aria-expanded", "false");
+        ui.riskToggle.textContent = "展开风险提示";
+      }
+    });
+
+    renderTalents();
+    renderRoles();
+    updateHomeButtons();
+    fetchGlobalLeaderboard();
+    playIntro();
+  </script>
+</body>
+</html>
+
+
