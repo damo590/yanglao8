@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>居家照护学习清单</title>
+  <style>
+    :root {
+      --green-950: #063f35;
+      --green-900: #14584f;
+      --green-700: #0f7f5f;
+      --green-600: #1f8f76;
+      --green-100: #eef8f3;
+      --green-50: #f8fcfb;
+      --line: #c8dfda;
+      --text: #203f3a;
+      --muted: #426963;
+      --blue-50: #e8f3ff;
+      --yellow-50: #fff1d9;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--green-50) 0%, #ffffff 46%, #f7fbfa 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 22px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 34px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green-950);
+      font-weight: 850;
+      font-size: 20px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--green-700);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .nav-note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+      gap: 34px;
+      align-items: center;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      padding: 7px 12px;
+      color: var(--green-700);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      color: var(--green-950);
+      font-size: 45px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      max-width: 590px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .btn.primary {
+      background: var(--green-700);
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(15, 127, 95, 0.24);
+    }
+
+    .btn.secondary {
+      background: var(--white);
+      color: var(--green-900);
+      border: 1px solid var(--line);
+    }
+
+    .microcopy {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .selector {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 20px 50px rgba(6, 63, 53, 0.10);
+      padding: 22px;
+    }
+
+    .selector h2 {
+      margin: 0 0 6px;
+      color: var(--green-950);
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .selector p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .scene-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .scene-card {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid #d0e7e2;
+      border-radius: 18px;
+      background: var(--white);
+      padding: 14px;
+    }
+
+    .scene-card.active {
+      background: var(--green-100);
+      border-color: #a8d6cc;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--green-700);
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    .scene-title {
+      color: var(--green-950);
+      font-weight: 850;
+      margin-bottom: 2px;
+    }
+
+    .scene-desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      color: var(--green-700);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin: 18px 0 16px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: var(--green-950);
+      font-size: 28px;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      gap: 18px;
+      margin-bottom: 38px;
+    }
+
+    .care-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .video-section {
+      margin-bottom: 38px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--white);
+      padding: 20px;
+    }
+
+    .panel.green { background: var(--green-100); border-color: #cbe4de; }
+    .panel.blue { background: var(--blue-50); border-color: #cfe2f7; }
+    .panel.yellow { background: var(--yellow-50); border-color: #efd28c; }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      color: var(--green-950);
+      font-size: 20px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 25px minmax(0, 1fr);
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .mark {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-700);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .yellow .mark {
+      background: #e0b85e;
+      color: #4b390f;
+    }
+
+    .blue .mark {
+      background: #2e8acf;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .video {
+      border: 1px solid rgba(46, 138, 207, 0.18);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      padding: 12px;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 12px;
+      border: 0;
+      background: #d9ebe7;
+      overflow: hidden;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .video strong {
+      display: block;
+      color: var(--green-950);
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .video span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .video a {
+      display: inline-flex;
+      margin-top: 8px;
+      color: var(--green-700);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .scenes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .small-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+      padding: 18px;
+      min-height: 156px;
+    }
+
+    .small-card h3 {
+      margin: 0 0 9px;
+      color: var(--green-900);
+      font-size: 19px;
+    }
+
+    .small-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .notice {
+      border: 1px solid #d0e7e2;
+      border-radius: 18px;
+      background: #fbfffe;
+      padding: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .notice strong {
+      color: var(--green-950);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .result,
+      .care-grid,
+      .video-list,
+      .scenes {
+        grid-template-columns: 1fr;
+      }
+
+      h1 { font-size: 34px; }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav">
+      <div class="brand"><span class="brand-mark">护</span>居家照护学习清单</div>
+      <div class="nav-note">不用注册，约 3 分钟生成照护清单</div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">给第一次照顾老人的家属</span>
+        <h1>不会照顾老人，很正常。先从今天这一件事开始。</h1>
+        <p class="lead">选择你现在遇到的照护场景，系统会给你一份清楚的学习清单：今天先做什么、哪些动作不要自己做、先看哪 3 个教学视频、需要准备哪些用品。</p>
+        <div class="cta-row">
+          <button class="btn primary">生成我的照护清单</button>
+          <button class="btn secondary">先看看示例</button>
+        </div>
+        <div class="microcopy">本工具用于居家照护学习和风险提醒，不替代医生、护士或急救判断。</div>
+      </div>
+
+      <div class="selector">
+        <h2>你现在最困扰的是哪件事？</h2>
+        <p>先选一个最急的场景，不需要一次把所有问题都说清楚。</p>
+        <div class="scene-grid">
+          <div class="scene-card active">
+            <div class="icon">浴</div>
+            <div>
+              <div class="scene-title">老人洗澡困难</div>
+              <div class="scene-desc">站不稳、怕摔、洗澡后很累，家属一个人扶不住。</div>
+            </div>
+            <span class="pill">生成</span>
+          </div>
+          <div class="scene-card">
+            <div class="icon">床</div>
+            <div>
+              <div class="scene-title">老人卧床</div>
+              <div class="scene-desc">翻身、擦身、换床单、失禁清洁和压疮预防。</div>
+            </div>
+            <span class="pill">生成</span>
+          </div>
+          <div class="scene-card">
+            <div class="icon">出</div>
+            <div>
+              <div class="scene-title">老人刚出院</div>
+              <div class="scene-desc">用药、复诊、血压血糖记录，管路和伤口边界。</div>
+            </div>
+            <span class="pill">生成</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-head">
+      <div>
+        <span class="eyebrow">示例清单</span>
+        <h2>老人洗澡困难：今天先把风险降下来</h2>
+      </div>
+      <p>这不是让家属硬扛，而是帮你知道：哪些可以先做，哪些不要勉强，什么时候该请专业人员。</p>
+    </section>
+
+    <section class="care-grid">
+      <div class="panel green">
+        <h3>今天先做 3 件事</h3>
+        <ul class="list">
+          <li><span class="mark">1</span><span>如果老人站不稳，先不要坚持站着淋浴，改成擦浴或坐浴。</span></li>
+          <li><span class="mark">2</span><span>洗澡前把防滑垫、洗澡椅、干毛巾、换洗衣物和保暖浴巾先放好。</span></li>
+          <li><span class="mark">3</span><span>洗澡前后观察头晕、胸闷、气喘、乏力，出现异常先停止并记录。</span></li>
+        </ul>
+      </div>
+
+      <div class="panel yellow">
+        <h3>这些不要自己硬做</h3>
+        <ul class="list">
+          <li><span class="mark">!</span><span>不要单人强行扶站洗澡。</span></li>
+          <li><span class="mark">!</span><span>不要在湿滑地面拖拽老人。</span></li>
+          <li><span class="mark">!</span><span>老人明显不舒服时不要继续洗。</span></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>需要准备的用品</h3>
+        <ul class="list">
+          <li><span class="mark">✓</span><span>防滑垫、洗澡椅、干毛巾、保暖浴巾、换洗衣物。</span></li>
+          <li><span class="mark">✓</span><span>浴室门口保持干燥，老人常走的路线不要堆杂物。</span></li>
+          <li><span class="mark">✓</span><span>如果家属一个人扶不住，优先考虑助浴上门或护工协助。</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="video-section">
+      <div class="panel blue">
+        <h3>先看这 3 个教学视频</h3>
+        <div class="video-list">
+          <div class="video">
+            <iframe class="video-frame" src="https://player.bilibili.com/player.html?bvid=BV1ij411s7rG&page=1&autoplay=0" title="如何正确给卧床老人洗头" allowfullscreen></iframe>
+            <strong>01 如何正确给卧床老人洗头</strong>
+            <span>适合先学习床上洗头的准备、体位和保暖细节。</span>
+            <a href="https://www.bilibili.com/video/BV1ij411s7rG/" target="_blank" rel="noopener">去 B 站看原视频</a>
+          </div>
+          <div class="video">
+            <iframe class="video-frame" src="https://player.bilibili.com/player.html?bvid=BV1LZ421B7hJ&page=1&autoplay=0" title="帮助卧床老人擦洗上身" allowfullscreen></iframe>
+            <strong>02 帮助卧床老人擦洗上身</strong>
+            <span>适合学习擦浴时的顺序、遮盖、保暖和观察要点。</span>
+            <a href="https://www.bilibili.com/video/BV1LZ421B7hJ/" target="_blank" rel="noopener">去 B 站看原视频</a>
+          </div>
+          <div class="video">
+            <iframe class="video-frame" src="https://player.bilibili.com/player.html?bvid=BV1Fm41167U6&page=1&autoplay=0" title="帮助卧床老人擦洗下身" allowfullscreen></iframe>
+            <strong>03 帮助卧床老人擦洗下身</strong>
+            <span>适合学习失能或卧床老人下身清洁时的隐私保护和清洁顺序。</span>
+            <a href="https://www.bilibili.com/video/BV1Fm41167U6/" target="_blank" rel="noopener">去 B 站看原视频</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-head">
+      <div>
+        <span class="eyebrow">首批支持</span>
+        <h2>先覆盖 3 个最常见的居家照护场景</h2>
+      </div>
+      <p>每个场景都给行动清单、学习视频、用品准备和专业边界提醒。</p>
+    </section>
+
+    <section class="scenes">
+      <div class="small-card">
+        <h3>老人洗澡困难</h3>
+        <p>适合站不稳、怕摔、洗澡后很累、家属一个人扶不住的情况。</p>
+      </div>
+      <div class="small-card">
+        <h3>老人卧床</h3>
+        <p>学习翻身、床上移动、擦身、失禁清洁和压疮预防。</p>
+      </div>
+      <div class="small-card">
+        <h3>老人刚出院</h3>
+        <p>梳理记录、复诊、用药、血压血糖观察，以及管路和伤口边界。</p>
+      </div>
+    </section>
+
+    <div class="notice">
+      <strong>重要提醒：</strong>尿管、鼻饲、伤口、造口、PICC 等专业护理操作，不建议家属自行处理。家属可以观察、记录和及时求助，但不要替代医生和护士。
+    </div>
+  </main>
+</body>
+</html>
