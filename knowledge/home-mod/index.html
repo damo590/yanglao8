@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>家庭适老化改造：先改这里，别被整屋套餐带偏 — 养老8</title>
+  <meta name="description" content="按父母风险排序，不是按装修公司报价排序。三个优先级层级，加上政府补贴和费用参考。" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
+  <style>
+    .article-hero { padding: 56px 32px 40px; max-width: 780px; margin: 0 auto; }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dark2); }
+    .breadcrumb-sep { opacity: .4; }
+    .article-hero h1 { font-size: 36px; font-weight: 700; color: var(--dark2); letter-spacing: -1px; line-height: 1.2; margin-bottom: 14px; }
+    .article-hero .sub { font-size: 17px; color: var(--muted); line-height: 1.6; max-width: 580px; }
+    .article-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 980px; background: rgba(60,180,100,.12); color: #1a6040; margin-bottom: 18px; }
+
+    .article-body { max-width: 780px; margin: 0 auto; padding: 0 32px 80px; }
+
+    .priority-block { margin-bottom: 32px; }
+    .priority-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      padding: 14px 20px; border-radius: 14px;
+    }
+    .priority-header.p1 { background: rgba(220,80,60,.07); border: 1px solid rgba(220,80,60,.2); }
+    .priority-header.p2 { background: rgba(255,183,77,.07); border: 1px solid rgba(255,183,77,.2); }
+    .priority-header.p3 { background: rgba(7,193,96,.08); border: 1px solid rgba(7,193,96,.25); }
+    .priority-badge {
+      font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 980px; flex-shrink: 0;
+    }
+    .p1 .priority-badge { background: rgba(220,80,60,.15); color: #8a2a20; }
+    .p2 .priority-badge { background: rgba(255,183,77,.2); color: #8a5a00; }
+    .p3 .priority-badge { background: rgba(7,193,96,.2); color: #1a6040; }
+    .priority-label { font-size: 15px; font-weight: 700; color: var(--dark2); }
+    .priority-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    .mod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mod-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .mod-icon { font-size: 20px; margin-bottom: 8px; }
+    .mod-name { font-size: 14px; font-weight: 700; color: var(--dark2); margin-bottom: 4px; }
+    .mod-why { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+    .mod-cost {
+      display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px;
+      border-radius: 980px; background: rgba(7,193,96,.4); color: var(--dark2);
+    }
+    .mod-subsidy {
+      display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px;
+      border-radius: 980px; background: rgba(7,193,96,.15); color: #1a6040; margin-left: 6px;
+    }
+
+    .subsidy-box {
+      background: var(--dark2); border-radius: 18px; padding: 28px 30px; margin: 36px 0; color: white;
+    }
+    .subsidy-box h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+    .subsidy-list { list-style: none; padding: 0; margin: 0; }
+    .subsidy-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,.85); padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08); line-height: 1.55;
+    }
+    .subsidy-list li:last-child { border-bottom: none; }
+    .subsidy-list .dot { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .tip-box {
+      background: rgba(7,193,96,.08); border: 1px solid rgba(7,193,96,.3);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .tip-box .t-title { font-size: 13px; font-weight: 700; color: var(--dark2); margin-bottom: 8px; }
+    .tip-box p, .tip-box ul { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .tip-box ul { padding-left: 18px; }
+    .tip-box li { margin-bottom: 6px; }
+
+    .warning-box {
+      background: rgba(220,80,60,.06); border: 1px solid rgba(220,80,60,.2);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .warning-box .w-title { font-size: 13px; font-weight: 700; color: #8a2a20; margin-bottom: 8px; }
+    .warning-box p { font-size: 14px; color: #6b3030; line-height: 1.6; margin: 0; }
+
+    .related-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .related-links h3 { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+    .related-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .related-link {
+      display: inline-block; padding: 10px 18px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: 14px; font-weight: 500; color: var(--dark2); text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .related-link:hover { border-color: rgba(7,193,96,.6); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      .article-hero { padding: 40px 20px 28px; }
+      .article-hero h1 { font-size: 26px; }
+      .article-body { padding: 0 20px 80px; }
+      .mod-grid { grid-template-columns: 1fr; }
+      .subsidy-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+    <div class="logo-mark">8</div>
+    <div><div class="logo-name">养老8</div><div class="logo-sub">让父母晚年生活更安心</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="/profile/">父母养老画像</a>
+    <a href="/care/">居家照护清单</a>
+    <a href="/fall/">防摔专题</a>
+    <a href="/policy/">政策服务</a>
+    <a href="/knowledge/" style="opacity:1;font-weight:600;">养老知识</a>
+  </div>
+  <a class="nav-action nav-action-desktop" href="/knowledge/" style="text-decoration:none;">← 返回知识库</a>
+</nav>
+
+<div class="article-hero">
+  <div class="breadcrumb">
+    <a href="/">养老8</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/knowledge/">养老知识</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>适老化改造优先级</span>
+  </div>
+  <div class="article-tag">🏠 居家安全</div>
+  <h1>家庭适老化改造：先改这里，别被整屋套餐带偏</h1>
+  <p class="sub">按父母风险排序，不是按装修公司报价排序。跌倒风险高的父母，卫生间改造的性价比远超其他所有项目。</p>
+</div>
+
+<div class="article-body">
+
+  <div class="warning-box">
+    <div class="w-title">⚠️ 选改造公司前必看</div>
+    <p>很多"适老化改造"公司会推销动辄数万元的整屋套餐，但真正高风险的不过是卫生间和夜间动线这两个场景。先按风险排序，再决定预算，别让销售的报价顺序影响你的判断。</p>
+  </div>
+
+  <div class="priority-block">
+    <div class="priority-header p1">
+      <div class="priority-badge">第一优先</div>
+      <div>
+        <div class="priority-label">立刻做 — 跌倒高风险区域</div>
+        <div class="priority-sub">约80%的老年人室内跌倒发生在卫生间，投入500–2000元可大幅降低风险</div>
+      </div>
+    </div>
+    <div class="mod-grid">
+      <div class="mod-card">
+        <div class="mod-icon">🚿</div>
+        <div class="mod-name">卫生间扶手</div>
+        <div class="mod-why">马桶旁、淋浴区和出入口各一根。选择承重150kg以上、防滑表面的不锈钢或铝合金扶手，安装必须打入墙体承重层。</div>
+        <div class="mod-cost">费用：150–400元/根</div>
+        <div class="mod-subsidy">可申请补贴</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🛁</div>
+        <div class="mod-name">浴室防滑垫</div>
+        <div class="mod-why">淋浴区地面、浴缸内外各铺一块。选PVC或橡胶材质，吸盘数量越多越稳固。每月检查一次吸盘是否仍然贴紧。</div>
+        <div class="mod-cost">费用：30–120元/块</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🚽</div>
+        <div class="mod-name">马桶助力架</div>
+        <div class="mod-why">适合膝关节不好或腿部力量下降的父母。夹紧式安装无需打洞，可升高马桶坐高5–10cm，起身时有支撑点。</div>
+        <div class="mod-cost">费用：200–600元</div>
+        <div class="mod-subsidy">可申请补贴</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">💡</div>
+        <div class="mod-name">感应夜灯</div>
+        <div class="mod-why">卧室到卫生间的动线上每隔2–3米安一盏。选人体红外感应款，插电或粘贴均可，不需要父母主动开灯。建议亮度中等、色温偏暖（3000K以下）。</div>
+        <div class="mod-cost">费用：30–80元/盏</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="priority-block">
+    <div class="priority-header p2">
+      <div class="priority-badge">第二优先</div>
+      <div>
+        <div class="priority-label">1个月内完成 — 夜间动线和活动区</div>
+        <div class="priority-sub">夜间起床上厕所是仅次于卫生间的高风险场景</div>
+      </div>
+    </div>
+    <div class="mod-grid">
+      <div class="mod-card">
+        <div class="mod-icon">🛤️</div>
+        <div class="mod-name">夜间动线清障</div>
+        <div class="mod-why">清除卧室到卫生间路径上的所有障碍物：杂物、充电线、小地毯（地毯边角翘起是跌倒常见原因）、宠物窝等。这是零成本但效果最快的改造。</div>
+        <div class="mod-cost">费用：0元</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🚪</div>
+        <div class="mod-name">门槛坡道</div>
+        <div class="mod-why">卫生间、阳台等有高门槛的入口加装斜坡板（坡道砖）。橡胶坡道安装简便，可移动；水泥找坡更持久但需施工。优先处理高度超过2cm的门槛。</div>
+        <div class="mod-cost">费用：50–300元/处</div>
+        <div class="mod-subsidy">可申请补贴</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🛏️</div>
+        <div class="mod-name">卧室床高调整</div>
+        <div class="mod-why">床面高度应使父母坐在床边时，脚掌能平踏地面、膝关节约呈90°。过低（低于38cm）起身困难，过高（高于55cm）下床危险。可通过调床脚或加床板实现。</div>
+        <div class="mod-cost">费用：0–300元</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">📞</div>
+        <div class="mod-name">紧急呼叫设备</div>
+        <div class="mod-why">在卫生间和卧室各放一个一键报警按钮或腕带式报警器，跌倒后可直接呼叫家人。选择可防水的款式，卫生间使用时不怕溅水。</div>
+        <div class="mod-cost">费用：100–500元/套</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="priority-block">
+    <div class="priority-header p3">
+      <div class="priority-badge">第三优先</div>
+      <div>
+        <div class="priority-label">3个月内规划 — 功能区优化</div>
+        <div class="priority-sub">这些改造提升日常舒适度，但不属于紧急安全项目</div>
+      </div>
+    </div>
+    <div class="mod-grid">
+      <div class="mod-card">
+        <div class="mod-icon">🍳</div>
+        <div class="mod-name">厨房操作台高度</div>
+        <div class="mod-why">标准操作台高度85cm，适合170cm身高。父母身高较矮或需要坐轮椅操作时，建议降至75cm，或加装可调高度台面。也可考虑增加坐式操作区域。</div>
+        <div class="mod-cost">费用：500–3000元</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🪜</div>
+        <div class="mod-name">走廊扶手</div>
+        <div class="mod-why">长走廊（超过3米）两侧加装连续扶手，适合行动不便或平衡感下降的父母。扶手直径28–35mm，安装高度850–900mm为宜。</div>
+        <div class="mod-cost">费用：200–600元/米</div>
+        <div class="mod-subsidy">可申请补贴</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🏗️</div>
+        <div class="mod-name">户外和楼道坡道</div>
+        <div class="mod-why">如果父母使用轮椅或助行器，需要处理入户台阶。坡度比例建议1:12（每上升1cm，水平距离12cm），表面须防滑。提前与物业沟通是否可施工。</div>
+        <div class="mod-cost">费用：1000–5000元</div>
+        <div class="mod-subsidy">可申请补贴</div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-icon">🪟</div>
+        <div class="mod-name">门把手和开关替换</div>
+        <div class="mod-why">圆形门把手换为杠杆式（L形）把手，关节炎老人更易操作。电灯开关可更换为带夜间发光的大面板款，不用摸黑找开关位置。</div>
+        <div class="mod-cost">费用：30–150元/处</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsidy-box">
+    <h3>政府补贴：这些改造项目可以申请</h3>
+    <ul class="subsidy-list">
+      <li><span class="dot">▸</span> <strong>民政部适老化改造补贴</strong>：部分城市对80岁以上或失能老人家庭提供2000–5000元的适老化改造补贴，覆盖扶手、坡道、防滑地砖等项目。</li>
+      <li><span class="dot">▸</span> <strong>长期护理保险（长护险）</strong>：已开通长护险的城市（上海、青岛、成都等），重度失能老人的居家改造费用可部分报销，需先通过失能等级评估。</li>
+      <li><span class="dot">▸</span> <strong>社区居家养老服务补贴</strong>：各街道社区养老服务中心可提供改造评估服务，部分地区可免费上门评估并协助申请补贴，建议先联系所在街道养老服务中心咨询。</li>
+      <li><span class="dot">▸</span> <strong>住房公积金提取</strong>：部分城市允许提取公积金用于适老化改造，具体政策咨询当地住房公积金管理中心。</li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <div class="t-title">找改造公司前的3个准备</div>
+    <ul>
+      <li>先拍下卫生间、走廊、入户台阶的照片，让对方按照你的场景报价，而不是按套餐报价</li>
+      <li>要求改造公司出具产品的承重检测报告，扶手类产品的承重测试是关键安全指标</li>
+      <li>施工前确认打墙位置是否有电线管道，建议让施工方用探测仪确认后再动工</li>
+    </ul>
+  </div>
+
+  <div class="related-links">
+    <h3>相关内容</h3>
+    <div class="related-grid">
+      <a class="related-link" href="/fall/">防摔专题 →</a>
+      <a class="related-link" href="/care/">居家照护清单 →</a>
+      <a class="related-link" href="/policy/">政策服务 →</a>
+      <a class="related-link" href="/knowledge/">全部养老知识 →</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-bar">
+  <div class="sticky-copy"><strong>先测清楚父母的真实风险</strong>，再决定从哪里开始</div>
+  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">开始生成养老画像</a>
+</div>
+
+</body>
+</html>

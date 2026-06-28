@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>实地考察养老院，要问这72个问题 — 养老8</title>
+  <meta name="description" content="宣传册只看不够，签合同前要核实这些。从护理配置到费用退费，72问覆盖养老院考察全流程。" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
+  <style>
+    .article-hero { padding: 56px 32px 40px; max-width: 820px; margin: 0 auto; }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dark2); }
+    .breadcrumb-sep { opacity: .4; }
+    .article-hero h1 { font-size: 36px; font-weight: 700; color: var(--dark2); letter-spacing: -1px; line-height: 1.2; margin-bottom: 14px; }
+    .article-hero .sub { font-size: 17px; color: var(--muted); line-height: 1.6; max-width: 600px; }
+    .article-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 980px; background: rgba(60,180,100,.12); color: #1a6040; margin-bottom: 18px; }
+
+    .article-body { max-width: 820px; margin: 0 auto; padding: 0 32px 80px; }
+
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--accent); filter: brightness(.75); margin-bottom: 14px; margin-top: 36px;
+    }
+
+    .q-group { margin-bottom: 28px; }
+    .q-group-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .q-group-num {
+      width: 28px; height: 28px; border-radius: 8px; background: var(--dark2);
+      color: var(--accent); font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .q-group-name { font-size: 15px; font-weight: 700; color: var(--dark2); }
+    .q-group-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    .checklist-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .cl-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 11px 18px; border-bottom: 1px solid rgba(7,193,96,.5);
+    }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-box {
+      flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
+      border: 2px solid var(--border); background: white; margin-top: 2px;
+    }
+    .cl-num { font-size: 11px; font-weight: 700; color: var(--muted); flex-shrink: 0; margin-top: 3px; min-width: 20px; }
+    .cl-text { font-size: 14px; color: var(--dark2); line-height: 1.55; }
+    .cl-tip { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+    .contract-box {
+      background: var(--dark2); border-radius: 18px; padding: 28px 30px; margin: 36px 0; color: white;
+    }
+    .contract-box h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+    .contract-item {
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .contract-item:last-child { border-bottom: none; }
+    .contract-dot { color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+    .contract-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .contract-desc { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.55; }
+
+    .tip-box {
+      background: rgba(7,193,96,.08); border: 1px solid rgba(7,193,96,.3);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .tip-box .t-title { font-size: 13px; font-weight: 700; color: var(--dark2); margin-bottom: 8px; }
+    .tip-box p, .tip-box ul { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .tip-box ul { padding-left: 18px; }
+    .tip-box li { margin-bottom: 6px; }
+
+    .related-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .related-links h3 { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+    .related-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .related-link {
+      display: inline-block; padding: 10px 18px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: 14px; font-weight: 500; color: var(--dark2); text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .related-link:hover { border-color: rgba(7,193,96,.6); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      .article-hero { padding: 40px 20px 28px; }
+      .article-hero h1 { font-size: 26px; }
+      .article-body { padding: 0 20px 80px; }
+      .checklist-card { border-radius: 12px; }
+      .cl-item { padding: 10px 14px; }
+      .contract-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+    <div class="logo-mark">8</div>
+    <div><div class="logo-name">养老8</div><div class="logo-sub">让父母晚年生活更安心</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="/profile/">父母养老画像</a>
+    <a href="/care/">居家照护清单</a>
+    <a href="/fall/">防摔专题</a>
+    <a href="/policy/">政策服务</a>
+    <a href="/knowledge/" style="opacity:1;font-weight:600;">养老知识</a>
+  </div>
+  <a class="nav-action nav-action-desktop" href="/knowledge/" style="text-decoration:none;">← 返回知识库</a>
+</nav>
+
+<div class="article-hero">
+  <div class="breadcrumb">
+    <a href="/">养老8</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/knowledge/">养老知识</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>养老院考察72问</span>
+  </div>
+  <div class="article-tag">🏥 机构选择</div>
+  <h1>实地考察养老院，要问这 72 个问题</h1>
+  <p class="sub">宣传册只看不够，签合同前要核实这些。分8组涵盖护理、医疗、饮食、费用和合同，带着清单去，一项一项确认。</p>
+</div>
+
+<div class="article-body">
+
+  <div class="tip-box">
+    <div class="t-title">考察前的准备</div>
+    <ul>
+      <li>建议考察3家以上，用这份清单做横向对比，而不是只看第一家</li>
+      <li>最好选在平时工作日的非就餐时间去，而不是对方特意安排的参观日</li>
+      <li>打印这份清单，边问边打勾，回到家再比对三家机构的差异</li>
+    </ul>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">一</div>
+      <div>
+        <div class="q-group-name">护理配置</div>
+        <div class="q-group-desc">护工与老人比例决定护理质量的上限</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">1</div><div><div class="cl-text">白班护工与老人的比例是多少？夜班呢？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">2</div><div><div class="cl-text">护工是否持有养老护理员职业资格证？比例是多少？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">3</div><div><div class="cl-text">护工的平均工龄是多少？过去1年的离职率大概是多少？</div><div class="cl-tip">高离职率意味着老人要频繁适应新护工，也反映管理质量。</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">4</div><div><div class="cl-text">护工是由机构直接雇用还是外包？出现问题时责任由谁承担？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">5</div><div><div class="cl-text">针对老人出现行为问题（比如打人、游走），护工接受过专业培训吗？培训内容是什么？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">6</div><div><div class="cl-text">对于卧床老人，翻身护理的频率和记录方式是什么？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">7</div><div><div class="cl-text">是否有专职康复师？每周为老人提供多少次康复训练？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">8</div><div><div class="cl-text">护理等级如何划分？如果老人护理需求增加，费用如何调整？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">9</div><div><div class="cl-text">是否可以查看护理记录（护理日志）？记录是手写还是电子系统？家属是否有权限查阅？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">二</div>
+      <div>
+        <div class="q-group-name">夜间安排</div>
+        <div class="q-group-desc">很多问题发生在夜间，这是考察的核心问题之一</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">10</div><div><div class="cl-text">夜班一名护工负责几位老人？值夜班时是否有专职人员不得离岗？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">11</div><div><div class="cl-text">老人夜间需要上厕所时，呼叫响应时间通常是多少？有没有计时记录？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">12</div><div><div class="cl-text">夜间是否有安全巡视？间隔多久？记录方式是什么？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">13</div><div><div class="cl-text">房间内是否安装呼叫铃？厕所内是否有紧急拉绳？测试一下是否正常工作。</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">14</div><div><div class="cl-text">走廊和卫生间夜间是否保持照明？地面是否有防滑处理？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">15</div><div><div class="cl-text">夜间老人出现异常（如发烧、跌倒），多快能联系上家属？使用什么方式通知？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">16</div><div><div class="cl-text">对于有夜间游走风险的认知症老人，夜间是否有特殊措施（如感应报警）？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">17</div><div><div class="cl-text">过去一年内，夜间发生过几起需要送医的紧急情况？结果如何？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">18</div><div><div class="cl-text">是否有监控覆盖夜间公共区域？家属是否可以查看录像？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">三</div>
+      <div>
+        <div class="q-group-name">医疗边界</div>
+        <div class="q-group-desc">养老院不是医院，弄清楚哪些医疗服务能做、哪些不能做</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">19</div><div><div class="cl-text">院内是否有医生常驻？还是护士/护工？如果只有护士，医生出诊频率是多少？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">20</div><div><div class="cl-text">是否可以处理慢性病用药管理（按时发药、记录）？有没有出错时的追责机制？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">21</div><div><div class="cl-text">院内能处理哪些医疗操作？（如换药、抽血、输液、导管护理）不能处理的，如何转介？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">22</div><div><div class="cl-text">老人病情急剧变化时，送往哪家医院？多远？过去一年送医次数大概多少？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">23</div><div><div class="cl-text">是否与附近医院有合作协议（如绿色通道）？能否提供协议文件？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">24</div><div><div class="cl-text">老人住院期间，机构会为老人的房间保留多少天（不收取床位费）？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">25</div><div><div class="cl-text">如果老人进入临终状态，机构能否提供安宁照护？还是必须转出？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">26</div><div><div class="cl-text">老人是否可以继续看原来的家庭医生或专科医生，由机构协助出行？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">27</div><div><div class="cl-text">是否可以自带家用医疗设备（血压计、血糖仪、制氧机）？电费如何计算？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">四</div>
+      <div>
+        <div class="q-group-name">失禁与压疮处理</div>
+        <div class="q-group-desc">这是检验护理质量最直接的两个指标</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">28</div><div><div class="cl-text">对于大小便失禁的老人，更换护理用品的频率标准是什么？是定时更换还是按需更换？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">29</div><div><div class="cl-text">护理用品（纸尿裤、护理垫）是机构统一提供还是家属自购？品牌和规格有没有要求？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">30</div><div><div class="cl-text">是否有压疮预防方案？卧床老人的翻身频率是多少，怎么记录？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">31</div><div><div class="cl-text">如果老人入住时已有压疮，机构能处理吗？如何分清入住前和入住后发生的压疮责任？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">32</div><div><div class="cl-text">是否使用气垫床/减压床垫？费用如何计算？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">33</div><div><div class="cl-text">发现皮肤问题时，第一步的处理流程是什么？多久通知家属？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">34</div><div><div class="cl-text">每个房间/楼层老人的皮肤状况由谁负责追踪？护士还是护工？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">35</div><div><div class="cl-text">过去一年，机构内发生过几起严重压疮事件？是否主动向家属披露？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">36</div><div><div class="cl-text">失禁护理时如何保护老人尊严？工作人员接受过相关培训吗？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">五</div>
+      <div>
+        <div class="q-group-name">饮食与营养</div>
+        <div class="q-group-desc">实际去食堂看一次，比任何回答都有说服力</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">37</div><div><div class="cl-text">一天几餐？加餐是否包含在内？每餐大概几个菜？主食是否多样？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">38</div><div><div class="cl-text">可以查看本周菜单吗？是否会提前公示？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">39</div><div><div class="cl-text">针对糖尿病、高血压、肾病老人是否提供特殊餐食？如何做到个性化？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">40</div><div><div class="cl-text">无法独立进食的老人，喂食是护工负责还是老人自行进食？喂食时间一般多长？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">41</div><div><div class="cl-text">是否有吞咽困难老人的专门饮食（软食/泥状食物/鼻饲食物）？由谁来制备？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">42</div><div><div class="cl-text">老人喜欢的食物是否可以带来？外卖或家属送餐是否允许？有什么限制？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">43</div><div><div class="cl-text">营养状况是否定期评估？由谁评估？体重多久测一次？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">44</div><div><div class="cl-text">厨房卫生许可证是否有效？最近一次卫生检查结果如何？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">45</div><div><div class="cl-text">老人用餐区域的桌椅高度、餐具是否为适老设计（防滑、易握）？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">六</div>
+      <div>
+        <div class="q-group-name">探访规定</div>
+        <div class="q-group-desc">了解探视限制，避免日后与机构产生摩擦</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">46</div><div><div class="cl-text">探视时间是否有限制？每天可以来几次？是否需要提前预约？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">47</div><div><div class="cl-text">节假日探视规定是否与平时相同？春节期间是否正常运营？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">48</div><div><div class="cl-text">可以带老人外出（回家、就医、旅行）吗？需要提前几天申请？外出期间床位费如何计算？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">49</div><div><div class="cl-text">老人可以接听家人电话吗？是否有专线或固定电话？使用个人手机有没有限制？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">50</div><div><div class="cl-text">传染病流行期间（如流感季、疫情）探视政策如何调整？如何保障家属知情权？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">51</div><div><div class="cl-text">是否允许家属参与老人的日常活动（如陪餐、陪做康复）？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">52</div><div><div class="cl-text">是否有视频探视设施或微信视频条件，供无法到场的家属使用？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">53</div><div><div class="cl-text">老人的个人照片、日常视频，机构是否会定期发给家属？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">54</div><div><div class="cl-text">家属对护理质量有异议时，有没有正式投诉渠道？负责人是谁，联系方式是什么？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">七</div>
+      <div>
+        <div class="q-group-name">费用与退费</div>
+        <div class="q-group-desc">入住前算清楚，避免出现隐形收费</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">55</div><div><div class="cl-text">月费包含哪些项目？请提供书面费用清单（床位费、护理费、餐饮费、水电费）。</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">56</div><div><div class="cl-text">护理等级如何升降？升级后费用如何调整？调整前是否会通知家属？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">57</div><div><div class="cl-text">入院押金是多少？用于哪些用途？退住时如何退还？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">58</div><div><div class="cl-text">主动退住（家属决定离院）需要提前几天通知？押金和剩余月费多少天内退还？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">59</div><div><div class="cl-text">如老人在院内去世，当天或之后几天的费用如何计算？遗体处理有没有配套服务？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">60</div><div><div class="cl-text">长护险（长期护理保险）是否可以用于报销？流程如何？需要家属自行申请还是机构协助？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">61</div><div><div class="cl-text">机构是否接受医保支付？哪些项目可以医保报销？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">62</div><div><div class="cl-text">过去3年内，月费是否有过调整？调整了多少？提前多久通知？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">63</div><div><div class="cl-text">是否有一次性预缴优惠套餐？如果预缴了，机构倒闭或搬迁，钱能要回来吗？</div></div></div>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-group-header">
+      <div class="q-group-num">八</div>
+      <div>
+        <div class="q-group-name">合同关键条款</div>
+        <div class="q-group-desc">签合同前逐条核对，不清楚的条款要求书面解释</div>
+      </div>
+    </div>
+    <div class="checklist-card">
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">64</div><div><div class="cl-text">合同中明确规定了哪些情况机构有权单方面解除合同（要求老人离院）？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">65</div><div><div class="cl-text">老人发生意外（跌倒、骨折、走失），合同中如何界定机构的责任和免责范围？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">66</div><div><div class="cl-text">合同中是否有"仲裁条款"（要求所有纠纷通过仲裁而非法院解决）？这对家属是否不利？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">67</div><div><div class="cl-text">家属授权书范围是什么？哪些医疗决定必须家属签字，哪些机构可自行决定？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">68</div><div><div class="cl-text">合同约定的护理服务内容与实际宣传材料是否一致？不一致之处要求书面说明。</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">69</div><div><div class="cl-text">机构是否投保了责任险？保额是多少？能否提供保险证明？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">70</div><div><div class="cl-text">合同规定的投诉流程是什么？如果对机构处理结果不满意，可以向哪个政府部门投诉（民政局/卫健委）？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">71</div><div><div class="cl-text">老人的个人信息（医疗记录、照片）机构如何使用和保护？是否有涉及隐私的条款？</div></div></div>
+      <div class="cl-item"><div class="cl-box"></div><div class="cl-num">72</div><div><div class="cl-text">合同是否有试用期条款（如30天内不满意可全额退款）？具体条件是什么？</div></div></div>
+    </div>
+  </div>
+
+  <div class="contract-box">
+    <h3>合同必看条款 · 高亮提示</h3>
+    <div class="contract-item">
+      <div class="contract-dot">!</div>
+      <div>
+        <div class="contract-title">单方面解除合同的条件</div>
+        <div class="contract-desc">机构有权要求老人离院的情况必须列明，"行为问题""医疗需求超出范围"等模糊表述要追问具体标准，避免被随意驱逐。</div>
+      </div>
+    </div>
+    <div class="contract-item">
+      <div class="contract-dot">!</div>
+      <div>
+        <div class="contract-title">意外伤害免责条款范围</div>
+        <div class="contract-desc">"老人自身行为导致的意外"这类条款可能将机构本该承担的看护责任转嫁给家属，要求明确"什么情况下机构承担责任"而非只看免责范围。</div>
+      </div>
+    </div>
+    <div class="contract-item">
+      <div class="contract-dot">!</div>
+      <div>
+        <div class="contract-title">退款时间节点</div>
+        <div class="contract-desc">押金和预缴费用的退还期限必须白纸黑字写清楚（建议不超过30天），不要接受"按情况处理"的口头承诺。</div>
+      </div>
+    </div>
+    <div class="contract-item">
+      <div class="contract-dot">!</div>
+      <div>
+        <div class="contract-title">收费调整通知期</div>
+        <div class="contract-desc">合同必须约定费用调整前的提前通知期（建议至少60天），让家属有时间重新评估是否继续。没有通知期条款的合同不要签。</div>
+      </div>
+    </div>
+    <div class="contract-item">
+      <div class="contract-dot">!</div>
+      <div>
+        <div class="contract-title">强制仲裁条款</div>
+        <div class="contract-desc">如果合同要求所有纠纷必须仲裁而不能起诉，这大幅限制了家属的维权路径。建议咨询律师或要求删除该条款后再签。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-links">
+    <h3>相关内容</h3>
+    <div class="related-grid">
+      <a class="related-link" href="/knowledge/caregiver/">护工面试30问 →</a>
+      <a class="related-link" href="/policy/">政策服务 →</a>
+      <a class="related-link" href="/knowledge/">全部养老知识 →</a>
+      <a class="related-link" href="/profile/">生成父母养老画像 →</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-bar">
+  <div class="sticky-copy"><strong>先测清楚父母的真实风险</strong>，再决定从哪里开始</div>
+  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">开始生成养老画像</a>
+</div>
+
+</body>
+</html>
