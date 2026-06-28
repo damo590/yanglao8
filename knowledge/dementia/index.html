@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>认知症早筛：10个日常观察问题 — 养老8</title>
+  <meta name="description" content="不是诊断，是帮你判断是否需要进一步检查。10个可观察的信号，加上沟通话术和就医建议。" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
+  <style>
+    .article-hero { padding: 56px 32px 40px; max-width: 780px; margin: 0 auto; }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dark2); }
+    .breadcrumb-sep { opacity: .4; }
+    .article-hero h1 { font-size: 36px; font-weight: 700; color: var(--dark2); letter-spacing: -1px; line-height: 1.2; margin-bottom: 14px; }
+    .article-hero .sub { font-size: 17px; color: var(--muted); line-height: 1.6; max-width: 580px; }
+    .article-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 980px; background: rgba(100,180,255,.12); color: #1a5a8a; margin-bottom: 18px; }
+
+    .article-body { max-width: 780px; margin: 0 auto; padding: 0 32px 80px; }
+
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--accent); filter: brightness(.75); margin-bottom: 14px; margin-top: 36px;
+    }
+
+    .check-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 0; margin-bottom: 10px; overflow: hidden;
+    }
+    .check-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 16px 22px; border-bottom: 1px solid rgba(7,193,96,.5);
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-box {
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 5px;
+      border: 2px solid var(--border); background: white; margin-top: 2px;
+    }
+    .check-item.level-warn .check-box { border-color: rgba(220,80,60,.4); }
+    .check-content { flex: 1; }
+    .check-q { font-size: 15px; font-weight: 600; color: var(--dark2); margin-bottom: 4px; line-height: 1.4; }
+    .check-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .level-badge {
+      display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700;
+      padding: 2px 9px; border-radius: 980px; margin-bottom: 8px;
+    }
+    .badge-light { background: rgba(255,183,77,.12); color: #8a5a00; }
+    .badge-warn { background: rgba(220,80,60,.1); color: #8a2a20; }
+
+    .result-box {
+      border-radius: 16px; padding: 22px 26px; margin: 28px 0;
+    }
+    .result-box.mild { background: rgba(255,183,77,.07); border: 1px solid rgba(255,183,77,.25); }
+    .result-box.serious { background: rgba(220,80,60,.06); border: 1px solid rgba(220,80,60,.2); }
+    .result-box h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .result-box.mild h3 { color: #8a5a00; }
+    .result-box.serious h3 { color: #8a2a20; }
+    .result-box p { font-size: 14px; line-height: 1.65; margin: 0 0 8px; }
+    .result-box p:last-child { margin: 0; }
+
+    .script-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px 26px; margin: 20px 0;
+    }
+    .script-card h3 { font-size: 14px; font-weight: 700; color: var(--dark2); margin-bottom: 14px; }
+    .script-item { margin-bottom: 14px; }
+    .script-item:last-child { margin-bottom: 0; }
+    .script-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 5px; }
+    .script-text {
+      font-size: 14px; color: var(--dark2); line-height: 1.6;
+      background: rgba(7,193,96,.07); border-left: 3px solid var(--accent);
+      padding: 10px 14px; border-radius: 0 8px 8px 0;
+    }
+
+    .tip-box {
+      background: rgba(7,193,96,.08); border: 1px solid rgba(7,193,96,.3);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .tip-box .t-title { font-size: 13px; font-weight: 700; color: var(--dark2); margin-bottom: 8px; }
+    .tip-box p, .tip-box ul { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .tip-box ul { padding-left: 18px; }
+    .tip-box li { margin-bottom: 6px; }
+
+    .threshold-box {
+      background: var(--dark2); border-radius: 16px; padding: 24px 28px; margin: 32px 0; color: white;
+    }
+    .threshold-box h3 { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+    .threshold-box p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.8); margin: 0; }
+
+    .related-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .related-links h3 { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+    .related-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .related-link {
+      display: inline-block; padding: 10px 18px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: 14px; font-weight: 500; color: var(--dark2); text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .related-link:hover { border-color: rgba(7,193,96,.6); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      .article-hero { padding: 40px 20px 28px; }
+      .article-hero h1 { font-size: 26px; }
+      .article-body { padding: 0 20px 80px; }
+      .check-item { padding: 14px 16px; }
+      .script-card, .result-box { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+    <div class="logo-mark">8</div>
+    <div><div class="logo-name">养老8</div><div class="logo-sub">让父母晚年生活更安心</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="/profile/">父母养老画像</a>
+    <a href="/care/">居家照护清单</a>
+    <a href="/fall/">防摔专题</a>
+    <a href="/policy/">政策服务</a>
+    <a href="/knowledge/" style="opacity:1;font-weight:600;">养老知识</a>
+  </div>
+  <a class="nav-action nav-action-desktop" href="/knowledge/" style="text-decoration:none;">← 返回知识库</a>
+</nav>
+
+<div class="article-hero">
+  <div class="breadcrumb">
+    <a href="/">养老8</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/knowledge/">养老知识</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>认知症早筛问卷</span>
+  </div>
+  <div class="article-tag">🧠 认知健康</div>
+  <h1>认知症早筛：10 个日常观察问题</h1>
+  <p class="sub">不是诊断，是帮你判断是否需要进一步检查。勾选近3个月内你观察到的情况，再看底部解读。</p>
+</div>
+
+<div class="article-body">
+
+  <div class="tip-box">
+    <div class="t-title">使用说明</div>
+    <p>以下10个问题基于日常观察，不需要专业背景。请根据父母近3个月的实际情况作判断，勾选你观察到的信号。出现3个及以上，建议到医院记忆门诊做正式评估。</p>
+  </div>
+
+  <div class="section-label">轻度信号（1–6）</div>
+
+  <div class="check-card">
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">1. 反复询问同一件事，几分钟内问了不止一次</div>
+        <div class="check-desc">比如反复问"今天几号""你吃饭了吗"，即使刚刚已经问过且得到了回答。偶尔一次不算，频繁出现才是信号。</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">2. 找东西的频率明显增加，常怀疑被人拿走</div>
+        <div class="check-desc">找不到钥匙、手机、存折，但藏起来后自己忘了，转而怀疑被偷。这种"藏物后遗忘"是早期认知症的典型表现之一。</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">3. 对以前感兴趣的活动明显失去兴趣</div>
+        <div class="check-desc">以前爱打牌、看新闻、做饭，现在毫无热情，整天发呆或坐着。排除抑郁症因素后，这也是需要关注的变化。</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">4. 处理日常财务出现困难，如计算找零或缴费</div>
+        <div class="check-desc">以前会自己缴水电费、计算账单，现在对数字明显困惑，或者把钱数搞错。注意区分"不熟悉手机操作"和"对数字本身失去概念"。</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">5. 说话时经常找词困难，停顿或用"那个""这个"代替</div>
+        <div class="check-desc">想说"遥控器"但说成"那个开电视的东西"，或者句子说一半就停住了，想不起要说什么。</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-light">轻度信号</div>
+        <div class="check-q">6. 对时间概念变得模糊，经常搞错日期或季节</div>
+        <div class="check-desc">不知道今天是几月，把夏天的衣服穿在冬天，或者对"昨天""上周"等相对时间感到困惑。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">需要重视（7–10）</div>
+
+  <div class="check-card">
+    <div class="check-item level-warn">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-warn">需要重视</div>
+        <div class="check-q">7. 在熟悉的地方迷路，或走出去后找不到回家的路</div>
+        <div class="check-desc">在住了几十年的小区里迷路，或去了一次就不记得路怎么走。这类空间定向障碍是中度认知症的常见信号，需要尽快就医评估。</div>
+      </div>
+    </div>
+    <div class="check-item level-warn">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-warn">需要重视</div>
+        <div class="check-q">8. 性格和行为出现明显变化，如突然变得多疑、暴躁或过于依赖</div>
+        <div class="check-desc">原本温和的父母变得容易发脾气、无故猜疑家人，或者黏人、不愿独处。人格改变往往比记忆减退出现得更早，容易被误以为是"性格问题"。</div>
+      </div>
+    </div>
+    <div class="check-item level-warn">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-warn">需要重视</div>
+        <div class="check-q">9. 出现幻觉或妄想，如"看到已去世的亲人"或坚信有人害自己</div>
+        <div class="check-desc">幻觉（看到/听到不存在的人或声音）和妄想（坚持错误信念且无法说服）是认知症进展的重要信号，也可能是路易体痴呆的表现，需要神经科评估。</div>
+      </div>
+    </div>
+    <div class="check-item level-warn">
+      <div class="check-box"></div>
+      <div class="check-content">
+        <div class="level-badge badge-warn">需要重视</div>
+        <div class="check-q">10. 日常生活自理能力下降，如忘记关火、重复穿同一件衣服、不记得已经吃饭</div>
+        <div class="check-desc">安全风险最高的信号。忘记关煤气、重复进食或数天不进食、个人卫生严重下降，这些情况意味着认知损害已影响到基本生活能力，需要立即安排就医。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-box mild">
+    <h3>勾选 1–2 个：保持关注</h3>
+    <p>单独出现1–2个信号可能与正常老化、睡眠不足、情绪压力有关，不必过度焦虑。建议记录下来，观察是否持续或加重，同时确保父母有规律作息和社交活动。</p>
+    <p>建议每3个月重新做一次观察，如有新的变化及时记录。</p>
+  </div>
+
+  <div class="result-box serious">
+    <h3>勾选 3 个及以上：建议就医评估</h3>
+    <p>出现3个或以上信号，或任意一个"需要重视"类信号，建议尽快到医院的<strong>记忆门诊</strong>或<strong>神经内科</strong>预约正式评估。早期干预可以显著延缓认知症进展，赢得更多时间准备照护安排。</p>
+    <p>就医时带上这份观察清单，描述信号出现的频率和时间，有助于医生做出更准确的判断。</p>
+  </div>
+
+  <div class="threshold-box">
+    <h3>就医时这样说，效率更高</h3>
+    <p>告诉医生："我父母近3个月出现了以下情况……（列举勾选项），我想做一个认知功能筛查，包括简易精神状态量表（MMSE）或蒙特利尔认知评估（MoCA）。" 带上社保卡、身份证，以及父母目前在服用的全部药物清单。</p>
+  </div>
+
+  <div class="section-label">常见难题：拒绝洗澡怎么办</div>
+
+  <div class="script-card">
+    <h3>认知症老人拒绝洗澡的沟通话术</h3>
+    <div class="script-item">
+      <div class="script-label">错误做法</div>
+      <div class="script-text">❌ "你都好几天没洗澡了！去洗！" — 直接命令会引发强烈抵抗，认知症老人对威权指令的反应往往更激烈。</div>
+    </div>
+    <div class="script-item">
+      <div class="script-label">推荐话术 A · 转移注意</div>
+      <div class="script-text">✅ "妈，等会儿要出去（或家里要来客人），我帮你先把衣服换换？顺便冲一冲，凉快一下。"——以"出门"为由，降低洗澡的心理门槛。</div>
+    </div>
+    <div class="script-item">
+      <div class="script-label">推荐话术 B · 情感联结</div>
+      <div class="script-text">✅ "爸，你以前每天都要洗澡的，我帮你放好热水，跟以前一样。"——唤起习惯记忆，避免强调"你现在忘了"。</div>
+    </div>
+    <div class="script-item">
+      <div class="script-label">推荐话术 C · 分步降低难度</div>
+      <div class="script-text">✅ 不要一上来就说"洗澡"，先说"我帮你擦擦脸"，再"换个干净衣服"，最后"顺便冲一下手"——分解动作，每一步的心理阻力都更小。</div>
+    </div>
+  </div>
+
+  <div class="related-links">
+    <h3>相关内容</h3>
+    <div class="related-grid">
+      <a class="related-link" href="/care/">居家照护清单 →</a>
+      <a class="related-link" href="/knowledge/caregiver/">护工面试30问 →</a>
+      <a class="related-link" href="/knowledge/">全部养老知识 →</a>
+      <a class="related-link" href="/profile/">生成父母养老画像 →</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-bar">
+  <div class="sticky-copy"><strong>先测清楚父母的真实风险</strong>，再决定从哪里开始</div>
+  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">开始生成养老画像</a>
+</div>
+
+</body>
+</html>

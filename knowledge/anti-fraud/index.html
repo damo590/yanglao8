@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>给父母手机做一次反诈体检 — 养老8</title>
+  <meta name="description" content="10分钟，从通讯录到支付权限全面排查。帮父母手机做一次系统安全检查，减少被诈骗的风险。" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
+  <style>
+    .article-hero { padding: 56px 32px 40px; max-width: 780px; margin: 0 auto; }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dark2); }
+    .breadcrumb-sep { opacity: .4; }
+    .article-hero h1 { font-size: 36px; font-weight: 700; color: var(--dark2); letter-spacing: -1px; line-height: 1.2; margin-bottom: 14px; }
+    .article-hero .sub { font-size: 17px; color: var(--muted); line-height: 1.6; max-width: 580px; }
+    .article-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 980px; background: rgba(220,80,60,.1); color: #8a2a20; margin-bottom: 18px; }
+
+    .article-body { max-width: 780px; margin: 0 auto; padding: 0 32px 80px; }
+
+    .check-group { margin-bottom: 28px; }
+    .check-group-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 8px; background: var(--dark2);
+      color: var(--accent); font-size: 13px; font-weight: 700; margin-bottom: 10px;
+    }
+    .check-group-title { font-size: 17px; font-weight: 700; color: var(--dark2); margin-bottom: 4px; }
+    .check-group-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+
+    .step-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden;
+    }
+    .step-item {
+      display: flex; gap: 0; border-bottom: 1px solid rgba(7,193,96,.5);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-icon {
+      width: 44px; flex-shrink: 0; background: rgba(7,193,96,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .step-content { padding: 14px 18px; flex: 1; }
+    .step-action { font-size: 14px; font-weight: 600; color: var(--dark2); margin-bottom: 4px; }
+    .step-path { font-size: 12px; color: var(--muted); font-family: "SF Mono", "Fira Code", monospace; background: rgba(7,193,96,.3); padding: 2px 7px; border-radius: 5px; display: inline-block; margin-bottom: 6px; }
+    .step-note { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .risk-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 980px; margin-left: 8px; vertical-align: middle;
+    }
+    .risk-high { background: rgba(220,80,60,.1); color: #8a2a20; }
+    .risk-mid { background: rgba(255,183,77,.12); color: #8a5a00; }
+
+    .passphrase-box {
+      background: var(--dark2); border-radius: 18px; padding: 28px 30px; margin: 36px 0; color: white;
+    }
+    .passphrase-box h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+    .passphrase-box p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.8); margin: 0 0 14px; }
+    .passphrase-box .examples { display: flex; flex-wrap: wrap; gap: 8px; }
+    .passphrase-example {
+      background: rgba(7,193,96,.15); border: 1px solid rgba(7,193,96,.3);
+      border-radius: 8px; padding: 8px 14px; font-size: 14px; color: var(--accent); font-weight: 600;
+    }
+
+    .warning-box {
+      background: rgba(220,80,60,.06); border: 1px solid rgba(220,80,60,.2);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .warning-box .w-title { font-size: 13px; font-weight: 700; color: #8a2a20; margin-bottom: 8px; }
+    .warning-box p { font-size: 14px; color: #6b3030; line-height: 1.6; margin: 0; }
+
+    .tip-box {
+      background: rgba(7,193,96,.08); border: 1px solid rgba(7,193,96,.3);
+      border-radius: 14px; padding: 18px 22px; margin: 28px 0;
+    }
+    .tip-box .t-title { font-size: 13px; font-weight: 700; color: var(--dark2); margin-bottom: 8px; }
+    .tip-box p, .tip-box ul { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .tip-box ul { padding-left: 18px; }
+    .tip-box li { margin-bottom: 6px; }
+
+    .related-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .related-links h3 { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+    .related-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .related-link {
+      display: inline-block; padding: 10px 18px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: 14px; font-weight: 500; color: var(--dark2); text-decoration: none;
+      transition: border-color .15s, transform .15s;
+    }
+    .related-link:hover { border-color: rgba(7,193,96,.6); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      .article-hero { padding: 40px 20px 28px; }
+      .article-hero h1 { font-size: 26px; }
+      .article-body { padding: 0 20px 80px; }
+      .passphrase-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+    <div class="logo-mark">8</div>
+    <div><div class="logo-name">养老8</div><div class="logo-sub">让父母晚年生活更安心</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="/profile/">父母养老画像</a>
+    <a href="/care/">居家照护清单</a>
+    <a href="/fall/">防摔专题</a>
+    <a href="/policy/">政策服务</a>
+    <a href="/knowledge/" style="opacity:1;font-weight:600;">养老知识</a>
+  </div>
+  <a class="nav-action nav-action-desktop" href="/knowledge/" style="text-decoration:none;">← 返回知识库</a>
+</nav>
+
+<div class="article-hero">
+  <div class="breadcrumb">
+    <a href="/">养老8</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/knowledge/">养老知识</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>父母手机反诈体检</span>
+  </div>
+  <div class="article-tag">🛡️ 防骗安全</div>
+  <h1>给父母手机做一次反诈体检</h1>
+  <p class="sub">10分钟，从通讯录到支付权限全面排查。老年人是电信诈骗的主要目标，这份清单帮你系统地降低风险。</p>
+</div>
+
+<div class="article-body">
+
+  <div class="warning-box">
+    <div class="w-title">⚠️ 为什么父母更容易被骗</div>
+    <p>老年人被诈骗的三大原因：独处时间多（没有人即时核实）、信任权威（容易相信"公安""医生""子女"身份）、对新型技术不熟悉（AI换脸、远程控制难以识别）。每年春节后的2–4月是诈骗高峰期，这时候做一次系统排查最有效。</p>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">1</div>
+    <div class="check-group-title">陌生联系人排查 <span class="risk-tag risk-high">高风险</span></div>
+    <div class="check-group-sub">诈骗分子通常以"快递""银行客服""子女朋友"为名存入通讯录</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">📋</div>
+        <div class="step-content">
+          <div class="step-action">一起翻查通讯录中的陌生号码</div>
+          <div class="step-note">重点看：备注为"客服""银行""警察""公安"或是一串没有备注的手机号。让父母说说每个号码是谁，说不出来的直接删除。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🔍</div>
+        <div class="step-content">
+          <div class="step-action">查看最近7天的通话记录</div>
+          <div class="step-note">重点看：通话时间超过5分钟的陌生号码、深夜或清晨的来电、多次拨打同一未知号码。对可疑号码截图留存。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">⚠️</div>
+        <div class="step-content">
+          <div class="step-action">安装国家反诈中心 App</div>
+          <div class="step-path">各应用市场搜索"国家反诈中心"</div>
+          <div class="step-note">这是公安部官方 App，可自动识别诈骗电话来电，开启"来电预警"功能。开启后遇到高风险号码会有弹窗提示。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">2</div>
+    <div class="check-group-title">转账和支付权限收紧 <span class="risk-tag risk-high">高风险</span></div>
+    <div class="check-group-sub">大额转账是诈骗最终目标，从权限上设置障碍是最有效的防护</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">💳</div>
+        <div class="step-content">
+          <div class="step-action">微信支付：设置每日转账限额</div>
+          <div class="step-path">微信 → 我 → 服务 → 钱包 → 支付安全 → 转账/收款限额</div>
+          <div class="step-note">建议将单日转账上限设为500–2000元，超出需要输入原密码重新确认。告诉父母：遇到要求解除限额的电话100%是诈骗。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">📱</div>
+        <div class="step-content">
+          <div class="step-action">支付宝：开启家人守护</div>
+          <div class="step-path">支付宝 → 我的 → 设置 → 家庭 → 家人守护</div>
+          <div class="step-note">绑定后，父母账户的大额付款需要你的手机二次确认，有效阻断诈骗分子诱导转账。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🏦</div>
+        <div class="step-content">
+          <div class="step-action">银行App：开启大额转账延迟到账</div>
+          <div class="step-note">大多数银行App都支持设置"大额转账延迟到账24小时"，在此期间可撤回。建议到银行柜台帮父母开通此服务，同时降低网银单日转账上限。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">3</div>
+    <div class="check-group-title">短视频推送风险 <span class="risk-tag risk-mid">中等风险</span></div>
+    <div class="check-group-sub">抖音、快手的算法会给父母持续推送"保健品""理财""彩票"相关内容</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">🎬</div>
+        <div class="step-content">
+          <div class="step-action">抖音：关闭直播间打赏和购物功能</div>
+          <div class="step-path">抖音 → 我 → 设置 → 青少年/家长模式</div>
+          <div class="step-note">开启"长辈模式"或设置使用密码，可限制直播打赏金额、关闭电商购买入口。重点排查父母是否关注了"保健品主播""中医养生"类账号。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🛒</div>
+        <div class="step-content">
+          <div class="step-action">检查是否绑定了快捷支付</div>
+          <div class="step-note">在抖音/快手/拼多多等App中，确认是否已绑定银行卡或开通免密支付。建议解绑主要银行卡，只保留限额较低的备用卡或零钱。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">4</div>
+    <div class="check-group-title">群聊风险排查 <span class="risk-tag risk-mid">中等风险</span></div>
+    <div class="check-group-sub">"老年健康群""同学群""免费领礼品群"是诈骗集中地</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">💬</div>
+        <div class="step-content">
+          <div class="step-action">一起翻看微信群列表，逐一确认</div>
+          <div class="step-note">重点排查：不知道是谁拉进去的群、群名含"内部""福利""免费""领取"的群、群内经常发链接或二维码的群。不熟悉的群建议直接退出。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🔒</div>
+        <div class="step-content">
+          <div class="step-action">设置：不允许陌生人拉进群聊</div>
+          <div class="step-path">微信 → 我 → 设置 → 隐私 → 加我为朋友的方式</div>
+          <div class="step-note">关闭"通过群聊加我"，并开启"好友验证"。这样陌生人无法直接把父母拉进可疑群聊。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">5</div>
+    <div class="check-group-title">远程控制软件检查 <span class="risk-tag risk-high">高风险</span></div>
+    <div class="check-group-sub">"客服"以"帮你操作"为由安装控制软件，可直接操控手机转账</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">🖥️</div>
+        <div class="step-content">
+          <div class="step-action">检查是否安装了远程控制类 App</div>
+          <div class="step-note">常见软件名：AnyDesk、TeamViewer、向日葵、ToDesk、云控等。打开手机"设置→应用管理"逐一排查，这些 App 若在父母手机上出现，立即卸载。正规客服不需要远程控制你的手机。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🔐</div>
+        <div class="step-content">
+          <div class="step-action">检查辅助功能权限是否被滥用</div>
+          <div class="step-path">设置 → 辅助功能 → 已安装的服务</div>
+          <div class="step-note">辅助功能权限可以让 App 监控屏幕操作，是远程控制的技术基础。除系统自带服务外，其他 App 若开启了此权限，立即关闭并调查原因。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-num">6</div>
+    <div class="check-group-title">AI换脸视频识别 <span class="risk-tag risk-high">高风险</span></div>
+    <div class="check-group-sub">诈骗分子可用 AI 伪造"子女"或"领导"视频通话，索要转账</div>
+    <div class="step-card">
+      <div class="step-item">
+        <div class="step-icon">🤖</div>
+        <div class="step-content">
+          <div class="step-action">告诉父母这3个AI换脸识别技巧</div>
+          <div class="step-note">
+            <strong>1. 看嘴型和声音是否同步</strong>：AI合成的视频嘴型经常轻微滞后或不自然。<br/>
+            <strong>2. 让对方做不寻常动作</strong>：用手遮住半张脸、快速转头、做鬼脸——AI换脸在边界处理上容易出现模糊或变形。<br/>
+            <strong>3. 打断视频，改打电话确认</strong>：无论视频里是谁，涉及转账的请求一律挂断，用常用号码回拨核实。
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">📞</div>
+        <div class="step-content">
+          <div class="step-action">建立家庭"急事核实"流程</div>
+          <div class="step-note">约定：如果有人称是子女遇到急事需要转账，必须拨打家庭固定联系电话（而不是对方给的号码）进行语音确认，等待10分钟后再操作。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="passphrase-box">
+    <h3>设置家庭暗语</h3>
+    <p>这是最简单有效的防护措施之一。设置一个只有家庭成员知道的验证词，遇到任何要求转账或提供密码的"紧急情况"，先说出暗语验证身份。</p>
+    <p>暗语要求：不能是生日/姓名、不能在网上出现过、对话中能自然说出来。</p>
+    <div class="examples">
+      <div class="passphrase-example">例：今天吃的什么菜</div>
+      <div class="passphrase-example">例：狗狗叫什么名字</div>
+      <div class="passphrase-example">例：妈妈娘家在哪个村</div>
+    </div>
+  </div>
+
+  <div class="related-links">
+    <h3>相关内容</h3>
+    <div class="related-grid">
+      <a class="related-link" href="/knowledge/supplements/">保健品购买前核验 →</a>
+      <a class="related-link" href="/knowledge/">全部养老知识 →</a>
+      <a class="related-link" href="/profile/">生成父母养老画像 →</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="sticky-bar">
+  <div class="sticky-copy"><strong>先测清楚父母的真实风险</strong>，再决定从哪里开始</div>
+  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">开始生成养老画像</a>
+</div>
+
+</body>
+</html>
