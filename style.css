@@ -276,6 +276,8 @@ strong { font-weight: 600; }
 .worry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
 .worry-card {
+  display: block;
+  color: inherit;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -314,6 +316,7 @@ strong { font-weight: 600; }
 .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 36px; }
 
 .topic-card {
+  color: inherit;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 16px;
