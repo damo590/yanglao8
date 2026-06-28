@@ -3,13 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>养老知识 — 养老8</title>
+  <title>养老知识库 — 养老8</title>
+  <meta name="description" content="围绕父母养老真实场景整理的知识库：跌倒预防、护工选择、长护险、适老化改造、认知症照护、反诈指南……" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
+  <style>
+    /* ===== KNOWLEDGE PAGE STYLES ===== */
+    .k-hero { padding: 64px 32px 48px; max-width: 860px; margin: 0 auto; }
+    .k-hero .hero-eyebrow { margin-bottom: 16px; }
+    .k-hero h1 { font-size: 42px; font-weight: 700; color: var(--dark2); letter-spacing: -1.2px; line-height: 1.15; margin-bottom: 16px; }
+    .k-hero p { font-size: 17px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+
+    .tabs { display: flex; gap: 8px; padding: 0 32px; max-width: 860px; margin: 0 auto 32px; flex-wrap: wrap; }
+    .tab {
+      font-size: 13px; font-weight: 500; color: var(--muted); padding: 7px 16px;
+      border-radius: 980px; border: 1px solid var(--border); background: var(--bg);
+      cursor: pointer; transition: all .15s;
+    }
+    .tab.active, .tab:hover { background: var(--dark2); color: var(--accent); border-color: var(--dark2); }
+
+    .k-section { padding: 0 32px 56px; max-width: 860px; margin: 0 auto; }
+    .k-section-title {
+      font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 18px; filter: brightness(.8);
+    }
+
+    .article-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    .article-card {
+      display: block; color: inherit;
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px; transition: border-color .18s, transform .18s;
+    }
+    .article-card:hover { border-color: rgba(122,217,176,.6); transform: translateY(-2px); }
+    .ac-tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 980px; margin-bottom: 12px;
+      background: rgba(122,217,176,.15); color: var(--dark2);
+    }
+    .ac-tag.tag-health { background: rgba(100,180,255,.12); color: #1a5a8a; }
+    .ac-tag.tag-service { background: rgba(255,183,77,.12); color: #8a5a00; }
+    .ac-tag.tag-risk { background: rgba(220,80,60,.1); color: #8a2a20; }
+    .ac-tag.tag-care { background: rgba(150,100,255,.1); color: #5a2080; }
+    .ac-tag.tag-institution { background: rgba(60,180,100,.12); color: #1a6040; }
+
+    .ac-title { font-size: 15px; font-weight: 600; color: var(--dark2); margin-bottom: 6px; letter-spacing: -.2px; line-height: 1.4; }
+    .ac-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .ac-foot {
+      margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px;
+    }
+    .ac-priority {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; border-radius: 4px; font-size: 10px; font-weight: 700;
+      background: rgba(122,217,176,.25); color: var(--dark2); flex-shrink: 0;
+    }
+    .ac-priority.p-s { background: var(--dark2); color: var(--accent); }
+
+    .coming-soon { opacity: .45; pointer-events: none; }
+    .soon-label {
+      display: inline-block; font-size: 11px; padding: 2px 8px;
+      border-radius: 980px; background: var(--border); color: var(--muted); margin-left: 6px;
+    }
+
+    .roadmap-box {
+      background: var(--dark2); border-radius: 20px; padding: 36px;
+      margin: 0 32px 48px; max-width: 796px; margin-left: auto; margin-right: auto;
+    }
+    .roadmap-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; opacity: .8; }
+    .roadmap-title { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 8px; letter-spacing: -.5px; }
+    .roadmap-sub { font-size: 14px; color: rgba(255,255,255,.55); margin-bottom: 28px; }
+    .roadmap-stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .stage-card { background: rgba(255,255,255,.07); border-radius: 12px; padding: 16px; }
+    .stage-age { font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .stage-label { font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .stage-items { list-style: none; }
+    .stage-items li { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.7; padding-left: 10px; position: relative; }
+    .stage-items li::before { content: "·"; position: absolute; left: 0; color: var(--accent); }
+    .roadmap-cta { margin-top: 24px; }
+    .btn-outline-light {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      border: 1px solid rgba(122,217,176,.35); border-radius: 980px;
+      padding: 8px 20px; background: rgba(122,217,176,.08);
+      transition: background .15s;
+    }
+    .btn-outline-light:hover { background: rgba(122,217,176,.15); }
+
+    @media (max-width: 768px) {
+      .k-hero { padding: 40px 20px 32px; }
+      .k-hero h1 { font-size: 30px; }
+      .tabs { padding: 0 20px; }
+      .k-section { padding: 0 20px 40px; }
+      .article-grid { grid-template-columns: 1fr; }
+      .roadmap-box { margin: 0 20px 36px; padding: 24px 20px; }
+      .roadmap-title { font-size: 20px; }
+      .roadmap-stages { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/">
+  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;">
     <div class="logo-mark">8</div>
     <div>
       <div class="logo-name">养老8</div>
@@ -23,13 +119,269 @@
     <a href="/policy/">政策服务</a>
     <a href="/knowledge/" style="opacity:1;font-weight:600;">养老知识</a>
   </div>
-  <a class="nav-action nav-action-desktop" href="/">返回首页</a>
+  <a class="nav-action nav-action-desktop" href="/" style="text-decoration:none;">返回首页</a>
+  <button class="nav-action" onclick="document.getElementById('menu').classList.toggle('open')">
+    <span class="nav-action-mobile">☰</span>
+  </button>
 </nav>
-<section class="hero" style="padding-bottom:80px;">
-  <div class="hero-eyebrow">即将上线</div>
-  <h1 class="hero-title">养老知识库<br><span class="hero-title-muted">正在建设中</span></h1>
-  <p class="hero-lead">用药管理、就医陪诊、机构选择……人工筛选 + AI 整理的养老知识合集。<strong>功能即将上线，敬请期待。</strong></p>
-  <a href="/" class="btn-primary" style="text-decoration:none;">← 返回首页</a>
-</section>
+<div class="mobile-menu" id="menu">
+  <a href="/profile/">父母养老画像</a>
+  <a href="/care/">居家照护清单</a>
+  <a href="/fall/">防摔专题</a>
+  <a href="/policy/">政策服务</a>
+  <a href="/knowledge/">养老知识</a>
+</div>
+
+<!-- HERO -->
+<div class="k-hero">
+  <div class="hero-eyebrow">养老知识库 · 持续更新</div>
+  <h1>父母养老，<br>一步步知道该做什么</h1>
+  <p>不贩卖焦虑，只提供具体可用的场景指南。围绕真实照护问题，帮你从"听说要准备"变成"今天能做一件事"。</p>
+</div>
+
+<!-- 5年行动路线图 -->
+<div class="roadmap-box">
+  <div class="roadmap-eyebrow">决策线 · S级优先</div>
+  <div class="roadmap-title">父母养老 5 年行动路线图</div>
+  <div class="roadmap-sub">从父母 60 岁开始，每个阶段最该准备什么——健康、钱、居住、照护、法律</div>
+  <div class="roadmap-stages">
+    <div class="stage-card">
+      <div class="stage-age">60岁</div>
+      <div class="stage-label">建立基础</div>
+      <ul class="stage-items">
+        <li>健康档案整理</li>
+        <li>慢病用药清单</li>
+        <li>家庭医生签约</li>
+        <li>遗嘱基本规划</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-age">65岁</div>
+      <div class="stage-label">防护升级</div>
+      <ul class="stage-items">
+        <li>家庭防摔改造</li>
+        <li>认知症早筛</li>
+        <li>长护险资格查询</li>
+        <li>紧急联系人设置</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-age">70岁</div>
+      <div class="stage-label">服务介入</div>
+      <ul class="stage-items">
+        <li>居家服务菜单</li>
+        <li>陪诊流程熟悉</li>
+        <li>助行器辅具评估</li>
+        <li>照护责任分工</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-age">75岁+</div>
+      <div class="stage-label">全面照护</div>
+      <ul class="stage-items">
+        <li>护工/护理院选择</li>
+        <li>失能评估申请</li>
+        <li>家属照护压力管理</li>
+        <li>机构入住准备</li>
+      </ul>
+    </div>
+  </div>
+  <div class="roadmap-cta">
+    <a href="/profile/" class="btn-outline-light">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      生成我家的行动路线图
+    </a>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="filterSection('all', this)">全部</div>
+  <div class="tab" onclick="filterSection('health', this)">健康照护</div>
+  <div class="tab" onclick="filterSection('service', this)">居家服务</div>
+  <div class="tab" onclick="filterSection('risk', this)">风险防范</div>
+  <div class="tab" onclick="filterSection('institution', this)">机构选择</div>
+  <div class="tab" onclick="filterSection('care', this)">家属支持</div>
+</div>
+
+<!-- 健康照护 -->
+<div class="k-section" data-cat="health">
+  <div class="k-section-title">健康照护</div>
+  <div class="article-grid">
+    <a class="article-card" href="/fall/">
+      <span class="ac-tag tag-health">防摔 · S级</span>
+      <div class="ac-title">跌倒预防完整指南</div>
+      <div class="ac-desc">浴室、卧室、夜间动线、鞋子选择、药物影响……家中 9 大风险点排查清单，可打印给父母。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 已上线 · 完整内容</div>
+    </a>
+    <a class="article-card" href="/fall/">
+      <span class="ac-tag tag-health">防摔 · S级</span>
+      <div class="ac-title">跌倒后 24 小时处理流程</div>
+      <div class="ac-desc">什么时候必须立刻就医，什么时候不能扶，可能骨折时如何判断，救护车前做什么。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 已上线 · 完整内容</div>
+    </a>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-health">认知症 · S级</span>
+      <div class="ac-title">认知症早筛问卷 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">10 个日常行为观察问题，帮你判断父母是否需要进一步检查。不是诊断，是行动前的参考。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-health">认知症 · S级</span>
+      <div class="ac-title">认知症拒绝洗澡怎么办 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">沟通脚本、环境调整、照护节奏……真实案例+照护逻辑，比"多哄哄"更有用的方法。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-health">失能评估</span>
+      <div class="ac-title">失能评估前自查 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">吃饭、穿衣、洗澡、如厕、行走、认知——长护险 6 项评估维度，提前知道父母在哪个等级。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-health">家庭医生</span>
+      <div class="ac-title">家庭医生到底能做什么 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">签约、慢病随访、转诊绿色通道、上门服务……哪些是真的能用到，哪些是"名头"。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+  </div>
+</div>
+
+<!-- 居家服务 -->
+<div class="k-section" data-cat="service">
+  <div class="k-section-title">居家服务</div>
+  <div class="article-grid">
+    <a class="article-card" href="/care/">
+      <span class="ac-tag tag-service">照护清单 · S级</span>
+      <div class="ac-title">居家照护服务菜单</div>
+      <div class="ac-desc">助浴、陪诊、上下楼、买药、护理床租赁……按父母能力状态，怎么组合最合适。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 已上线 · 完整内容</div>
+    </a>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-service">护工 · S级</span>
+      <div class="ac-title">护工面试 30 问 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">资质核验、夜间安排、翻身拍背、失禁护理、红包边界、意外责任……雇前必问清楚的问题。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-service">助浴</span>
+      <div class="ac-title">助浴服务怎么选 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">价格（约300-400元/次）、人力配置、设备差异、隐私保护、不适合哪些父母……选购前的完整核验表。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-service">辅具</span>
+      <div class="ac-title">辅具购买清单 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">助行器、轮椅、护理床、防滑鞋、适老餐具——按父母情况推荐，避免买了用不上或买错型号。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+  </div>
+</div>
+
+<!-- 风险防范 -->
+<div class="k-section" data-cat="risk">
+  <div class="k-section-title">风险防范</div>
+  <div class="article-grid">
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-risk">反诈 · S级</span>
+      <div class="ac-title">父母手机反诈体检 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">通讯录陌生联系人、支付权限、短视频推送、群聊风险、远程控制……10分钟给父母手机做一次安全体检。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-risk">反诈 · S级</span>
+      <div class="ac-title">AI 视频诈骗防范指南 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">如何教父母识别"看起来像亲人"的AI换脸视频，设置家庭暗语，发现被骗后第一时间怎么做。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-risk">保健品 · S级</span>
+      <div class="ac-title">保健品购买前核验 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">批准文号查询、成分表解读、"疾病承诺"识别、付款路径风险……可转发给父母的版本。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-risk">适老改造</span>
+      <div class="ac-title">家庭适老化改造优先级 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">先改卫生间、再改动线、再改照明——不被整屋装修套餐带偏，按父母真实风险排序改造。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+  </div>
+</div>
+
+<!-- 机构选择 -->
+<div class="k-section" data-cat="institution">
+  <div class="k-section-title">机构选择</div>
+  <div class="article-grid">
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-institution">养老院 · S级</span>
+      <div class="ac-title">养老院考察 72 问 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">护理等级、夜间人员配置、失禁处理、医疗边界、探访规定、退费条款……实地考察必问清单。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-institution">合同风险</span>
+      <div class="ac-title">护理院合同避坑指南 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">不抢救条款、摔倒责任、压疮处理、走失赔偿、退费计算……签之前重点看这几条。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-institution">旅居养老</span>
+      <div class="ac-title">旅居养老核验表 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">费用、医疗可及性、合同、季节适应、同伴资源、安全保障、退费……父母适不适合旅居先评估。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-institution">AI设备</span>
+      <div class="ac-title">AI 养老设备购买前 20 问 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">跌倒报警器、陪伴机器人、家庭AI助手——分别能解决什么，不能替代什么，误报怎么处理。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+  </div>
+</div>
+
+<!-- 家属支持 -->
+<div class="k-section" data-cat="care">
+  <div class="k-section-title">家属支持</div>
+  <div class="article-grid">
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-care">心理健康 · S级</span>
+      <div class="ac-title">家属照护抑郁自查 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">照顾父母的人也需要被照顾。长期照护者的情绪崩溃前兆、负担测量表、和子女分工沟通模板。</div>
+      <div class="ac-foot"><span class="ac-priority p-s">S</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-care">认知症照护</span>
+      <div class="ac-title">认知症"总想回家"怎么处理 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">公交站台设计案例背后的照护逻辑——不是欺骗，是环境支持。实操方法和沟通话术。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+    <div class="article-card coming-soon">
+      <span class="ac-tag tag-care">陪伴</span>
+      <div class="ac-title">退休后父母每周活动计划 <span class="soon-label">即将上线</span></div>
+      <div class="ac-desc">减少孤独、防止保健品诈骗的根本——父母食堂、同龄社群、有仪式感的日常如何设计。</div>
+      <div class="ac-foot"><span class="ac-priority">A</span> 内容准备中</div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sticky-copy"><strong>先测清楚父母的真实风险</strong>，再决定从哪里开始</div>
+  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    开始生成养老画像
+  </a>
+</div>
+
+<script>
+function filterSection(cat, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.k-section[data-cat]').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
 </body>
 </html>
