@@ -151,6 +151,16 @@ h1 {
 }
 .query-submit { width: 100%; margin-top: 2px; }
 .query-hint { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+.query-boundary {
+  margin: 8px 0 0;
+  padding: 9px 11px;
+  border-radius: var(--radius);
+  background: #f1fbf5;
+  border: 1px solid #d8e8e0;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.45;
+}
 .action-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: action; }
 .action-list li {
   counter-increment: action;

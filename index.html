@@ -189,6 +189,7 @@
       parentOptions: document.getElementById("parentOptions"),
       parentBackBtn: document.getElementById("parentBackBtn"),
       parentNextBtn: document.getElementById("parentNextBtn"),
+      parentNextHint: document.getElementById("parentNextHint"),
       parentExitBtn: document.getElementById("parentExitBtn"),
       parentResultType: document.getElementById("parentResultType"),
       parentResultSubtitle: document.getElementById("parentResultSubtitle"),
@@ -765,6 +766,9 @@
       ui.parentBackBtn.disabled = parentProfileState.index === 0;
       ui.parentNextBtn.disabled = !selected;
       ui.parentNextBtn.textContent = parentProfileState.index >= total - 1 ? "生成父母画像" : "下一题";
+      if (ui.parentNextHint) {
+        ui.parentNextHint.hidden = Boolean(selected);
+      }
     }
 
     function startParentProfile() {
@@ -3567,6 +3571,15 @@
       color: #6c4300;
     }
 
+    .action-btn:disabled {
+      opacity: 1;
+      border-color: #d7e4df;
+      background: #eef4f1;
+      color: #8aa29b;
+      transform: none;
+      box-shadow: none;
+    }
+
     .ghost-btn {
       border: 1px solid #cce1dc;
       border-radius: 14px;
@@ -3589,6 +3602,12 @@
       padding: 16px;
       display: grid;
       gap: 14px;
+    }
+
+    .parent-flow {
+      max-width: 1320px;
+      margin: 0 auto;
+      align-content: start;
     }
 
     .parent-flow-head {
@@ -3629,9 +3648,10 @@
       border: 1px solid #cbe4de;
       border-radius: 18px;
       background: #ffffff;
-      padding: 18px;
+      padding: clamp(18px, 2.3vw, 28px);
       display: grid;
-      gap: 14px;
+      gap: 16px;
+      align-content: start;
     }
 
     .parent-question-card h3 {
@@ -3693,6 +3713,13 @@
 
     .parent-nav .action-btn {
       min-width: 180px;
+    }
+
+    .parent-next-hint {
+      margin: -2px 0 0;
+      color: #6c867f;
+      font-size: clamp(14px, 1vw, 16px);
+      font-weight: 800;
     }
 
     .parent-result-type {
@@ -4791,6 +4818,17 @@
       overflow: visible;
     }
 
+    body:has(#screenParentProfile.active) .wrap {
+      height: auto;
+      min-height: 100vh;
+    }
+
+    body:has(#screenParentProfile.active) .card {
+      height: auto;
+      min-height: 0;
+      overflow: visible;
+    }
+
     #screenHome .home-shell {
       width: 100%;
       max-width: none;
@@ -4950,21 +4988,21 @@
     }
 
     #screenHome .home-hero .home-tags {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(92px, 1fr));
-      max-width: 470px;
-      gap: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 610px;
+      gap: 10px;
     }
 
     #screenHome .home-tag {
-      min-height: 56px;
+      min-height: 42px;
       border: 1px solid #e2eee9;
-      border-radius: 12px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.86);
       color: #123f38;
       font-size: 13px;
       font-weight: 900;
-      padding: 10px 9px;
+      padding: 8px 13px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -5934,7 +5972,14 @@
       #screenHome .home-head { grid-template-columns: 1fr; }
       #screenHome .home-hero { padding: 24px 6px 18px; }
       #screenHome .home-hero h1 { font-size: clamp(34px, 10vw, 44px); }
-      #screenHome .home-hero .home-tags { grid-template-columns: 1fr; }
+      #screenHome .home-hero .home-tags {
+        gap: 8px;
+      }
+      #screenHome .home-hero .home-tag {
+        min-height: 34px;
+        padding: 6px 10px;
+        font-size: 12px;
+      }
       #screenHome .home-primary-btn,
       #screenHome .home-secondary-action { width: 100%; min-width: 0; justify-self: stretch; }
       #screenHome .home-bottom-cta .home-primary-btn { min-width: 0; }
@@ -6012,7 +6057,7 @@
       .parent-flow,
       .parent-result { padding: 10px; }
       .parent-flow-head { grid-template-columns: 1fr; padding: 14px; }
-      .parent-question-card { padding: 14px; }
+      .parent-question-card { padding: 16px; gap: 12px; }
       .parent-options,
       .parent-result-grid { grid-template-columns: 1fr; }
       .parent-option { min-height: 96px; }
@@ -6114,17 +6159,16 @@
           </header>
           <div class="home-hero fg-section-inner">
             <div class="hero-copy-block">
-              <h1>养老8低成本防摔行动方案</h1>
-              <p class="sub">别等父母摔倒住院后才后悔。3分钟看看父母家里哪里最容易摔，先用 100 元以内做对第一步。</p>
+              <h1>3分钟生成养老画像<br />和本周行动清单</h1>
+              <p class="sub">先看清父母现在最该优先处理的问题：防摔、独居响应、照护安排、政策服务还是后续用品。测完先给你本周能做的 3 件事。</p>
               <div class="home-tags">
-                <span class="home-tag"><span class="mini-icon shield-icon"></span>可登录保存</span>
                 <span class="home-tag"><span class="mini-icon clock-icon"></span>约3分钟</span>
-                <span class="home-tag"><span class="mini-icon list-icon"></span>测完生成低成本行动清单</span>
-                <span class="home-tag"><span class="mini-icon family-icon"></span>适合子女和长辈一起看</span>
+                <span class="home-tag"><span class="mini-icon shield-icon"></span>可保存结果</span>
+                <span class="home-tag"><span class="mini-icon list-icon"></span>生成本周行动建议</span>
               </div>
-              <button id="btnStartParentProfile" class="home-primary-btn">开始防摔自查 <span aria-hidden="true">›</span></button>
-              <a class="home-secondary-action care-hero-link" href="/care/">第一次照顾老人？生成居家照护学习清单</a>
-              <div class="home-cta-note"><span aria-hidden="true">✓</span> 测完后会得到：先做这 3 个低成本防摔动作 + 100 元行动建议</div>
+              <button id="btnStartParentProfile" class="home-primary-btn">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
+              <a class="home-secondary-action care-hero-link" href="#homeFallTitle">先看低成本防摔自查</a>
+              <div class="home-cta-note"><span aria-hidden="true">✓</span> 测完后会得到：父母画像类型、当前优先问题、本周行动清单。</div>
             </div>
             <div class="hero-visual-card" aria-label="温馨家庭养老场景">
               <div class="family-scene">
@@ -6497,8 +6541,8 @@
                 <span class="badge">父母养老画像</span>
                 <span class="badge" id="parentStepText">1 / 15</span>
               </div>
-              <h2>建立父母养老档案</h2>
-              <p class="sub">每题选一个最接近的情况，先形成行动优先级，不做医疗诊断。</p>
+              <h2>建立父母养老画像</h2>
+              <p class="sub">先问几个基础情况，再判断防摔、照护和政策服务的优先级。不做医疗诊断。</p>
             </div>
             <button id="parentExitBtn" class="ghost-btn">返回首页</button>
           </div>
@@ -6511,6 +6555,7 @@
               <button id="parentBackBtn" class="ghost-btn" type="button">上一题</button>
               <button id="parentNextBtn" class="action-btn" type="button" disabled>下一题</button>
             </div>
+            <p id="parentNextHint" class="parent-next-hint">请选择一个选项后继续。</p>
           </div>
         </div>
       </section>

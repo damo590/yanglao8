@@ -41,9 +41,10 @@ assert.match(
   /STATIC_PREVIEW_PORTS = new Set\(\["4173", "5173", "5500", "8000", "8080", "8765"\]\)/,
   "local static preview ports should include the verification server port"
 );
-assert.match(visibleHtml, /开始 3 分钟家庭防摔自测/, "homepage primary CTA should stay in place");
-assert.match(visibleHtml, /低成本防摔行动方案/, "homepage should position the product as a low-cost fall-prevention action tool");
-assert.match(visibleHtml, /先用 100 元以内做对第一步/, "homepage should promise the first low-cost action step");
+assert.match(visibleHtml, /开始生成我家的养老画像/, "homepage primary CTA should lead to the parent profile");
+assert.match(visibleHtml, /3分钟生成养老画像[\s\S]*和本周行动清单/, "homepage should position the product around the parent profile and weekly action list");
+assert.match(visibleHtml, /先看低成本防摔自查/, "homepage should keep fall prevention as a secondary path");
+assert.match(visibleHtml, /开始 3 分钟家庭防摔自测/, "fall self-check entry should stay in place");
 assert.match(visibleHtml, /稳住榜/, "leaderboard layout should remain on the homepage");
 assert.match(visibleHtml, /总体风险等级/, "result page should show the risk-level card");
 assert.match(visibleHtml, /已识别风险场景/, "result page should show identified risk scenes");
