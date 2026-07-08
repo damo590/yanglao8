@@ -4,7 +4,7 @@ const path = require("node:path");
 
 const homeHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 assert.match(homeHtml, /href="\/care\/"/, "homepage should link to the care subpage");
-assert.match(homeHtml, /居家照护清单|第一次照顾老人必读/, "homepage should expose the care-list entry copy");
+assert.match(homeHtml, /居家照护学习清单/, "homepage should expose the care-list entry copy");
 
 const carePath = path.join(__dirname, "..", "care", "index.html");
 assert.ok(fs.existsSync(carePath), "care subpage should exist at /care/index.html");

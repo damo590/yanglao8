@@ -21,6 +21,14 @@ const forbiddenTerms = [
   "复活"
 ];
 
+const requiredTerms = [
+  "总体风险等级",
+  "信息缺口",
+  "医疗红旗",
+  "今日行动",
+  "家庭防摔风险地图"
+];
+
 function loadRuntimeBank() {
   const source = fs.readFileSync(runtimePath, "utf8");
   const sandbox = {
@@ -51,12 +59,12 @@ test("runtime question bank exposes mode-filtered risk collection questions", ()
   );
 });
 
-test("homepage links to fall topic without exposing exam-style wording", () => {
+test("page uses runtime bank and avoids exam-style result wording", () => {
   const html = fs.readFileSync(htmlPath, "utf8");
   const visibleHtml = html.replace(/<script[\s\S]*?<\/script>/g, "");
 
-  assert.match(html, /href="\/fall\/"/, "homepage should link to the fall-prevention topic");
-  assert.match(visibleHtml, /防摔专题/, "homepage should expose the fall-prevention topic");
+  assert.match(html, /fallRiskQuestions\.runtime\.js/, "index should load the runtime bank");
+  assert.match(html, /FallRiskQuestionBank/, "index should read the runtime bank from window");
 
   for (const forbidden of forbiddenTerms) {
     assert.doesNotMatch(
@@ -64,5 +72,9 @@ test("homepage links to fall topic without exposing exam-style wording", () => {
       new RegExp(forbidden),
       `visible page should not contain ${forbidden}`
     );
+  }
+
+  for (const expected of requiredTerms) {
+    assert.match(visibleHtml, new RegExp(expected), `page should contain ${expected}`);
   }
 });
