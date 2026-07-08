@@ -7,12 +7,19 @@ assert.match(homeHtml, /href="\/care\/"/, "homepage should link to the care subp
 assert.match(homeHtml, /居家照护学习清单/, "homepage should expose the care-list entry copy");
 
 const carePath = path.join(__dirname, "..", "care", "index.html");
+const careCssPath = path.join(__dirname, "..", "care", "assets", "site.css");
+const careJsPath = path.join(__dirname, "..", "care", "assets", "site.js");
 assert.ok(fs.existsSync(carePath), "care subpage should exist at /care/index.html");
+assert.ok(fs.existsSync(careCssPath), "care subpage stylesheet should exist at /care/assets/site.css");
+assert.ok(fs.existsSync(careJsPath), "care subpage script should exist at /care/assets/site.js");
 
 const html = fs.readFileSync(carePath, "utf8");
 const visibleText = html.replace(/<[^>]+>/g, "");
 
 assert.match(html, /居家照护学习清单/, "care page should expose the product name");
+assert.match(html, /href="\/care\/assets\/site\.css"/, "care page should load its own deployed stylesheet");
+assert.match(html, /src="\/care\/assets\/site\.js"/, "care page should load its own deployed script");
+assert.doesNotMatch(html, /yanglao8-demo-v2/, "care page should not depend on demo-only assets");
 assert.match(visibleText, /不会照顾老人，很正常。先从今天这一件事开始。/, "care page should use customer-facing hero copy");
 assert.match(html, /老人洗澡困难/, "bath scene should be available");
 assert.match(html, /老人卧床/, "bedridden scene should be available");
