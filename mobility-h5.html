@@ -1,0 +1,1609 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>爸妈行动力基线记录｜养老8</title>
+  <meta name="description" content="公众号 H5：记录爸妈起身、走路和站稳变化，7 天后复测对比，推动家庭行动。" />
+  <style>
+    :root {
+      --ink: #18362f;
+      --muted: #60746d;
+      --soft: #eff7f1;
+      --paper: #fffdf8;
+      --line: #dbe9df;
+      --green: #1d7457;
+      --green-dark: #0f4d3d;
+      --mint: #dff3e7;
+      --blue: #e4f1f3;
+      --orange: #ffe8c9;
+      --warning: #9a5a13;
+      --danger: #9d3c2f;
+      --shadow: 0 16px 42px rgba(21, 72, 54, 0.13);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #f4faf5;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #f4faf5 0%, #fffaf0 52%, #f7fbf8 100%);
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 18px 16px 44px;
+    }
+
+    .phone-shell {
+      width: min(100%, 430px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 52px;
+      margin: -18px -16px 14px;
+      padding: 12px 16px 10px;
+      background: rgba(244, 250, 245, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(219, 233, 223, 0.72);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--green-dark);
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #fff;
+      font-size: 17px;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(29, 116, 87, 0.24);
+    }
+
+    .top-note {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 22px 22px;
+      border: 1px solid rgba(219, 233, 223, 0.86);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255, 253, 248, 0.98), rgba(231, 246, 236, 0.96));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -44px -58px auto;
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+      background: rgba(255, 218, 161, 0.38);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(29, 116, 87, 0.09);
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .hero h1 {
+      position: relative;
+      margin: 18px 0 12px;
+      max-width: 350px;
+      font-size: clamp(32px, 10vw, 46px);
+      line-height: 1.08;
+      color: #16382f;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      position: relative;
+      margin: 0;
+      max-width: 360px;
+      color: #4e655d;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: end;
+      margin: 22px 0 18px;
+      min-height: 146px;
+    }
+
+    .family-card {
+      min-height: 146px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, #fff7e7 0%, #f0f8ed 100%);
+      border: 1px solid rgba(219, 233, 223, 0.86);
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .figure-row {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: 6px;
+      min-height: 84px;
+    }
+
+    .person {
+      position: relative;
+      width: 31px;
+      height: 72px;
+      border-radius: 16px 16px 10px 10px;
+      background: #2e8063;
+    }
+
+    .person::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      width: 28px;
+      height: 28px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #f0caa1;
+      box-shadow: inset 0 -3px 0 rgba(95, 51, 26, 0.09);
+    }
+
+    .person::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      right: 6px;
+      bottom: -22px;
+      height: 28px;
+      border-left: 5px solid #385149;
+      border-right: 5px solid #385149;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .person.elder {
+      height: 62px;
+      width: 34px;
+      background: #87a98f;
+    }
+
+    .cane {
+      width: 5px;
+      height: 66px;
+      border-radius: 999px;
+      background: #8b633b;
+      transform: rotate(6deg);
+      transform-origin: bottom;
+    }
+
+    .mini-caption {
+      color: #5e7068;
+      font-size: 12px;
+      line-height: 1.42;
+      text-align: center;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal {
+      padding: 12px 12px;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(219, 233, 223, 0.72);
+      font-size: 13px;
+      color: #35564b;
+      line-height: 1.45;
+    }
+
+    .home-path-preview {
+      position: relative;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(219, 233, 223, 0.86);
+    }
+
+    .home-path-preview h2 {
+      margin: 0 0 10px;
+      color: var(--green-dark);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .preview-path-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .preview-path {
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: #fffdf8;
+      border: 1px solid rgba(219, 233, 223, 0.86);
+      color: #3d5c52;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .preview-path b {
+      display: block;
+      margin-bottom: 3px;
+      color: #16382f;
+      font-size: 13px;
+    }
+
+    .hero-actions {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .primary,
+    .secondary,
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 780;
+      text-decoration: none;
+    }
+
+    .primary {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(29, 116, 87, 0.24);
+    }
+
+    .secondary {
+      background: #ffffff;
+      color: var(--green-dark);
+      border: 1px solid rgba(29, 116, 87, 0.18);
+    }
+
+    .ghost {
+      min-height: 42px;
+      background: transparent;
+      color: var(--green-dark);
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0 0;
+    }
+
+    .trust-row span {
+      padding: 9px 8px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #587068;
+      font-size: 12px;
+      text-align: center;
+      border: 1px solid rgba(219, 233, 223, 0.72);
+    }
+
+    .section {
+      display: none;
+      margin-top: 16px;
+      animation: rise 0.24s ease both;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel {
+      padding: 20px;
+      border-radius: 26px;
+      background: rgba(255, 253, 248, 0.96);
+      border: 1px solid rgba(219, 233, 223, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    .panel + .panel {
+      margin-top: 12px;
+    }
+
+    .step-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .step-kicker {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .step-head h2,
+    .report h2 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    .step-head p,
+    .soft-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.64;
+    }
+
+    .progress-pill {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: var(--green-dark);
+      background: var(--mint);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .check-list,
+    .option-list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .check-item,
+    .radio-card {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 10px;
+      align-items: flex-start;
+      min-height: 48px;
+      padding: 13px 12px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: #2c5046;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .check-item input,
+    .radio-card input {
+      width: 19px;
+      height: 19px;
+      margin: 1px 0 0;
+      accent-color: var(--green);
+    }
+
+    .notice {
+      padding: 13px 14px;
+      border-radius: 18px;
+      background: #fff6e5;
+      color: var(--warning);
+      border: 1px solid #f4d7a9;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .blocked {
+      display: none;
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff3ee;
+      color: var(--danger);
+      border: 1px solid #f3c7bb;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .blocked.show {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #395a50;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    select,
+    .text-input {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 0 13px;
+      outline: none;
+    }
+
+    select:focus,
+    .text-input:focus {
+      border-color: rgba(29, 116, 87, 0.56);
+      box-shadow: 0 0 0 4px rgba(29, 116, 87, 0.09);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip-choice {
+      position: relative;
+    }
+
+    .chip-choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip-choice span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: #416159;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .chip-choice input:checked + span {
+      color: var(--green-dark);
+      background: var(--mint);
+      border-color: rgba(29, 116, 87, 0.28);
+    }
+
+    .timer-box {
+      margin: 16px 0;
+      padding: 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, #eef8f0, #fff7e8);
+      border: 1px solid rgba(219, 233, 223, 0.9);
+      text-align: center;
+    }
+
+    .timer-value {
+      font-variant-numeric: tabular-nums;
+      font-size: 58px;
+      line-height: 1;
+      font-weight: 850;
+      color: var(--green-dark);
+    }
+
+    .timer-label {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .timer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .inline-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-guide {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .guide-card {
+      padding: 13px 14px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: #3d5c52;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .guide-card strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--green-dark);
+    }
+
+    .report {
+      display: grid;
+      gap: 12px;
+    }
+
+    .report-hero {
+      padding: 20px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #e8f6ed, #fff7e6);
+      border: 1px solid rgba(219, 233, 223, 0.9);
+    }
+
+    .report-level {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      padding: 12px 8px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(219, 233, 223, 0.8);
+      text-align: center;
+    }
+
+    .metric b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 20px;
+      color: var(--green-dark);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .result-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .result-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.32;
+      color: var(--green-dark);
+    }
+
+    .result-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .result-card li {
+      position: relative;
+      padding-left: 18px;
+      color: #3d5c52;
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    .result-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.64em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .path-note {
+      margin: 0 0 12px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: #f5fbf6;
+      border: 1px solid var(--line);
+      color: #3d5c52;
+      font-size: 13px;
+      line-height: 1.58;
+    }
+
+    .path-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .path-card {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .path-card h4 {
+      margin: 0 0 8px;
+      color: var(--green-dark);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .path-card p {
+      margin: 0;
+      color: #4b665e;
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .path-card strong {
+      display: inline-flex;
+      margin-bottom: 8px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--mint);
+      color: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .share-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: #16382f;
+      color: #f7fff8;
+      box-shadow: 0 20px 42px rgba(24, 54, 47, 0.18);
+    }
+
+    .share-card h3 {
+      margin: 0 0 10px;
+      color: #ffffff;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .share-card p {
+      margin: 0;
+      color: rgba(247, 255, 248, 0.82);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .share-card .share-actions {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      z-index: 40;
+      width: min(360px, calc(100vw - 32px));
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(20, 55, 47, 0.94);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.45;
+      transform: translate(-50%, 16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    canvas {
+      display: none;
+    }
+
+    @media (min-width: 720px) {
+      .page {
+        padding-top: 28px;
+      }
+
+      .phone-shell {
+        width: min(100%, 760px);
+      }
+
+      .topbar {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0 0 22px 22px;
+      }
+
+      .hero {
+        padding: 36px;
+      }
+
+      .hero h1 {
+        max-width: 610px;
+      }
+
+      .hero p {
+        max-width: 560px;
+      }
+
+      .hero-actions {
+        grid-template-columns: 1fr 1fr;
+        max-width: 520px;
+      }
+
+      .preview-path-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section {
+        max-width: 580px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="phone-shell">
+      <header class="topbar" aria-label="页面导航">
+        <div class="brand"><span class="brand-mark">稳</span><span>养老8 · 行动力基线记录</span></div>
+        <div class="top-note">本地保存 · 7 天复测</div>
+      </header>
+
+      <section id="home" class="hero" aria-labelledby="homeTitle">
+        <div class="eyebrow">记录信号，再分流到用品、咨询或改造路径</div>
+        <h1 id="homeTitle">行动力记录与用品路径分诊</h1>
+        <p>不直接判断“高危低危”，而是把爸妈的起身、夜间动线、扶手和晃动信号，转成家人今天能执行的路径。</p>
+
+        <div class="hero-art" aria-label="家庭观察示意">
+          <div class="family-card">
+            <div class="figure-row">
+              <div class="person elder"></div>
+              <div class="cane" aria-hidden="true"></div>
+              <div class="person"></div>
+            </div>
+            <div class="mini-caption">家人陪在旁边，动作只做自己舒服的范围。</div>
+          </div>
+          <div class="signal-list">
+            <div class="signal">第一次：留下基线</div>
+            <div class="signal">7 天后：复测对比</div>
+            <div class="signal">本周：完成一件改造</div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="primary" data-go="safety">记录第一次基线</button>
+          <button class="secondary" id="demoScenario">先看样例结果</button>
+        </div>
+
+        <div class="home-path-preview" aria-label="入口路径预览">
+          <h2>入口路径预览</h2>
+          <div class="preview-path-grid">
+            <div class="preview-path"><b>今晚能做</b>夜灯、清障、防滑路线，先解决最短路径。</div>
+            <div class="preview-path"><b>先量尺寸再买</b>鞋、椅、坐便高度，避免买回来不适配。</div>
+            <div class="preview-path"><b>先咨询再决定</b>手杖、助行器、扶手不盲买。</div>
+            <div class="preview-path"><b>社区或改造路径</b>门槛、固定扶手、卫生间动线走改造。</div>
+          </div>
+        </div>
+
+        <div class="trust-row" aria-label="产品边界">
+          <span>不采集身份信息</span>
+          <span>只存在本机</span>
+          <span>推动家庭行动</span>
+        </div>
+      </section>
+
+      <section id="why" class="section">
+        <div class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-kicker">产品定位</div>
+              <h2>核心价值是复测，不是一次性判断</h2>
+              <p>一次记录只能说明“今天看到什么”。连续记录才有价值：更慢、差不多、还是更稳。</p>
+            </div>
+            <div class="progress-pill">先判断</div>
+          </div>
+          <div class="mini-guide">
+            <div class="guide-card"><strong>已有记录</strong><span id="historyStatus">当前设备还没有历史基线。完成一次后，下次会自动显示复测对比。</span></div>
+            <div class="guide-card"><strong>适合</strong>老人可独立站立，旁边有家人陪护，只想留一次家庭观察记录。</div>
+            <div class="guide-card"><strong>暂缓</strong>明显头晕、胸闷、疼痛、刚摔倒、医生要求卧床或限制活动。</div>
+          </div>
+          <div class="inline-actions">
+            <button class="primary" data-go="safety">做 7 天复测</button>
+            <button class="ghost" data-go="home">返回首页</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="safety" class="section">
+        <div class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-kicker">第 1 步</div>
+              <h2>先确认安全条件</h2>
+              <p>全部满足后再进入动作测试。任何不舒服，都停止。</p>
+            </div>
+            <div class="progress-pill">1 / 5</div>
+          </div>
+          <div class="check-list" id="safetyList">
+            <label class="check-item"><input type="checkbox" value="well" /><span>老人今天没有明显头晕、胸闷、气短或疼痛。</span></label>
+            <label class="check-item"><input type="checkbox" value="company" /><span>测试旁边有家人陪护，不让老人独自完成。</span></label>
+            <label class="check-item"><input type="checkbox" value="floor" /><span>地面干燥、防滑，椅子稳定，光线充足。</span></label>
+            <label class="check-item"><input type="checkbox" value="shoes" /><span>老人穿的是合脚、防滑、能固定脚的鞋。</span></label>
+            <label class="check-item"><input type="checkbox" value="stop" /><span>过程中如果不舒服、害怕或站不稳，会立即停止。</span></label>
+          </div>
+          <div class="notice">本工具只做家庭观察记录，不构成医疗诊断、治疗建议或跌倒概率预测。</div>
+          <div id="safetyBlocked" class="blocked">请先确认全部安全条件。若无法确认，建议先做居家环境自查，不进行动作测试。</div>
+          <div class="inline-actions">
+            <button class="primary" id="safetyNext">安全条件已确认</button>
+            <button class="secondary" id="homeOnly">只做居家自查</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <div class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-kicker">第 2 步</div>
+              <h2>记录最少必要信息</h2>
+              <p>不需要姓名、电话、身份证和住址，只记录这次观察需要的信息。</p>
+            </div>
+            <div class="progress-pill">2 / 5</div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="relation">这次观察的是谁</label>
+              <select id="relation">
+                <option>爸爸</option>
+                <option>妈妈</option>
+                <option>爷爷</option>
+                <option>奶奶</option>
+                <option>其他长辈</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="age">年龄段</label>
+              <select id="age">
+                <option value="60">60-69 岁</option>
+                <option value="70">70-79 岁</option>
+                <option value="80">80 岁以上</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>最近让你担心的表现</label>
+              <div class="chips">
+                <label class="chip-choice"><input type="checkbox" value="近一年摔倒过" data-risk="3" /><span>近一年摔倒过</span></label>
+                <label class="chip-choice"><input type="checkbox" value="夜间起夜频繁" data-risk="1" /><span>夜间起夜频繁</span></label>
+                <label class="chip-choice"><input type="checkbox" value="走路明显变慢" data-risk="2" /><span>走路明显变慢</span></label>
+                <label class="chip-choice"><input type="checkbox" value="起身常要扶手" data-risk="2" /><span>起身常要扶手</span></label>
+                <label class="chip-choice"><input type="checkbox" value="怕出门或怕摔" data-risk="1" /><span>怕出门或怕摔</span></label>
+                <label class="chip-choice"><input type="checkbox" value="膝痛、腰痛或头晕" data-risk="2" /><span>膝痛/腰痛/头晕</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="inline-actions">
+            <button class="primary" data-go="guide">继续看动作指引</button>
+            <button class="ghost" data-go="safety">返回上一步</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="guide" class="section">
+        <div class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-kicker">第 3 步</div>
+              <h2>5 次坐站记录</h2>
+              <p>坐在稳定椅子上，连续起身坐下 5 次。家人在旁保护并计时。</p>
+            </div>
+            <div class="progress-pill">3 / 5</div>
+          </div>
+          <div class="mini-guide">
+            <div class="guide-card"><strong>准备</strong>椅子靠墙或保持稳定，旁边留出空间，家属站在侧后方保护。</div>
+            <div class="guide-card"><strong>动作</strong>从坐姿开始，尽量不用手扶，连续起身坐下 5 次；不舒服就停止。</div>
+            <div class="guide-card"><strong>记录</strong>计时只是参考，更重要的是是否扶手、晃动、中途停顿或明显费劲。</div>
+          </div>
+          <div class="inline-actions">
+            <button class="primary" data-go="test">进入计时记录</button>
+            <button class="ghost" data-go="profile">返回信息页</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="test" class="section">
+        <div class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-kicker">第 4 步</div>
+              <h2>手动计时与观察</h2>
+              <p>按下开始后计时。完成 5 次坐站后停止，再勾选观察到的表现。</p>
+            </div>
+            <div class="progress-pill">4 / 5</div>
+          </div>
+          <div class="timer-box" aria-live="polite">
+            <div class="timer-value" id="timerValue">00.0</div>
+            <div class="timer-label">5 次坐站用时</div>
+            <div class="timer-actions">
+              <button class="primary" id="timerStart">开始</button>
+              <button class="secondary" id="timerStop">停止</button>
+            </div>
+            <button class="ghost" id="timerReset">重新计时</button>
+          </div>
+          <div class="field">
+            <label>观察到的表现</label>
+            <div class="check-list" id="observationList">
+              <label class="check-item"><input type="checkbox" value="需要扶手或扶桌" data-risk="2" /><span>起身或坐下时需要扶手、扶桌。</span></label>
+              <label class="check-item"><input type="checkbox" value="起身明显吃力" data-risk="2" /><span>起身明显吃力，或者越做到后面越慢。</span></label>
+              <label class="check-item"><input type="checkbox" value="身体左右晃动" data-risk="2" /><span>站起或坐下时身体左右晃动明显。</span></label>
+              <label class="check-item"><input type="checkbox" value="中途停顿或放弃" data-risk="3" /><span>中途停顿、害怕，或者没有完成 5 次。</span></label>
+              <label class="check-item"><input type="checkbox" value="坐下速度控制不好" data-risk="2" /><span>坐下时速度控制不好，有往下砸的感觉。</span></label>
+            </div>
+          </div>
+          <div class="inline-actions">
+            <button class="primary" id="buildReport">保存本次记录</button>
+            <button class="ghost" data-go="guide">返回动作指引</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="report" class="section">
+        <div class="report">
+          <div class="report-hero">
+            <div class="report-level" id="reportLevel">本次基线卡</div>
+            <h2 id="reportTitle">家庭行动力基线已保存</h2>
+            <p class="soft-copy" id="reportSummary">本次记录保存中。</p>
+            <div class="metric-grid">
+              <div class="metric"><b id="metricTime">--</b><span>坐站用时</span></div>
+              <div class="metric"><b id="metricSignals">0</b><span>观察信号</span></div>
+              <div class="metric"><b id="metricRetest">7天</b><span>下次复测</span></div>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <h3>复测对比</h3>
+            <ul id="compareOutput"></ul>
+          </div>
+
+          <div class="result-card">
+            <h3>这次看到的信号</h3>
+            <ul id="signalOutput"></ul>
+          </div>
+
+          <div class="result-card">
+            <h3>这周先做 3 件事</h3>
+            <ul id="actionOutput"></ul>
+          </div>
+
+          <div class="result-card">
+            <h3>下一步用品与服务路径</h3>
+            <p class="path-note">用品不是第一步，场景才是第一步。先判断是哪一个生活场景出问题，再决定今晚处理、量尺寸购买、咨询专业人员，还是走社区或改造路径。</p>
+            <div class="path-grid" id="pathOutput"></div>
+          </div>
+
+          <div class="result-card">
+            <h3>本周任务完成打卡</h3>
+            <div class="check-list" id="taskCheckList"></div>
+            <button class="secondary" id="saveTasks">保存任务完成状态</button>
+          </div>
+
+          <div class="result-card">
+            <h3>就医或康复沟通卡</h3>
+            <ul id="doctorOutput"></ul>
+          </div>
+
+          <div class="share-card" id="shareCard">
+            <h3 id="shareTitle">家庭群分享卡</h3>
+            <p id="shareText">这次给爸妈做了行动力基线记录，准备把本周行动清单发给家人一起确认。</p>
+            <div class="share-actions">
+              <button class="secondary" id="copyShare">复制分享文案</button>
+              <button class="primary" id="downloadCard">生成分享图</button>
+            </div>
+          </div>
+
+          <div class="inline-actions">
+            <button class="secondary" data-go="test">修改观察结果</button>
+            <button class="ghost" data-go="home">回到首页</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shareCanvas" width="900" height="1200"></canvas>
+
+  <script>
+    const STORAGE_KEY = "yanglao8_mobility_baselines_v2";
+
+    const state = {
+      elapsed: 0,
+      running: false,
+      timerStartAt: 0,
+      timerHandle: 0,
+      lastSection: "home",
+      currentRecordId: null
+    };
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function go(id) {
+      $$(".section").forEach((section) => section.classList.toggle("active", section.id === id));
+      if (id === "home") {
+        $$(".section").forEach((section) => section.classList.remove("active"));
+        $("#home").scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        $("#" + id).scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      state.lastSection = id;
+      if (id === "why") renderHistoryStatus();
+    }
+
+    function checkedValues(selector) {
+      return $$(selector).filter((item) => item.checked).map((item) => item.value);
+    }
+
+    function checkedScore(selector) {
+      return $$(selector)
+        .filter((item) => item.checked)
+        .reduce((sum, item) => sum + Number(item.dataset.risk || 0), 0);
+    }
+
+    function formatTime(value) {
+      return value.toFixed(1).padStart(4, "0");
+    }
+
+    function setTimer(value) {
+      state.elapsed = Math.max(0, value);
+      $("#timerValue").textContent = formatTime(state.elapsed);
+    }
+
+    function startTimer() {
+      if (state.running) return;
+      state.running = true;
+      state.timerStartAt = performance.now() - state.elapsed * 1000;
+      state.timerHandle = window.setInterval(() => {
+        setTimer((performance.now() - state.timerStartAt) / 1000);
+      }, 100);
+      showToast("计时已开始，家人在旁边保护。");
+    }
+
+    function stopTimer() {
+      if (!state.running) return;
+      state.running = false;
+      window.clearInterval(state.timerHandle);
+      setTimer((performance.now() - state.timerStartAt) / 1000);
+      showToast("已停止计时，请继续勾选观察结果。");
+    }
+
+    function resetTimer() {
+      state.running = false;
+      window.clearInterval(state.timerHandle);
+      setTimer(0);
+      showToast("计时已清零。");
+    }
+
+    function loadRecords() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const records = raw ? JSON.parse(raw) : [];
+        return Array.isArray(records) ? records : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveRecords(records) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(-20)));
+    }
+
+    function latestRecordFor(relation) {
+      return loadRecords()
+        .filter((record) => record.relation === relation)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0] || null;
+    }
+
+    function renderHistoryStatus() {
+      const records = loadRecords().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const target = $("#historyStatus");
+      if (!target) return;
+      if (!records.length) {
+        target.textContent = "当前设备还没有历史基线。完成一次后，下次会自动显示复测对比。";
+        return;
+      }
+      const latest = records[0];
+      const date = new Date(latest.createdAt).toLocaleDateString("zh-CN", { month: "numeric", day: "numeric" });
+      target.textContent = `最近一次是 ${date} 给${latest.relation}记录，用时 ${formatTime(latest.elapsed || 0)} 秒；这次可作为 7 天复测。`;
+    }
+
+    function classify(score, elapsed, hasFallHistory) {
+      if (hasFallHistory || score >= 8 || elapsed >= 18) {
+        return {
+          tag: "需要优先跟进",
+          title: "这次基线提示：先处理安全场景，再准备咨询",
+          summary: "这不是诊断，但这次记录里出现了较明显的不稳、完成困难或既往跌倒信号。先处理家中最容易摔的场景，同时把记录留好，方便问医生、康复治疗师或社区卫生服务中心。"
+        };
+      }
+      if (score >= 4 || elapsed >= 13) {
+        return {
+          tag: "建议关注",
+          title: "这次基线提示：先做一轮居家改造",
+          summary: "这次记录里看到起身费劲、扶手、晃动或速度变慢等信号。先把夜间动线、鞋子和卫生间防滑处理掉，7 天后复测对比。"
+        };
+      }
+      return {
+        tag: "先留基线",
+        title: "这次先作为第一次行动力基线",
+        summary: "这次没有记录到特别明显的行动困难。建议保留这次基线，7 天后复测一次，再看起身速度、是否扶手、夜间动线是否有变化。"
+      };
+    }
+
+    function listItems(target, items) {
+      const el = $(target);
+      el.innerHTML = "";
+      items.forEach((text) => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        el.appendChild(li);
+      });
+    }
+
+    function renderTasks(actions, completed = []) {
+      const box = $("#taskCheckList");
+      box.innerHTML = "";
+      actions.forEach((action, index) => {
+        const label = document.createElement("label");
+        label.className = "check-item";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.value = action;
+        input.checked = completed.includes(action);
+        const span = document.createElement("span");
+        span.textContent = `任务 ${index + 1}：${action.replace(/[。；;]+$/u, "")}`;
+        label.append(input, span);
+        box.appendChild(label);
+      });
+    }
+
+    function buildPathRecommendations(concerns, observations, hasFallHistory) {
+      const paths = [];
+      const hasNightRisk = concerns.includes("夜间起夜频繁");
+      const hasRiseRisk = observations.includes("需要扶手或扶桌")
+        || observations.includes("起身明显吃力")
+        || concerns.includes("起身常要扶手");
+      const hasBalanceRisk = observations.includes("身体左右晃动")
+        || observations.includes("中途停顿或放弃")
+        || observations.includes("坐下速度控制不好");
+      const hasPainOrSlow = concerns.includes("膝痛、腰痛或头晕")
+        || concerns.includes("走路明显变慢")
+        || concerns.includes("怕出门或怕摔");
+
+      paths.push({
+        type: "今晚能做",
+        title: hasNightRisk ? "先处理床边到卫生间的夜间动线" : "先处理最常走的一条路线",
+        body: hasNightRisk
+          ? "小夜灯、人感灯、清掉床边到厕所的杂物，比马上买复杂设备更优先。今晚就能完成。"
+          : "把常走路线上的地垫、拖线、低矮杂物清掉；先观察走路是否还需要扶墙。"
+      });
+
+      paths.push({
+        type: "先量尺寸再买",
+        title: hasRiseRisk ? "看椅子高度、鞋子和坐便高度" : "先看鞋子和浴室基础用品",
+        body: hasRiseRisk
+          ? "可考虑包跟防滑鞋、坐便增高垫、带扶手的稳定椅或淋浴椅；购买前先量座高、脚是否能踩实地面。"
+          : "低门槛品类包括包跟防滑鞋、浴室防滑垫、淋浴椅；不要只看“防摔”字样，先看尺寸和使用场景。"
+      });
+
+      paths.push({
+        type: "先咨询再决定",
+        title: hasBalanceRisk || hasFallHistory ? "手杖、助行器、扶手不要直接盲买" : "如果连续复测变慢，再咨询专业人员",
+        body: hasBalanceRisk || hasFallHistory
+          ? "出现明显晃动、中途停顿、坐下控制不好或既往摔倒时，先带记录问医生、康复治疗师或社区卫生服务中心，再决定手杖、助行器、床边扶手。"
+          : "如果 7 天后复测比这次更慢，或新增扶手、晃动、害怕出门，再带记录咨询。"
+      });
+
+      paths.push({
+        type: "社区或改造路径",
+        title: hasNightRisk || hasFallHistory ? "卫生间和门槛可能需要固定改造" : "先拍 4 张环境照片给家人讨论",
+        body: hasNightRisk || hasFallHistory
+          ? "固定扶手、门槛处理、防滑地面、厕所动线改造不适合只靠电商下单，建议先问社区、街道养老窗口或适老化改造服务。"
+          : "先拍床边、卫生间、浴室、门口 4 张照片。家人先判断是不是用品问题，还是空间改造问题。"
+      });
+
+      if (hasPainOrSlow && !hasFallHistory) {
+        paths[2].body += " 伴随膝痛、腰痛、头晕或走路明显变慢时，不要只靠用品解决。";
+      }
+
+      return paths;
+    }
+
+    function renderPathRecommendations(paths) {
+      const box = $("#pathOutput");
+      box.innerHTML = "";
+      paths.forEach((path) => {
+        const card = document.createElement("div");
+        card.className = "path-card";
+        const type = document.createElement("strong");
+        type.textContent = path.type;
+        const title = document.createElement("h4");
+        title.textContent = path.title;
+        const body = document.createElement("p");
+        body.textContent = path.body;
+        card.append(type, title, body);
+        box.appendChild(card);
+      });
+    }
+
+    function buildComparison(previous, elapsed, observations) {
+      if (!previous) {
+        return [
+          "这是当前设备上的第一次基线记录。它的价值不在于立刻下结论，而是给 7 天后复测留下对照。",
+          "下次重点对比：5 次坐站用时、是否需要扶手、是否晃动、是否中途停顿。",
+          "如果家人意见不统一，先把这次基线卡发到家庭群，约定下次复测时间。"
+        ];
+      }
+      const diff = elapsed - (previous.elapsed || 0);
+      const absDiff = Math.abs(diff);
+      const timeText = absDiff < 1
+        ? "这次用时和上次基本接近。"
+        : diff > 0
+          ? `这次比上次慢了约 ${absDiff.toFixed(1)} 秒。`
+          : `这次比上次快了约 ${absDiff.toFixed(1)} 秒。`;
+      const previousObs = previous.observations || [];
+      const newSignals = observations.filter((item) => !previousObs.includes(item));
+      const improvedSignals = previousObs.filter((item) => !observations.includes(item));
+      return [
+        timeText,
+        newSignals.length ? `这次新增观察信号：${newSignals.join("、")}。` : "这次没有新增明显观察信号。",
+        improvedSignals.length ? `这次少了这些信号：${improvedSignals.join("、")}。` : "仍建议继续观察扶手、晃动和中途停顿。"
+      ];
+    }
+
+    function buildReport() {
+      stopTimer();
+      const relation = $("#relation").value;
+      const age = $("#age").selectedOptions[0].textContent;
+      const concerns = checkedValues("#profile input[type='checkbox']");
+      const observations = checkedValues("#observationList input[type='checkbox']");
+      const previous = latestRecordFor(relation);
+      const baseScore = checkedScore("#profile input[type='checkbox']");
+      const observationScore = checkedScore("#observationList input[type='checkbox']");
+      const timeScore = state.elapsed >= 18 ? 3 : state.elapsed >= 13 ? 2 : state.elapsed >= 9 ? 1 : 0;
+      const totalScore = baseScore + observationScore + timeScore;
+      const hasFallHistory = concerns.includes("近一年摔倒过");
+      const level = classify(totalScore, state.elapsed || 0, hasFallHistory);
+      const signals = [];
+      if (state.elapsed > 0) signals.push(`${relation}这次 5 次坐站用时 ${formatTime(state.elapsed)} 秒，可作为下次复测对比。`);
+      if (concerns.length) signals.push(`基础信息中需要关注：${concerns.join("、")}。`);
+      if (observations.length) signals.push(`动作中观察到：${observations.join("、")}。`);
+      if (!signals.length) signals.push("这次没有勾选明显担心项，建议保留记录并定期复测。");
+      const comparison = buildComparison(previous, state.elapsed || 0, observations);
+      const paths = buildPathRecommendations(concerns, observations, hasFallHistory);
+
+      const actions = [
+        "今晚先检查床边到卫生间路线：清掉杂物，补一盏小夜灯。",
+        "这周确认鞋子是否防滑、合脚、包跟，不合适就先换鞋。",
+        "请家人分工：一个人负责复测记录，一个人负责卫生间防滑和夜间路线。"
+      ];
+      if (concerns.includes("夜间起夜频繁")) actions[0] = "连续 7 天记录夜间起夜次数，同时先加夜灯、清理通往卫生间的路线。";
+      if (observations.includes("需要扶手或扶桌")) actions[1] = "检查常起身的位置是否有稳定支撑，避免临时扶不稳的桌椅。";
+      if (hasFallHistory) actions[2] = "把最近一次摔倒或差点摔倒的时间、地点、原因写下来，方便咨询专业人员。";
+
+      const doctor = [
+        `沟通对象：${relation}，年龄段 ${age}，这次家庭观察结果仅供医生了解日常变化。`,
+        "可以问医生：是否需要评估头晕、血压、用药、膝关节、下肢力量或平衡能力？",
+        "可以问社区卫生服务中心：是否有老年人跌倒风险筛查、家庭医生或康复评估入口？"
+      ];
+
+      const record = {
+        id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        relation,
+        age,
+        elapsed: state.elapsed || 0,
+        concerns,
+        observations,
+        actions,
+        level: level.tag,
+        createdAt: new Date().toISOString(),
+        completedTasks: []
+      };
+      const records = loadRecords();
+      records.push(record);
+      saveRecords(records);
+      state.currentRecordId = record.id;
+
+      $("#reportLevel").textContent = previous ? "7 天复测 · " + level.tag : "第一次基线 · " + level.tag;
+      $("#reportTitle").textContent = previous ? `${relation}复测对比已保存` : `${relation}行动力基线已保存`;
+      $("#reportSummary").textContent = level.summary;
+      $("#metricTime").textContent = state.elapsed > 0 ? `${formatTime(state.elapsed)}s` : "未计";
+      $("#metricSignals").textContent = String(concerns.length + observations.length);
+      $("#metricRetest").textContent = level.tag === "暂未发现明显异常" ? "1月" : "7天";
+      listItems("#compareOutput", comparison);
+      listItems("#signalOutput", signals);
+      listItems("#actionOutput", actions);
+      renderPathRecommendations(paths);
+      listItems("#doctorOutput", doctor);
+      renderTasks(actions);
+
+      const shareActions = actions.map((item) => item.replace(/[。；;]+$/u, ""));
+      const share = `这次给${relation}做了行动力基线记录：${previous ? "已完成复测对比" : "已留下第一次基线"}。本周先做三件事：${shareActions.join("；")}。下次复测时间：${$("#metricRetest").textContent}后。`;
+      $("#shareTitle").textContent = `${relation}行动力记录 · ${previous ? "复测对比" : "第一次基线"}`;
+      $("#shareText").textContent = share;
+      go("report");
+    }
+
+    function runDemoScenario() {
+      const relation = "妈妈";
+      const age = "70-79 岁";
+      const concerns = ["夜间起夜频繁", "起身常要扶手", "走路明显变慢"];
+      const observations = ["需要扶手或扶桌", "身体左右晃动"];
+      const elapsed = 16.8;
+      const hasFallHistory = false;
+      const level = classify(7, elapsed, hasFallHistory);
+      const comparison = [
+        "样例：这是一次典型的 7 天复测结果，用时比上次慢了约 2.4 秒。",
+        "样例：新增观察信号是起身需要扶手、站起时左右晃动。",
+        "样例：这类结果不直接推荐买助行器，而是先分流到夜间动线、鞋椅尺寸和专业咨询。"
+      ];
+      const signals = [
+        `${relation}这次 5 次坐站用时 ${formatTime(elapsed)} 秒，适合和上次基线对比。`,
+        `基础信息中需要关注：${concerns.join("、")}。`,
+        `动作中观察到：${observations.join("、")}。`
+      ];
+      const actions = [
+        "今晚先加床边小夜灯，并清理床到卫生间路线。",
+        "这周量椅子和坐便高度，确认起身位置是否有稳定支撑。",
+        "把记录发到家庭群，约定 7 天后复测；若仍变慢，带记录咨询社区或康复科。"
+      ];
+      const doctor = [
+        `沟通对象：${relation}，年龄段 ${age}，这是一份样例记录，不代表真实评估。`,
+        "如果实际也出现晃动、扶手或明显变慢，可以问医生是否需要评估平衡、用药、膝关节和下肢力量。",
+        "如果家里卫生间和夜间路线风险明显，可以问社区是否有适老化改造或跌倒风险筛查入口。"
+      ];
+      const paths = buildPathRecommendations(concerns, observations, hasFallHistory);
+
+      state.currentRecordId = null;
+      $("#reportLevel").textContent = "样例结果 · 建议关注";
+      $("#reportTitle").textContent = "用品路径分诊样例";
+      $("#reportSummary").textContent = "这是一份演示结果：同样是担心跌倒，产品不会直接带货，而是按场景分成今晚能做、先量尺寸再买、先咨询再决定、社区或改造路径。";
+      $("#metricTime").textContent = `${formatTime(elapsed)}s`;
+      $("#metricSignals").textContent = String(concerns.length + observations.length);
+      $("#metricRetest").textContent = "7天";
+      listItems("#compareOutput", comparison);
+      listItems("#signalOutput", signals);
+      listItems("#actionOutput", actions);
+      renderPathRecommendations(paths);
+      listItems("#doctorOutput", doctor);
+      renderTasks(actions);
+      $("#shareTitle").textContent = "样例：行动力记录 · 用品路径分诊";
+      $("#shareText").textContent = "样例：这次给妈妈做了行动力记录，结果不是直接买某个产品，而是先做夜间动线、量尺寸看鞋椅坐便、必要时咨询社区或康复科。";
+      go("report");
+    }
+
+    function saveTaskStatus() {
+      if (!state.currentRecordId) {
+        showToast("请先保存一次记录。");
+        return;
+      }
+      const records = loadRecords();
+      const record = records.find((item) => item.id === state.currentRecordId);
+      if (!record) {
+        showToast("没有找到本次记录。");
+        return;
+      }
+      record.completedTasks = checkedValues("#taskCheckList input[type='checkbox']");
+      saveRecords(records);
+      showToast(record.completedTasks.length ? `已保存 ${record.completedTasks.length} 个完成项。` : "已保存任务状态。");
+    }
+
+    async function copyShare() {
+      const text = $("#shareText").textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("分享文案已复制，可以发到家庭群。");
+      } catch (error) {
+        showToast("浏览器未开放复制权限，请长按分享文案复制。");
+      }
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+      const chars = Array.from(text);
+      let line = "";
+      let lines = 0;
+      for (const ch of chars) {
+        const test = line + ch;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          y += lineHeight;
+          lines += 1;
+          line = ch;
+          if (lines >= maxLines - 1) break;
+        } else {
+          line = test;
+        }
+      }
+      if (line && lines < maxLines) ctx.fillText(line, x, y);
+      return y + lineHeight;
+    }
+
+    function downloadCard() {
+      const canvas = $("#shareCanvas");
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      grad.addColorStop(0, "#e8f6ed");
+      grad.addColorStop(1, "#fff1d8");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#18362f";
+      ctx.font = "700 42px Microsoft YaHei, sans-serif";
+      ctx.fillText("家庭行动力基线记录", 70, 100);
+
+      ctx.fillStyle = "#1d7457";
+      ctx.font = "800 60px Microsoft YaHei, sans-serif";
+      wrapText(ctx, $("#shareTitle").textContent, 70, 200, 760, 76, 3);
+
+      ctx.fillStyle = "#395a50";
+      ctx.font = "32px Microsoft YaHei, sans-serif";
+      wrapText(ctx, $("#shareText").textContent, 70, 410, 760, 52, 9);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(70, 920, 760, 150);
+      ctx.fillStyle = "#18362f";
+      ctx.font = "700 31px Microsoft YaHei, sans-serif";
+      ctx.fillText("这不是诊断，是给家人的观察记录。", 105, 982);
+      ctx.fillStyle = "#60746d";
+      ctx.font = "27px Microsoft YaHei, sans-serif";
+      ctx.fillText("建议保存后 7 天或 1 个月复测对比。", 105, 1034);
+
+      const link = document.createElement("a");
+      link.download = "家庭行动力基线分享卡.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      showToast("分享图已生成。");
+    }
+
+    $$("[data-go]").forEach((button) => {
+      button.addEventListener("click", () => go(button.dataset.go));
+    });
+
+    $("#safetyNext").addEventListener("click", () => {
+      const checks = $$("#safetyList input[type='checkbox']");
+      const allChecked = checks.every((item) => item.checked);
+      $("#safetyBlocked").classList.toggle("show", !allChecked);
+      if (allChecked) go("profile");
+    });
+
+    $("#homeOnly").addEventListener("click", () => {
+      $("#safetyBlocked").classList.add("show");
+      showToast("无法确认安全时，建议先做居家环境自查，不做动作测试。");
+    });
+
+    $("#timerStart").addEventListener("click", startTimer);
+    $("#timerStop").addEventListener("click", stopTimer);
+    $("#timerReset").addEventListener("click", resetTimer);
+    $("#buildReport").addEventListener("click", buildReport);
+    $("#demoScenario").addEventListener("click", runDemoScenario);
+    $("#saveTasks").addEventListener("click", saveTaskStatus);
+    $("#copyShare").addEventListener("click", copyShare);
+    $("#downloadCard").addEventListener("click", downloadCard);
+    renderHistoryStatus();
+  </script>
+</body>
+</html>

@@ -21,6 +21,21 @@
       ],
       "destination": "https://yanglao8.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/knowledge",
+      "destination": "/knowledge/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/knowledge/",
+      "destination": "https://yanglao8-knowledge.vercel.app/"
+    },
+    {
+      "source": "/knowledge/:path*",
+      "destination": "https://yanglao8-knowledge.vercel.app/:path*"
     }
   ]
 }

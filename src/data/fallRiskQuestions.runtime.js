@@ -127,7 +127,9 @@
 
   function getQuestionsByMode(mode) {
     if (mode === "custom") return questions.slice();
-    return questions.filter((question) => Array.isArray(question.modes) && question.modes.includes(mode));
+    const filtered = questions.filter((question) => Array.isArray(question.modes) && question.modes.includes(mode));
+    if (mode === "standard") return filtered.slice(0, 15);
+    return filtered;
   }
 
   const bank = {

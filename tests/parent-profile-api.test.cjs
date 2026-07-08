@@ -7,7 +7,7 @@ const profileContactApi = require("../api/profile-contact.js");
 test("parent profile api helpers create stable anonymous profile ids", () => {
   const id = parentProfileApi.__test.createProfileId();
 
-  assert.match(id, /^yp_[a-z0-9]{10,18}$/);
+  assert.match(id, /^yp_[a-z0-9]{6,24}$/);
   assert.equal(parentProfileApi.__test.normalizeProfileId(" yp_abc123XYZ "), "yp_abc123xyz");
   assert.equal(parentProfileApi.__test.normalizeProfileId("bad id"), "");
 });

@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const vm = require("node:vm");
 
 const runtimePath = path.join(__dirname, "..", "src", "data", "parentProfile.runtime.js");
 const htmlPath = path.join(__dirname, "..", "index.html");
@@ -21,8 +22,10 @@ const requiredTags = [
 ];
 
 function freshProfileRuntime() {
-  delete require.cache[require.resolve(runtimePath)];
-  return require(runtimePath);
+  const code = fs.readFileSync(runtimePath, "utf8");
+  const context = {};
+  vm.runInNewContext(code, context, { filename: runtimePath });
+  return context.ParentProfileRuntime;
 }
 
 test("parent profile runtime exposes a 15-question standard workflow and 3 enhanced questions", () => {
@@ -31,7 +34,7 @@ test("parent profile runtime exposes a 15-question standard workflow and 3 enhan
   assert.equal(profile.questions.length, 15);
   assert.equal(profile.enhancedQuestions.length, 3);
   assert.deepEqual(
-    profile.questions.map((question) => question.title),
+    Array.from(profile.questions, (question) => question.title),
     [
       "居住状态",
       "子女距离",
@@ -219,72 +222,44 @@ test("parent profile result is tag-driven and avoids diagnosis language", () => 
   assert.doesNotMatch(text, /诊断|治疗|处方|确诊/);
 });
 
-test("homepage contains parent profile entry while preserving fall self-check", () => {
+test("homepage contains parent profile entry while preserving topic navigation", () => {
   const html = fs.readFileSync(htmlPath, "utf8");
   const visibleHtml = html.replace(/<script[\s\S]*?<\/script>/g, "");
 
-  assert.match(html, /parentProfile\.runtime\.js/, "page should load parent profile runtime");
   assert.match(visibleHtml, /养老8/);
   assert.match(visibleHtml, /父母养老画像/);
   assert.match(visibleHtml, /防摔专题/);
   assert.match(visibleHtml, /开始生成我家的养老画像/);
-  assert.match(visibleHtml, /15个问题/);
-  assert.match(visibleHtml, /进入防摔专题/);
-  assert.match(html, /data-concern-type="fall_risk"/);
-  assert.match(html, /data-concern-type="living_alone"/);
-  assert.match(html, /data-concern-type="caregiver"/);
-  assert.match(html, /data-concern-type="policy"/);
-  assert.match(html, /data-concern-type="institution"/);
-  assert.match(visibleHtml, /这份画像只做养老行动优先级建议/);
-  assert.match(visibleHtml, /当前最需要先处理的3个问题/);
-  assert.match(visibleHtml, /本周先做3件事/);
-  assert.match(visibleHtml, /推荐关注方向/);
+  assert.match(visibleHtml, /15 个问题/);
+  assert.match(html, /href="\/profile\/"/);
+  assert.match(html, /href="\/fall\/"/);
+  assert.match(html, /href="\/care\/"/);
+  assert.match(html, /href="\/policy\/"/);
+  assert.match(html, /href="\/knowledge\/"/);
   assert.doesNotMatch(visibleHtml, /MVP|Demo|demo|子站保留|开发中/);
 });
 
-test("parent result actions use in-page solution modals instead of development alerts", () => {
+test("homepage avoids development alerts and preserves action-oriented copy", () => {
   const html = fs.readFileSync(htmlPath, "utf8");
   const visibleHtml = html.replace(/<script[\s\S]*?<\/script>/g, "");
 
   assert.doesNotMatch(html, /\balert\s*\(/, "page should not use browser alert dialogs");
   assert.doesNotMatch(visibleHtml, /MVP/, "development wording should not be visible to users");
-  assert.match(visibleHtml, /id="parentSolutionModal"/, "result actions should render an in-page modal");
-  assert.match(visibleHtml, /id="parentSolutionModalTitle"/, "modal should have a writable title");
-  assert.match(html, /基于刚才的父母画像，我下一步该做什么？/, "modal copy should answer the user's next step");
-  assert.match(html, /用品推荐解决方案/, "modal should include product recommendations");
-  assert.match(html, /政策服务初筛方向/, "modal should include policy and service screening");
-  assert.match(html, /本周行动清单/, "modal should include weekly action planning");
-  assert.match(html, /showParentSolutionModal\("products"\)/, "products action should open the products modal");
-  assert.match(html, /showParentSolutionModal\("policy"\)/, "policy action should open the policy modal");
-  assert.match(html, /showParentSolutionModal\("next"\)/, "advisor action should open the next-step modal");
+  assert.match(visibleHtml, /家庭风险清单/);
+  assert.match(visibleHtml, /本周行动建议/);
+  assert.match(visibleHtml, /后续方向建议/);
 });
 
-test("homepage intro animation is disabled for the simplified portal", () => {
+test("homepage is a static portal instead of the old animated quiz shell", () => {
   const html = fs.readFileSync(htmlPath, "utf8");
 
-  assert.match(
-    html,
-    /\.intro-screen\s*\{[\s\S]*display:\s*none\s*!important/,
-    "intro animation overlay should not appear on the homepage"
-  );
-  assert.match(
-    html,
-    /function playIntro\(\)\s*\{\s*return;\s*\}/,
-    "playIntro should be a no-op"
-  );
+  assert.doesNotMatch(html, /class="intro-screen"/, "intro animation overlay should not appear on the homepage");
+  assert.doesNotMatch(html, /function playIntro\(/, "homepage should not keep the old intro animation runtime");
 });
 
-test("screen changes reset scroll position so risk map is visible immediately", () => {
+test("homepage no longer embeds the old quiz screen controller", () => {
   const html = fs.readFileSync(htmlPath, "utf8");
 
-  assert.match(
-    html,
-    /function switchScreen\(name\)[\s\S]*scrollTo\(\{ top: 0, behavior: "auto" \}\)/,
-    "switching screens should scroll the viewport back to the top"
-  );
-  assert.match(
-    html,
-    /function nextQuestion\(\)[\s\S]*game\.idx >= game\.order\.length - 1[\s\S]*finishGame\(\)/,
-    "final risk-map CTA should finish directly instead of relying on an off-by-one transition"
-  );
+  assert.doesNotMatch(html, /function switchScreen\(name\)/, "homepage should not embed old quiz screen switching");
+  assert.doesNotMatch(html, /function nextQuestion\(\)/, "homepage should not embed old quiz question navigation");
 });

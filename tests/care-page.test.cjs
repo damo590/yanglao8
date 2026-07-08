@@ -4,15 +4,16 @@ const path = require("node:path");
 
 const homeHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 assert.match(homeHtml, /href="\/care\/"/, "homepage should link to the care subpage");
-assert.match(homeHtml, /居家照护学习清单/, "homepage should expose the care-list entry copy");
+assert.match(homeHtml, /居家照护清单|第一次照顾老人必读/, "homepage should expose the care-list entry copy");
 
 const carePath = path.join(__dirname, "..", "care", "index.html");
 assert.ok(fs.existsSync(carePath), "care subpage should exist at /care/index.html");
 
 const html = fs.readFileSync(carePath, "utf8");
+const visibleText = html.replace(/<[^>]+>/g, "");
 
 assert.match(html, /居家照护学习清单/, "care page should expose the product name");
-assert.match(html, /不会照顾老人，很正常。先从今天这一件事开始。/, "care page should use customer-facing hero copy");
+assert.match(visibleText, /不会照顾老人，很正常。先从今天这一件事开始。/, "care page should use customer-facing hero copy");
 assert.match(html, /老人洗澡困难/, "bath scene should be available");
 assert.match(html, /老人卧床/, "bedridden scene should be available");
 assert.match(html, /老人刚出院/, "discharge scene should be available");

@@ -1,0 +1,212 @@
+[
+  {
+    "city": "上海",
+    "name": "上海市高龄津贴",
+    "category": "高龄津贴",
+    "age_min": 65,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "65-69岁：75元/月；70-79岁：150元/月；80-89岁：180元/月；90-99岁：350元/月；100岁及以上：600元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满65周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "银行卡"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "津贴标准根据年龄段递增，自动发放或需申请",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市长期护理保险（长护险）",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "居家护理：约40元/小时（个人自付10%）；养老机构护理：约70元/天（个人自付15%）",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市职工医保或居民医保参保人员",
+      "经评估为重度失能（1-6级）",
+      "年满60周岁"
+    ],
+    "materials": [
+      "身份证",
+      "医保卡",
+      "评估申请表"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心或长护险服务窗口",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "需通过统一需求评估，评估费用个人承担部分",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "自理",
+      "半失能",
+      "失能",
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "低保老人：约960元/月；低收入老人：约768元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "经评估为照护一级至六级",
+      "低保或低收入家庭"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低保证或低收入证明",
+      "评估报告"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "补贴用于购买养老服务，金额根据照护等级和收入调整",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市困难老年人补贴（低保老人）",
+    "category": "低保相关",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "低保金：约1510元/月（2024年标准）",
+    "amount_monthly": 1510,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "家庭人均收入低于低保标准"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "收入证明",
+      "家庭财产证明"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "低保标准每年调整，2024年城镇为1510元/月",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市残疾人两项补贴（困难残疾人生活补贴和重度残疾人护理补贴）",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "生活补贴：低保残疾人约1510元/月；护理补贴：重度残疾人约300元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "持有残疾人证",
+      "低保或重度残疾（一、二级）"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "低保证明（如适用）"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "两项补贴可同时申请，具体金额根据残疾等级和收入调整",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市失能老人护理补贴（试点）",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约200-400元/月（根据评估等级）",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "经评估为重度失能",
+      "部分区试点"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "评估报告"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "仅部分区试点，如浦东、徐汇等，金额和条件可能不同",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市老年综合津贴（交通补贴）",
+    "category": "其他",
+    "age_min": 65,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "65-69岁：75元/月；70-79岁：150元/月；80-89岁：180元/月；90-99岁：350元/月；100岁及以上：600元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满65周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "银行卡"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与高龄津贴合并发放，实际为同一政策",
+    "is_published": false
+  }
+]

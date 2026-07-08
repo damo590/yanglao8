@@ -1,0 +1,212 @@
+[
+  {
+    "city": "北京",
+    "name": "北京市高龄老年人津贴",
+    "category": "高龄津贴",
+    "age_min": 80,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "80-89周岁：100元/月；90-99周岁：500元/月；100周岁及以上：800元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满80周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "近期一寸照片",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "自2023年起执行，金额为全市统一标准",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市失能老年人护理补贴",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "600元/月",
+    "amount_monthly": 600,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "经评估为重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "失能评估报告",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "需通过北京市老年人能力综合评估",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难老年人养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "300元/月",
+    "amount_monthly": 300,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "享受低保待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低保证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与失能补贴不重复享受",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难老年人养老服务补贴（低收入）",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低收入",
+    "amount": "200元/月",
+    "amount_monthly": 200,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "享受低收入待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低收入证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与失能补贴不重复享受",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市重度残疾人护理补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "一级残疾人：300元/月；二级残疾人：100元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "具有北京市户籍",
+      "持有第二代残疾人证",
+      "残疾等级为一级或二级"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）残联",
+    "apply_url": "http://www.bjdpf.org.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "60岁以上老年人符合条件的可申请",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难残疾人生活补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "400元/月",
+    "amount_monthly": 400,
+    "eligibility": [
+      "具有北京市户籍",
+      "持有残疾人证",
+      "享受低保待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "低保证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）残联",
+    "apply_url": "http://www.bjdpf.org.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "60岁以上老年人符合条件的可申请",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市长期护理保险试点（石景山区）",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "机构护理：约70%报销，每月上限约3000元；居家护理：约90%报销，每月上限约2000元",
+    "amount_monthly": null,
+    "eligibility": [
+      "石景山区参保人员",
+      "年满60周岁",
+      "经评估为重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "医保卡",
+      "失能评估报告",
+      "申请审批表"
+    ],
+    "apply_channel": "石景山区医保局或街道社保所",
+    "apply_url": "https://www.bjsjs.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "仅石景山区试点，其他区尚未全面推行",
+    "is_published": false
+  }
+]

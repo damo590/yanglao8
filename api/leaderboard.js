@@ -1,4 +1,4 @@
-const { list, put } = require("@vercel/blob");
+import { list, put } from "@vercel/blob";
 
 const BLOB_PATH = "leaderboards/global.json";
 const MAX_ENTRIES = 50;
@@ -100,12 +100,16 @@ function normalizeState(state) {
 }
 
 async function loadState() {
-  const { blobs } = await list({ prefix: BLOB_PATH, limit: 10 });
-  const match = (blobs || []).find((item) => item.pathname === BLOB_PATH) || (blobs || [])[0];
-  if (!match) return defaultState();
-  const response = await fetch(match.url, { cache: "no-store" });
-  if (!response.ok) return defaultState();
-  return normalizeState(await response.json());
+  try {
+    const { blobs } = await list({ prefix: BLOB_PATH, limit: 10 });
+    const match = (blobs || []).find((item) => item.pathname === BLOB_PATH) || (blobs || [])[0];
+    if (!match) return defaultState();
+    const response = await fetch(match.url, { cache: "no-store" });
+    if (!response.ok) return defaultState();
+    return normalizeState(await response.json());
+  } catch (error) {
+    return defaultState();
+  }
 }
 
 function upsertScope(scopeState, key, entry) {
@@ -126,7 +130,7 @@ async function saveState(state) {
   });
 }
 
-module.exports = async function handler(request, response) {
+async function handler(request, response) {
   if (request.method === "OPTIONS") {
     response.statusCode = 204;
     response.end();
@@ -164,9 +168,11 @@ module.exports = async function handler(request, response) {
   }
 
   json(response, 405, { ok: false, error: "method_not_allowed" });
-};
+}
 
-module.exports.__test = {
+export default handler;
+
+export const __test = {
   defaultState,
   normalizeState,
   upsertScope

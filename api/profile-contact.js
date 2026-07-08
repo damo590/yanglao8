@@ -58,6 +58,24 @@ async function supabaseFetch(path, options = {}) {
   return data;
 }
 
+async function requestUserId(request) {
+  const authHeader = request.headers && (request.headers.authorization || request.headers.Authorization);
+  const token = String(authHeader || "").replace(/^Bearer\s+/i, "").trim();
+  if (!token) return null;
+  const config = supabaseConfig();
+  if (!config) return null;
+
+  const response = await fetch(`${config.url}/auth/v1/user`, {
+    headers: {
+      apikey: config.key,
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!response.ok) return null;
+  const data = await response.json();
+  return data && data.id ? data.id : null;
+}
+
 async function readBody(request) {
   if (request.body && typeof request.body === "object") return request.body;
   if (typeof request.body === "string") return JSON.parse(request.body || "{}");
@@ -75,7 +93,7 @@ async function readBody(request) {
   });
 }
 
-module.exports = async function handler(request, response) {
+async function handler(request, response) {
   if (request.method === "OPTIONS") {
     response.statusCode = 204;
     response.end();
@@ -97,18 +115,34 @@ module.exports = async function handler(request, response) {
       json(response, 400, { ok: false, error: "missing_required_fields" });
       return;
     }
-    const rows = await supabaseFetch("profile_contacts", {
+    const userId = await requestUserId(request);
+    const profileRows = await supabaseFetch(
+      `care_needs?select=profile_id,user_id&profile_id=eq.${encodeURIComponent(payload.profile_id)}&limit=1`
+    );
+    const matchedProfile = Array.isArray(profileRows) && profileRows[0] ? profileRows[0] : null;
+    const rows = await supabaseFetch("contacts", {
       method: "POST",
       headers: { Prefer: "return=representation" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        user_id: userId || (matchedProfile && matchedProfile.user_id ? matchedProfile.user_id : null),
+        profile_id: payload.profile_id,
+        contact_name: payload.name,
+        relationship: "family",
+        phone: payload.phone_or_wechat,
+        city: payload.city,
+        note: payload.note || null
+      })
     });
     json(response, 200, { ok: true, contact: Array.isArray(rows) ? rows[0] : payload });
   } catch (error) {
     json(response, error.status || 500, { ok: false, error: error.message || "contact_write_failed" });
   }
-};
+}
 
-module.exports.__test = {
+export default handler;
+
+export const __test = {
   normalizeProfileId,
-  normalizeContactPayload
+  normalizeContactPayload,
+  requestUserId
 };

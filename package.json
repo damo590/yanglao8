@@ -2,6 +2,11 @@
   "name": "fall-guardian-site",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate-subsidies": "node scripts/generate-subsidies.js",
+    "insert-subsidies": "node scripts/insert-subsidies.js"
+  },
   "dependencies": {
     "@vercel/blob": "latest"
   },

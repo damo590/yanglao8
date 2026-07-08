@@ -1,4 +1,4 @@
-const crypto = require("node:crypto");
+import crypto from "node:crypto";
 
 function json(response, status, body) {
   response.statusCode = status;
@@ -31,6 +31,46 @@ function normalizeProfilePayload(body) {
     result: normalizeJsonObject(body.result),
     action_list: normalizeJsonArray(body.actionList || body.action_list),
     source: String(body.source || "yanglao8_demo").slice(0, 80)
+  };
+}
+
+function cleanText(value, max = 120) {
+  return String(value || "").trim().replace(/\s+/g, " ").slice(0, max);
+}
+
+function profilePayloadToCareNeed(payload, userId = null) {
+  const result = normalizeJsonObject(payload.result);
+  const answers = normalizeJsonObject(payload.answers);
+  const priorities = normalizeJsonArray(result.topTags).length
+    ? normalizeJsonArray(result.topTags)
+    : normalizeJsonArray(result.priorities).slice(0, 6);
+
+  return {
+    user_id: userId || null,
+    profile_id: payload.profile_id,
+    care_city: cleanText(answers.city || answers.care_city || "unknown", 60),
+    care_district: cleanText(answers.district || answers.care_district || "", 60) || null,
+    service_types: normalizeJsonArray(result.recommendedDirections).slice(0, 8),
+    self_care_level: "unknown",
+    cognitive_status: "unknown",
+    priorities,
+    note: cleanText(result.type || payload.source || "", 300) || null,
+    status: "submitted",
+    answers,
+    result,
+    action_list: payload.action_list,
+    source: payload.source
+  };
+}
+
+function careNeedToProfile(row) {
+  return {
+    profile_id: row.profile_id,
+    answers: row.answers || {},
+    result: row.result || {},
+    action_list: Array.isArray(row.action_list) ? row.action_list : [],
+    created_at: row.created_at,
+    updated_at: row.updated_at
   };
 }
 
@@ -68,6 +108,24 @@ async function supabaseFetch(path, options = {}) {
   return data;
 }
 
+async function requestUserId(request) {
+  const authHeader = request.headers && (request.headers.authorization || request.headers.Authorization);
+  const token = String(authHeader || "").replace(/^Bearer\s+/i, "").trim();
+  if (!token) return null;
+  const config = supabaseConfig();
+  if (!config) return null;
+
+  const response = await fetch(`${config.url}/auth/v1/user`, {
+    headers: {
+      apikey: config.key,
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!response.ok) return null;
+  const data = await response.json();
+  return data && data.id ? data.id : null;
+}
+
 async function readBody(request) {
   if (request.body && typeof request.body === "object") return request.body;
   if (typeof request.body === "string") return JSON.parse(request.body || "{}");
@@ -85,7 +143,7 @@ async function readBody(request) {
   });
 }
 
-module.exports = async function handler(request, response) {
+async function handler(request, response) {
   if (request.method === "OPTIONS") {
     response.statusCode = 204;
     response.end();
@@ -101,13 +159,13 @@ module.exports = async function handler(request, response) {
         return;
       }
       const rows = await supabaseFetch(
-        `parent_profiles?select=profile_id,answers,result,action_list,created_at,updated_at&profile_id=eq.${encodeURIComponent(profileId)}&limit=1`
+        `care_needs?select=profile_id,answers,result,action_list,created_at,updated_at&profile_id=eq.${encodeURIComponent(profileId)}&limit=1`
       );
       if (!Array.isArray(rows) || !rows.length) {
         json(response, 404, { ok: false, error: "profile_not_found" });
         return;
       }
-      json(response, 200, { ok: true, profile: rows[0] });
+      json(response, 200, { ok: true, profile: careNeedToProfile(rows[0]) });
     } catch (error) {
       json(response, error.status || 500, { ok: false, error: error.message || "profile_read_failed" });
     }
@@ -117,12 +175,13 @@ module.exports = async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const payload = normalizeProfilePayload(await readBody(request));
-      const rows = await supabaseFetch("parent_profiles?on_conflict=profile_id", {
+      const userId = await requestUserId(request);
+      const rows = await supabaseFetch("care_needs?on_conflict=profile_id", {
         method: "POST",
         headers: { Prefer: "resolution=merge-duplicates,return=representation" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(profilePayloadToCareNeed(payload, userId))
       });
-      const saved = Array.isArray(rows) && rows[0] ? rows[0] : payload;
+      const saved = Array.isArray(rows) && rows[0] ? careNeedToProfile(rows[0]) : payload;
       json(response, 200, { ok: true, profile_id: saved.profile_id, profile: saved });
     } catch (error) {
       json(response, error.status || 500, { ok: false, error: error.message || "profile_write_failed" });
@@ -131,10 +190,15 @@ module.exports = async function handler(request, response) {
   }
 
   json(response, 405, { ok: false, error: "method_not_allowed" });
-};
+}
 
-module.exports.__test = {
+export default handler;
+
+export const __test = {
   createProfileId,
   normalizeProfileId,
-  normalizeProfilePayload
+  normalizeProfilePayload,
+  profilePayloadToCareNeed,
+  careNeedToProfile,
+  requestUserId
 };

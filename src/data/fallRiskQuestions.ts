@@ -1297,5 +1297,10 @@ export function getQuestionsByMode(mode: TestMode): Question[] {
     return questions;
   }
 
-  return questions.filter((question) => question.modes.includes(mode));
+  const filtered = questions.filter((question) => question.modes.includes(mode));
+  if (mode === "standard") {
+    return filtered.slice(0, 15);
+  }
+
+  return filtered;
 }

@@ -1,0 +1,218 @@
+[
+  {
+    "city": "长沙",
+    "name": "高龄津贴",
+    "category": "高龄津贴",
+    "age_min": 80,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "80-89岁：100元/月；90-99岁：200元/月；100岁及以上：500元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "长沙市户籍",
+      "年满80周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "近期照片",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地社区（村）或街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "各区县执行标准一致，部分区可能额外补贴",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "经济困难老年人养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约100元/月（具体金额视区县和评估等级而定）",
+    "amount_monthly": 100,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "低保家庭",
+      "经评估为失能或半失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "低保证明",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "具体金额和申请流程可能因区县而异",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "经济困难老年人护理补贴",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "失能",
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约200元/月（重度失能）或约150元/月（中度失能）",
+    "amount_monthly": 200,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "低保家庭",
+      "经评估为失能或重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "低保证明",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "与养老服务补贴不重复享受，具体金额以评估结果为准",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "困难残疾人生活补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约140元/月",
+    "amount_monthly": 140,
+    "eligibility": [
+      "长沙市户籍",
+      "持有第二代残疾人证",
+      "低保家庭"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "残疾人证",
+      "低保证明",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办或残联",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与重度残疾人护理补贴可同时享受",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "重度残疾人护理补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约100元/月",
+    "amount_monthly": 100,
+    "eligibility": [
+      "长沙市户籍",
+      "持有第二代残疾人证",
+      "残疾等级为一级或二级"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "残疾人证",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办或残联",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与困难残疾人生活补贴可同时享受",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "特困人员供养补贴",
+    "category": "低保相关",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约1000元/月（分散供养）或约1500元/月（集中供养）",
+    "amount_monthly": 1000,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "无劳动能力",
+      "无生活来源",
+      "无法定赡养人"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "收入证明",
+      "家庭情况说明",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "具体金额根据各区县标准调整",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "长期护理保险试点补贴",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约1500元/月（机构护理）或约1000元/月（居家护理）",
+    "amount_monthly": 1500,
+    "eligibility": [
+      "长沙市参保职工或居民",
+      "年满60周岁",
+      "经评估为重度失能",
+      "参加长护险并缴费"
+    ],
+    "materials": [
+      "身份证",
+      "社保卡",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "长沙市医保局或指定经办机构",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "长沙市为长护险试点城市，政策覆盖部分人群，具体金额以评估结果和护理方式为准",
+    "is_published": false
+  }
+]

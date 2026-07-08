@@ -1,0 +1,611 @@
+[
+  {
+    "city": "北京",
+    "name": "北京市高龄老年人津贴",
+    "category": "高龄津贴",
+    "age_min": 80,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "80-89周岁：存入养老助残卡专项消费（非现金提现）；90-99周岁：100元/月；100周岁及以上：200元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满80周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "近期一寸照片",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "80-89岁津贴存入养老助残卡只能消费不能提现；90岁起可发放至银行卡；金额以北京市民政局2024年标准为准",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市失能老年人护理补贴",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "600元/月",
+    "amount_monthly": 600,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "经评估为重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "失能评估报告",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "需通过北京市老年人能力综合评估",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难老年人养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "300元/月",
+    "amount_monthly": 300,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "享受低保待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低保证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与失能补贴不重复享受",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难老年人养老服务补贴（低收入）",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低收入",
+    "amount": "200元/月",
+    "amount_monthly": 200,
+    "eligibility": [
+      "具有北京市户籍",
+      "年满60周岁",
+      "享受低收入待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低收入证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政科或社区（村）居委会",
+    "apply_url": "http://mzj.beijing.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与失能补贴不重复享受",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市重度残疾人护理补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "一级残疾人：300元/月；二级残疾人：100元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "具有北京市户籍",
+      "持有第二代残疾人证",
+      "残疾等级为一级或二级"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）残联",
+    "apply_url": "http://www.bjdpf.org.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "60岁以上老年人符合条件的可申请",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市困难残疾人生活补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "400元/月",
+    "amount_monthly": 400,
+    "eligibility": [
+      "具有北京市户籍",
+      "持有残疾人证",
+      "享受低保待遇"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "低保证明",
+      "申请审批表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）残联",
+    "apply_url": "http://www.bjdpf.org.cn/",
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "60岁以上老年人符合条件的可申请",
+    "is_published": false
+  },
+  {
+    "city": "北京",
+    "name": "北京市长期护理保险试点（石景山区）",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "机构护理：约70%报销，每月上限约3000元；居家护理：约90%报销，每月上限约2000元",
+    "amount_monthly": null,
+    "eligibility": [
+      "石景山区参保人员",
+      "年满60周岁",
+      "经评估为重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "医保卡",
+      "失能评估报告",
+      "申请审批表"
+    ],
+    "apply_channel": "石景山区医保局或街道社保所",
+    "apply_url": "https://www.bjsjs.gov.cn/",
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "仅石景山区试点，其他区尚未全面推行",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市高龄津贴",
+    "category": "高龄津贴",
+    "age_min": 65,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "65-69岁：75元/月；70-79岁：150元/月；80-89岁：180元/月；90-99岁：350元/月；100岁及以上：600元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满65周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "银行卡"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "2024年5月起实行免申即享，无需申请自动发放；每季度首月15日（1/4/7/10月）到账；可选敬老卡或社保卡领取",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市长期护理保险（长护险）",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "居家护理：约40元/小时（个人自付10%）；养老机构护理：约70元/天（个人自付15%）",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市职工医保或居民医保参保人员",
+      "经评估为重度失能（1-6级）",
+      "年满60周岁"
+    ],
+    "materials": [
+      "身份证",
+      "医保卡",
+      "评估申请表"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心或长护险服务窗口",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "需通过统一需求评估，评估费用个人承担部分",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "自理",
+      "半失能",
+      "失能",
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "低保老人：约960元/月；低收入老人：约768元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "经评估为照护一级至六级",
+      "低保或低收入家庭"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "低保证或低收入证明",
+      "评估报告"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "补贴用于购买养老服务，金额根据照护等级和收入调整",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市困难老年人补贴（低保老人）",
+    "category": "低保相关",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "低保金：约1510元/月（2024年标准）",
+    "amount_monthly": 1510,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "家庭人均收入低于低保标准"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "收入证明",
+      "家庭财产证明"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "低保标准每年调整，2024年城镇为1510元/月",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市残疾人两项补贴（困难残疾人生活补贴和重度残疾人护理补贴）",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "生活补贴：低保残疾人约1510元/月；护理补贴：重度残疾人约300元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "持有残疾人证",
+      "低保或重度残疾（一、二级）"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "残疾人证",
+      "低保证明（如适用）"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2024,
+    "confidence": "high",
+    "notes": "两项补贴可同时申请，具体金额根据残疾等级和收入调整",
+    "is_published": false
+  },
+  {
+    "city": "上海",
+    "name": "上海市失能老人护理补贴（试点）",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约200-400元/月（根据评估等级）",
+    "amount_monthly": null,
+    "eligibility": [
+      "上海市户籍",
+      "年满60周岁",
+      "经评估为重度失能",
+      "部分区试点"
+    ],
+    "materials": [
+      "身份证",
+      "户口簿",
+      "评估报告"
+    ],
+    "apply_channel": "户籍所在地街道/乡镇社区事务受理服务中心",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "仅部分区试点，如浦东、徐汇等，金额和条件可能不同",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "高龄津贴",
+    "category": "高龄津贴",
+    "age_min": 80,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "80-89岁：100元/月；90-99岁：200元/月；100岁及以上：500元/月",
+    "amount_monthly": null,
+    "eligibility": [
+      "长沙市户籍",
+      "年满80周岁"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "近期照片",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地社区（村）或街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "各区县执行标准一致，部分区可能额外补贴",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "经济困难老年人养老服务补贴",
+    "category": "养老服务补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约100元/月（具体金额视区县和评估等级而定）",
+    "amount_monthly": 100,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "低保家庭",
+      "经评估为失能或半失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "低保证明",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "具体金额和申请流程可能因区县而异",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "经济困难老年人护理补贴",
+    "category": "失能补贴",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "失能",
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约200元/月（重度失能）或约150元/月（中度失能）",
+    "amount_monthly": 200,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "低保家庭",
+      "经评估为失能或重度失能"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "低保证明",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "与养老服务补贴不重复享受，具体金额以评估结果为准",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "困难残疾人生活补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "低保",
+    "amount": "约140元/月",
+    "amount_monthly": 140,
+    "eligibility": [
+      "长沙市户籍",
+      "持有第二代残疾人证",
+      "低保家庭"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "残疾人证",
+      "低保证明",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办或残联",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与重度残疾人护理补贴可同时享受",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "重度残疾人护理补贴",
+    "category": "残疾人补贴",
+    "age_min": null,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约100元/月",
+    "amount_monthly": 100,
+    "eligibility": [
+      "长沙市户籍",
+      "持有第二代残疾人证",
+      "残疾等级为一级或二级"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "残疾人证",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办或残联",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "high",
+    "notes": "与困难残疾人生活补贴可同时享受",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "特困人员供养补贴",
+    "category": "低保相关",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": null,
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约1000元/月（分散供养）或约1500元/月（集中供养）",
+    "amount_monthly": 1000,
+    "eligibility": [
+      "长沙市户籍",
+      "年满60周岁",
+      "无劳动能力",
+      "无生活来源",
+      "无法定赡养人"
+    ],
+    "materials": [
+      "身份证",
+      "户口本",
+      "收入证明",
+      "家庭情况说明",
+      "申请表"
+    ],
+    "apply_channel": "户籍所在地街道（乡镇）民政办",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "具体金额根据各区县标准调整",
+    "is_published": false
+  },
+  {
+    "city": "长沙",
+    "name": "长期护理保险试点补贴",
+    "category": "长护险",
+    "age_min": 60,
+    "age_max": null,
+    "care_levels": [
+      "重度失能"
+    ],
+    "hukou_type": "不限",
+    "income_type": "不限",
+    "amount": "约1500元/月（机构护理）或约1000元/月（居家护理）",
+    "amount_monthly": 1500,
+    "eligibility": [
+      "长沙市参保职工或居民",
+      "年满60周岁",
+      "经评估为重度失能",
+      "参加长护险并缴费"
+    ],
+    "materials": [
+      "身份证",
+      "社保卡",
+      "失能评估报告",
+      "申请表"
+    ],
+    "apply_channel": "长沙市医保局或指定经办机构",
+    "apply_url": null,
+    "policy_year": 2023,
+    "confidence": "medium",
+    "notes": "长沙市为长护险试点城市，政策覆盖部分人群，具体金额以评估结果和护理方式为准",
+    "is_published": false
+  }
+]

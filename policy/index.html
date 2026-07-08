@@ -3,206 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>政策服务 — 养老8</title>
-  <meta name="description" content="长护险申请、适老化改造补贴、社区居家照护服务……帮你把政策语言翻译成家庭可执行的行动步骤。" />
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23063f35'/><text x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%237ad9b0' font-family='system-ui'>8</text></svg>" />
-  <style>
-    .p-hero { padding: 64px 32px 48px; max-width: 860px; margin: 0 auto; }
-    .p-hero h1 { font-size: 42px; font-weight: 700; color: var(--dark2); letter-spacing: -1.2px; line-height: 1.15; margin-bottom: 16px; }
-    .p-hero p { font-size: 17px; color: var(--muted); line-height: 1.65; max-width: 540px; }
-
-    .policy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 32px 48px; max-width: 860px; margin: 0 auto; }
-
-    .policy-card {
-      display: block; color: inherit;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 18px; padding: 26px;
-      transition: border-color .18s, transform .18s;
-    }
-    .policy-card:hover { border-color: rgba(7,193,96,.6); transform: translateY(-2px); }
-    .policy-card.featured { grid-column: 1 / -1; background: var(--dark2); border-color: transparent; }
-
-    .pc-icon { font-size: 28px; margin-bottom: 14px; }
-    .pc-label { font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; opacity: .8; filter: brightness(.8); }
-    .pc-label.on-dark { filter: none; opacity: 1; }
-    .pc-title { font-size: 18px; font-weight: 700; color: var(--dark2); margin-bottom: 8px; letter-spacing: -.3px; }
-    .pc-title.on-dark { color: #fff; }
-    .pc-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
-    .pc-desc.on-dark { color: rgba(255,255,255,.6); }
-
-    .pc-steps { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
-    .pc-step { display: flex; gap: 12px; align-items: flex-start; }
-    .pc-step-num {
-      width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
-      background: rgba(7,193,96,.2); color: var(--dark2);
-      font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
-    }
-    .pc-step-text { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.55; }
-
-    .policy-hint {
-      margin: 0 32px 32px; max-width: 796px; margin-left: auto; margin-right: auto;
-      padding: 16px 20px; background: rgba(7,193,96,.08);
-      border: 1px solid rgba(7,193,96,.25); border-radius: 14px;
-      font-size: 13px; color: var(--dark1); line-height: 1.65;
-      display: flex; gap: 12px; align-items: flex-start;
-    }
-    .hint-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-    .coming-soon { opacity: .45; pointer-events: none; }
-    .soon-badge {
-      display: inline-block; font-size: 11px; padding: 2px 8px;
-      border-radius: 980px; background: var(--border); color: var(--muted); margin-left: 6px; vertical-align: middle;
-    }
-
-    @media (max-width: 768px) {
-      .p-hero { padding: 40px 20px 32px; }
-      .p-hero h1 { font-size: 30px; }
-      .policy-grid { grid-template-columns: 1fr; padding: 0 20px 36px; }
-      .policy-card.featured { grid-column: auto; }
-      .policy-hint { margin: 0 20px 24px; }
-    }
-  </style>
+  <title>养老8政策服务｜查查父母能享受哪些养老福利</title>
+  <link rel="stylesheet" href="/policy/assets/policy.css" />
 </head>
 <body>
-
-<nav class="nav">
-  <a class="nav-logo" href="/" style="display:flex;align-items:center;gap:9px;">
-    <div class="logo-mark">8</div>
-    <div>
-      <div class="logo-name">养老8</div>
-      <div class="logo-sub">让父母晚年生活更安心</div>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="/profile/">父母养老画像</a>
-    <a href="/care/">居家照护清单</a>
-    <a href="/fall/">防摔专题</a>
-    <a href="/policy/" style="opacity:1;font-weight:600;">政策服务</a>
-    <a href="/knowledge/">养老知识</a>
-  </div>
-  <a class="nav-action nav-action-desktop" href="/" style="text-decoration:none;">返回首页</a>
-  <button class="nav-action" onclick="document.getElementById('menu').classList.toggle('open')">
-    <span class="nav-action-mobile">☰</span>
-  </button>
-</nav>
-<div class="mobile-menu" id="menu">
-  <a href="/profile/">父母养老画像</a>
-  <a href="/care/">居家照护清单</a>
-  <a href="/fall/">防摔专题</a>
-  <a href="/policy/">政策服务</a>
-  <a href="/knowledge/">养老知识</a>
-</div>
-
-<div class="p-hero">
-  <div class="hero-eyebrow">政策服务 · 把政策语言翻译成家庭行动</div>
-  <h1>父母能申请什么，<br>你可能还不知道</h1>
-  <p>长护险、适老化补贴、社区照护……这些政策存在，但很多家庭不知道怎么用。这里帮你找到和你家相关的那一条。</p>
-</div>
-
-<div class="policy-hint">
-  <span class="hint-icon">💡</span>
-  <span>政策因城市不同差异较大。以下内容基于主流城市通用情况整理，具体申请条件请以当地民政局或街道办事处为准。</span>
-</div>
-
-<div class="policy-grid">
-
-  <!-- 长护险 - 重点 -->
-  <div class="policy-card featured">
-    <div class="pc-icon">🏅</div>
-    <div class="pc-label on-dark">S级优先 · 最值得了解</div>
-    <div class="pc-title on-dark">长期护理保险（长护险）</div>
-    <div class="pc-desc on-dark">失能老人每月可获数百至数千元照护补贴，还可抵扣专业护理服务费用。目前已在 49 个城市试点，覆盖超 1.7 亿人。</div>
-    <div class="pc-steps">
-      <div class="pc-step">
-        <div class="pc-step-num">1</div>
-        <div class="pc-step-text">确认父母所在城市是否已开通长护险试点（查当地医保局官网）</div>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="养老8 首页">
+        <span class="brand-mark">8</span>
+        <span><strong class="brand-name">养老8</strong><small class="brand-sub">让父母晚年生活更安心</small></span>
+      </a>
+      <div class="nav-links" aria-label="主要导航">
+        <a href="/">父母养老画像</a>
+        <a href="/care/">居家照护清单</a>
+        <a href="/#fall">防摔专题</a>
+        <a class="active" href="/policy/">政策服务</a>
       </div>
-      <div class="pc-step">
-        <div class="pc-step-num">2</div>
-        <div class="pc-step-text">申请失能评估：向街道/社区或医保中心提交申请，专业机构上门评估6项能力</div>
+      <a class="nav-cta" href="#selfServiceQuery">自助查询</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="policy-hero">
+      <div class="hero-copy">
+        <div class="eyebrow">政策项已接入 · 官方来源可追溯 · 先看高频补贴</div>
+        <h1>查查父母可能能享受哪些养老福利</h1>
+        <p class="lead">先按地区和真实需求查看高龄津贴、长护险、养老服务补贴和困难老人支持。每条政策都落到能获得什么、可能适合谁、准备哪些材料、去哪里确认。</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#selfServiceQuery">自助查询政策</a>
+          <a class="btn-secondary" href="#policyBrowser">查看政策列表</a>
+        </div>
+        <div class="proof">
+          <span>不承诺一定符合</span>
+          <span>以当地审核为准</span>
+          <span>官方来源可追溯</span>
+        </div>
       </div>
-      <div class="pc-step">
-        <div class="pc-step-num">3</div>
-        <div class="pc-step-text">通过评估后，选择定点护理机构或居家服务机构，长护险按比例报销服务费</div>
+
+      <aside class="query-panel" id="selfServiceQuery" aria-label="养老政策自助查询入口">
+        <div class="panel-top">
+          <span>自助查询入口</span>
+          <strong>输入养老政策问题，DeepSeek 直接解答</strong>
+          <small id="policyPanelRegion">当前地区：长沙</small>
+        </div>
+        <div class="panel-body">
+          <div class="query-form">
+            <label>
+              <span>所在地区</span>
+              <select id="quickRegionSelect">
+                <option value="changsha">长沙</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="all">全部地区</option>
+              </select>
+            </label>
+            <label>
+              <span>补贴类型</span>
+              <select id="quickCategorySelect">
+                <option value="all">全部类型</option>
+                <option value="monthly_money">津贴和现金补贴</option>
+                <option value="home_care">失能照护和长护险</option>
+                <option value="community">其他养老支持</option>
+              </select>
+            </label>
+            <label class="query-full">
+              <span>问题或关键词</span>
+              <input id="quickPolicySearchInput" type="search" placeholder="例如：我爸82岁在长沙能领什么补贴？" />
+            </label>
+            <button class="btn-primary query-submit" type="button" id="quickQueryBtn">开始查询</button>
+          </div>
+          <p class="query-hint" id="policyPanelCount">正在读取政策项。</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section district-section" aria-labelledby="districtTitle">
+      <div>
+        <div class="section-label">地区先行</div>
+        <h2 id="districtTitle">当前查询地区：长沙</h2>
+        <p>政策可能看户籍地、居住地或医保参保地。当前先展示已整理的城市政策项，后续可继续扩展到更多地区。</p>
       </div>
+      <div class="district-grid">
+        <button class="district-card active" type="button" data-region="changsha">长沙</button>
+        <button class="district-card" type="button" data-region="beijing">北京</button>
+        <button class="district-card" type="button" data-region="shanghai">上海</button>
+        <button class="district-card" type="button" data-region="all">全部地区</button>
+      </div>
+    </section>
+
+    <section class="band" id="policyBrowser">
+      <div class="section">
+        <div class="section-head split-head">
+          <div>
+            <div class="section-label">按需求查政策</div>
+            <h2>直接按补贴类型查看政策项</h2>
+          </div>
+          <label class="search-box">
+            <span>搜索政策</span>
+            <input id="policySearchInput" type="search" placeholder="搜：高龄津贴 / 长护险 / 适老化改造" />
+          </label>
+        </div>
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card" type="button" data-category="monthly_money"><strong>津贴和现金补贴</strong><span>高龄津贴、低保相关、残疾人补贴</span></button>
+          <button class="category-card" type="button" data-category="home_care"><strong>失能照护和长护险</strong><span>长护险、失能补贴、养老服务补贴</span></button>
+          <button class="category-card" type="button" data-category="community"><strong>其他养老支持</strong><span>社区服务、补贴政策和本地支持</span></button>
+        </div>
+        <div class="policy-ai-result" id="policyAiResult" hidden></div>
+        <div class="policy-list" id="browserPolicyList"></div>
+        <div class="empty-state" id="policyEmptyState" hidden>
+          <strong>暂时没有匹配结果</strong>
+          <p>可以修改地区、换一个关键词，或先联系当地社区确认。</p>
+        </div>
+        <p class="data-status" id="policyDataStatus">正在读取政策项。</p>
+      </div>
+    </section>
+
+    <section class="bottom-notice">
+      <strong>风险提示</strong>
+      <p>本页面提供政策信息整理和初步匹配，不代表政府部门最终审核结果。补贴标准、申请条件和办理流程可能因地区、时间和个人情况发生变化，请以当地主管部门最新规定为准。</p>
+    </section>
+  </main>
+
+  <div class="policy-drawer" id="policyDetailDrawer" hidden aria-hidden="true">
+    <div class="drawer-card" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <button class="drawer-close" type="button" id="drawerCloseBtn" aria-label="关闭政策详情">×</button>
+      <div id="drawerContent"></div>
     </div>
   </div>
 
-  <!-- 适老化改造补贴 -->
-  <div class="policy-card">
-    <div class="pc-icon">🔧</div>
-    <div class="pc-label">改造补贴</div>
-    <div class="pc-title">居家适老化改造补贴</div>
-    <div class="pc-desc">多数城市对困难老人或失能老人提供适老化改造补贴，可用于安装扶手、防滑处理、门槛改造等。金额从数百元到数千元不等。</div>
-    <div style="margin-top:16px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--dark2);">可申请项目：</strong><br>
-      卫生间扶手、防滑地垫、马桶助力架、门槛坡道、感应夜灯、紧急呼叫设备
-    </div>
-    <div style="margin-top:12px;font-size:13px;color:var(--muted);">申请渠道：街道办事处民政科 / 社区养老服务中心</div>
-  </div>
-
-  <!-- 社区居家照护 -->
-  <div class="policy-card">
-    <div class="pc-icon">🏘️</div>
-    <div class="pc-label">社区服务</div>
-    <div class="pc-title">社区居家照护服务</div>
-    <div class="pc-desc">日间照料中心、送餐上门、定期探访、助浴、助洁……多数社区有政府补贴的居家服务，但知道的家庭很少。</div>
-    <div style="margin-top:16px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--dark2);">怎么找：</strong><br>
-      向父母所在街道的"养老服务中心"或"老龄办"咨询，或在手机搜索"[城市名]+居家养老服务"
-    </div>
-  </div>
-
-  <!-- 高龄津贴 -->
-  <div class="policy-card">
-    <div class="pc-icon">💰</div>
-    <div class="pc-label">现金补贴</div>
-    <div class="pc-title">高龄津贴 / 老年人补贴</div>
-    <div class="pc-desc">大多数省市对 80 岁以上老人发放高龄津贴，部分城市从 70 岁起就有。每月 50—500 元不等，直接发放到银行账户。</div>
-    <div style="margin-top:16px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--dark2);">如何申请：</strong><br>
-      持老人身份证和银行卡，到户籍所在地社区（村委会）或民政局办理，通常每年需认证一次
-    </div>
-  </div>
-
-  <!-- 家庭医生签约 -->
-  <div class="policy-card">
-    <div class="pc-icon">🩺</div>
-    <div class="pc-label">基层医疗</div>
-    <div class="pc-title">家庭医生签约服务</div>
-    <div class="pc-desc">65 岁以上老人可免费签约家庭医生，享受每年一次健康体检、慢病随访、用药指导，部分城市提供上门服务。</div>
-    <div style="margin-top:16px;font-size:13px;color:var(--muted);">
-      <strong style="color:var(--dark2);">签约方式：</strong><br>
-      到父母家附近的社区卫生服务中心，带上医保卡和身份证即可签约，全程免费
-    </div>
-  </div>
-
-  <!-- 老年人意外险 -->
-  <div class="policy-card coming-soon">
-    <div class="pc-icon">🛡️</div>
-    <div class="pc-label">政策保险</div>
-    <div class="pc-title">老年人意外险 <span class="soon-badge">内容完善中</span></div>
-    <div class="pc-desc">部分城市为老年人提供政府补贴的意外险，保费极低甚至免费，覆盖跌倒、骨折等高发意外场景。</div>
-  </div>
-
-  <!-- 医养结合 -->
-  <div class="policy-card coming-soon">
-    <div class="pc-icon">🏥</div>
-    <div class="pc-label">医养结合</div>
-    <div class="pc-title">医养结合机构查询 <span class="soon-badge">内容完善中</span></div>
-    <div class="pc-desc">既能住又能看病的养老机构，适合有基础疾病的失能老人。各地资质和收费差异大，需要实地核查。</div>
-  </div>
-
-</div>
-
-<div class="sticky-bar">
-  <div class="sticky-copy"><strong>先测清楚父母在哪个阶段</strong>，再判断该申请什么</div>
-  <a href="/profile/" class="btn-sticky" style="text-decoration:none;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    生成父母养老画像
-  </a>
-</div>
-
+  <div class="toast" id="policyToast" role="status" aria-live="polite"></div>
+  <script src="/src/data/policyService.runtime.js"></script>
+  <script src="/policy/assets/policy.js"></script>
 </body>
 </html>
