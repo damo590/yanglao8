@@ -1,5 +1,6 @@
 .codex_tmp/
 *.png
+!assets/yanglao8-family-hero-v2.png
 docs/superpowers/
 yanglao8-demo-v2/
 yanglao8-ui-demo.html
