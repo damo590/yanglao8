@@ -1,4 +1,11 @@
 import crypto from "node:crypto";
+import {
+  canAccessProfile,
+  canWriteProfile,
+  createAccessToken,
+  hashAccessToken,
+  normalizeAccessToken
+} from "./_lib/profile-security.js";
 
 function json(response, status, body) {
   response.statusCode = status;
@@ -48,6 +55,7 @@ function normalizeJsonArray(value) {
 function normalizeProfilePayload(body) {
   return {
     profile_id: normalizeProfileId(body.profile_id) || createProfileId(),
+    access_token: normalizeAccessToken(body.access_token),
     answers: normalizeJsonObject(body.answers),
     result: normalizeJsonObject(body.result),
     action_list: normalizeJsonArray(body.actionList || body.action_list),
@@ -59,7 +67,7 @@ function cleanText(value, max = 120) {
   return String(value || "").trim().replace(/\s+/g, " ").slice(0, max);
 }
 
-function profilePayloadToCareNeed(payload, userId = null) {
+function profilePayloadToCareNeed(payload, userId = null, accessToken = "") {
   const result = normalizeJsonObject(payload.result);
   const answers = normalizeJsonObject(payload.answers);
   const priorities = normalizeJsonArray(result.topTags).length
@@ -80,7 +88,10 @@ function profilePayloadToCareNeed(payload, userId = null) {
     answers,
     result,
     action_list: payload.action_list,
-    source: payload.source
+    source: payload.source,
+    access_token_hash: hashAccessToken(accessToken),
+    is_shared: true,
+    completed_at: new Date().toISOString()
   };
 }
 
@@ -97,7 +108,7 @@ function careNeedToProfile(row) {
 
 function supabaseConfig() {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return null;
   return { url: url.replace(/\/$/, ""), key };
 }
@@ -184,17 +195,37 @@ async function handler(request, response) {
   if (request.method === "GET") {
     try {
       const url = new URL(request.url, "http://localhost");
+      const userId = await requestUserId(request);
+      if (url.searchParams.get("mine") === "1") {
+        if (!userId) {
+          json(response, 401, { ok: false, error: "authentication_required" });
+          return;
+        }
+        const rows = await supabaseFetch(
+          `care_needs?select=profile_id,answers,result,action_list,created_at,updated_at&user_id=eq.${encodeURIComponent(userId)}&order=updated_at.desc&limit=20`
+        );
+        json(response, 200, {
+          ok: true,
+          profiles: Array.isArray(rows) ? rows.map(careNeedToProfile) : []
+        });
+        return;
+      }
       const profileId = normalizeProfileId(url.searchParams.get("id"));
       if (!profileId) {
         json(response, 400, { ok: false, error: "invalid_profile_id" });
         return;
       }
       const rows = await supabaseFetch(
-        `care_needs?select=profile_id,answers,result,action_list,created_at,updated_at&profile_id=eq.${encodeURIComponent(profileId)}&limit=1`
+        `care_needs?select=profile_id,user_id,access_token_hash,is_shared,answers,result,action_list,created_at,updated_at&profile_id=eq.${encodeURIComponent(profileId)}&limit=1`
       );
       if (!Array.isArray(rows) || !rows.length) {
         logRequest("info", "request_completed", request, startedAt, { status: 404 });
         json(response, 404, { ok: false, error: "profile_not_found" });
+        return;
+      }
+      const accessToken = normalizeAccessToken(url.searchParams.get("token"));
+      if (!canAccessProfile(rows[0], userId, accessToken)) {
+        json(response, 403, { ok: false, error: "profile_access_denied" });
         return;
       }
       logRequest("info", "request_completed", request, startedAt, { status: 200 });
@@ -210,14 +241,29 @@ async function handler(request, response) {
     try {
       const payload = normalizeProfilePayload(await readBody(request));
       const userId = await requestUserId(request);
+      const existingRows = await supabaseFetch(
+        `care_needs?select=profile_id,user_id,access_token_hash,is_shared&profile_id=eq.${encodeURIComponent(payload.profile_id)}&limit=1`
+      );
+      const existing = Array.isArray(existingRows) && existingRows[0] ? existingRows[0] : null;
+      if (!canWriteProfile(existing, userId, payload.access_token)) {
+        json(response, 403, { ok: false, error: "profile_write_denied" });
+        return;
+      }
+      const accessToken = payload.access_token || createAccessToken();
+      const ownerId = userId || (existing && existing.user_id) || null;
       const rows = await supabaseFetch("care_needs?on_conflict=profile_id", {
         method: "POST",
         headers: { Prefer: "resolution=merge-duplicates,return=representation" },
-        body: JSON.stringify(profilePayloadToCareNeed(payload, userId))
+        body: JSON.stringify(profilePayloadToCareNeed(payload, ownerId, accessToken))
       });
       const saved = Array.isArray(rows) && rows[0] ? careNeedToProfile(rows[0]) : payload;
       logRequest("info", "request_completed", request, startedAt, { status: 200 });
-      json(response, 200, { ok: true, profile_id: saved.profile_id, profile: saved });
+      json(response, 200, {
+        ok: true,
+        profile_id: saved.profile_id,
+        access_token: accessToken,
+        profile: saved
+      });
     } catch (error) {
       logRequest("error", "request_failed", request, startedAt, { error: error.message || "profile_write_failed" });
       json(response, error.status || 500, { ok: false, error: error.message || "profile_write_failed" });
@@ -236,5 +282,7 @@ export const __test = {
   normalizeProfilePayload,
   profilePayloadToCareNeed,
   careNeedToProfile,
-  requestUserId
+  requestUserId,
+  canAccessProfile,
+  canWriteProfile
 };

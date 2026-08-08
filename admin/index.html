@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>养老8运营概览</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, "Microsoft YaHei", sans-serif; color: #173f38; background: #f3f8f6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(980px, calc(100% - 32px)); margin: 48px auto; }
+    h1 { margin-bottom: 8px; }
+    .sub { color: #55736e; }
+    .login, .card { background: #fff; border: 1px solid #d8e8e3; border-radius: 16px; padding: 20px; box-shadow: 0 12px 32px rgba(20, 80, 67, .07); }
+    .login { display: flex; gap: 10px; margin: 24px 0; }
+    input { flex: 1; min-width: 0; border: 1px solid #b9d7cf; border-radius: 10px; padding: 12px; font: inherit; }
+    button { border: 0; border-radius: 10px; background: #0b8067; color: #fff; padding: 12px 18px; font-weight: 800; cursor: pointer; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .value { font-size: 34px; font-weight: 900; margin-top: 12px; }
+    .label { color: #55736e; }
+    #status { min-height: 24px; color: #8a4a35; }
+    .hidden { display: none !important; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } .login { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>养老8运营概览</h1>
+    <p class="sub">只显示画像和留资汇总，不展示个人联系方式或测评答案。</p>
+    <div class="login">
+      <input id="token" type="password" autocomplete="current-password" placeholder="输入后台访问口令" />
+      <button id="load" type="button">查看数据</button>
+    </div>
+    <p id="status"></p>
+    <section id="dashboard" class="grid hidden" aria-live="polite">
+      <article class="card"><div class="label">累计完成画像</div><div id="profiles" class="value">0</div></article>
+      <article class="card"><div class="label">累计留资</div><div id="leads" class="value">0</div></article>
+      <article class="card"><div class="label">留资 / 画像</div><div id="conversion" class="value">0%</div></article>
+      <article class="card"><div class="label">近24小时画像</div><div id="profiles24h" class="value">0</div></article>
+      <article class="card"><div class="label">近7天画像</div><div id="profiles7d" class="value">0</div></article>
+      <article class="card"><div class="label">近7天留资</div><div id="leads7d" class="value">0</div></article>
+    </section>
+  </main>
+  <script>
+    const fields = {
+      profiles: document.getElementById("profiles"), leads: document.getElementById("leads"),
+      conversion: document.getElementById("conversion"), profiles24h: document.getElementById("profiles24h"),
+      profiles7d: document.getElementById("profiles7d"), leads7d: document.getElementById("leads7d")
+    };
+    async function loadStats() {
+      const token = document.getElementById("token").value.trim();
+      const status = document.getElementById("status");
+      if (!token) { status.textContent = "请输入后台访问口令。"; return; }
+      status.textContent = "正在加载...";
+      try {
+        const response = await fetch("/api/admin-stats", { headers: { "X-Admin-Token": token } });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error(data.error || "load_failed");
+        fields.profiles.textContent = data.totals.profiles;
+        fields.leads.textContent = data.totals.leads;
+        fields.conversion.textContent = `${Math.round(data.conversion.lead_per_profile * 100)}%`;
+        fields.profiles24h.textContent = data.recent.profiles_24h;
+        fields.profiles7d.textContent = data.recent.profiles_7d;
+        fields.leads7d.textContent = data.recent.leads_7d;
+        document.getElementById("dashboard").classList.remove("hidden");
+        status.textContent = `更新于 ${new Date(data.generated_at).toLocaleString("zh-CN")}`;
+      } catch (error) {
+        document.getElementById("dashboard").classList.add("hidden");
+        status.textContent = "口令错误或统计服务暂不可用。";
+      }
+    }
+    document.getElementById("load").addEventListener("click", loadStats);
+    document.getElementById("token").addEventListener("keydown", (event) => { if (event.key === "Enter") loadStats(); });
+  </script>
+</body>
+</html>

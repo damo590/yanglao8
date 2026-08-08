@@ -42,6 +42,7 @@
     document.addEventListener("DOMContentLoaded", () => {
     const STORAGE_KEY = "fall_guardian_risk_map_v1";
     const PARENT_PROFILE_STORAGE_KEY = "yanglao8_parent_profile_v1";
+    const PARENT_PROFILE_DRAFT_KEY = "yanglao8_parent_profile_draft_v1";
     const LEADERBOARD_API = "/api/leaderboard";
     const PARENT_PROFILE_API = "/api/parent-profile";
     const PROFILE_CONTACT_API = "/api/profile-contact";
@@ -250,6 +251,7 @@
       authLogoutBtn: document.getElementById("authLogoutBtn"),
       authStatus: document.getElementById("authStatus"),
       authUserEmail: document.getElementById("authUserEmail"),
+      authProfileHistory: document.getElementById("authProfileHistory"),
       advisorFormPanel: document.getElementById("advisorFormPanel"),
       advisorName: document.getElementById("advisorName"),
       advisorContact: document.getElementById("advisorContact"),
@@ -650,6 +652,7 @@
       try {
         localStorage.setItem(PARENT_PROFILE_STORAGE_KEY, JSON.stringify({
           profile_id: parentProfileState.profileId || "",
+          access_token: currentParentAccessToken || "",
           answers: parentProfileState.answers,
           result,
           actionList: result.weekActions || [],
@@ -658,6 +661,23 @@
       } catch (error) {
         // localStorage may be unavailable in private browsing; the flow should still finish.
       }
+    }
+
+    function saveParentProfileDraft() {
+      try {
+        localStorage.setItem(PARENT_PROFILE_DRAFT_KEY, JSON.stringify({
+          profile_id: parentProfileState.profileId || "",
+          access_token: currentParentAccessToken || "",
+          index: parentProfileState.index || 0,
+          answers: parentProfileState.answers || {},
+          concernType: selectedConcernType || "",
+          savedAt: new Date().toISOString()
+        }));
+      } catch (error) {}
+    }
+
+    function clearParentProfileDraft() {
+      try { localStorage.removeItem(PARENT_PROFILE_DRAFT_KEY); } catch (error) {}
     }
 
     function createClientProfileId() {
@@ -671,9 +691,11 @@
       ui.parentSaveStatus.className = `parent-save-status${tone ? ` ${tone}` : ""}`;
     }
 
-    function parentProfileUrl(profileId) {
+    function parentProfileUrl(profileId, accessToken = currentParentAccessToken) {
       const url = new URL(window.location.href);
       url.searchParams.set("profile_id", profileId);
+      if (accessToken) url.searchParams.set("profile_token", accessToken);
+      else url.searchParams.delete("profile_token");
       return url.toString();
     }
 
@@ -698,6 +720,7 @@
           headers: { "Content-Type": "application/json", ...authHeaders() },
           body: JSON.stringify({
             profile_id: profileId,
+            access_token: currentParentAccessToken || "",
             answers: parentProfileState.answers,
             result,
             actionList: result.weekActions || []
@@ -708,10 +731,11 @@
           throw new Error("profile_save_failed");
         }
         currentParentProfileId = data.profile_id;
+        currentParentAccessToken = data.access_token || currentParentAccessToken;
         parentProfileState.profileId = data.profile_id;
         result.profile_id = data.profile_id;
         saveParentProfileResult(result);
-        window.history.replaceState({}, "", parentProfileUrl(data.profile_id));
+        window.history.replaceState({}, "", parentProfileUrl(data.profile_id, currentParentAccessToken));
         renderParentResult(result);
         setParentSaveStatus("已保存到后端，可用链接重新打开。", "ok");
         trackEvent("profile_saved_backend", { source: "parent_profile" });
@@ -728,6 +752,7 @@
           const saved = JSON.parse(localStorage.getItem(PARENT_PROFILE_STORAGE_KEY) || "{}");
           if (saved && saved.profile_id === profileId && saved.result) {
             parentProfileState = { index: 0, answers: saved.answers || {}, profileId };
+            currentParentAccessToken = saved.access_token || currentParentAccessToken;
             parentProfileResult = saved.result;
             currentParentProfileId = profileId;
             renderParentResult(saved.result);
@@ -740,7 +765,12 @@
         return;
       }
       try {
-        const response = await fetch(`${PARENT_PROFILE_API}?id=${encodeURIComponent(profileId)}`, { cache: "no-store" });
+        const params = new URLSearchParams({ id: profileId });
+        if (currentParentAccessToken) params.set("token", currentParentAccessToken);
+        const response = await fetch(`${PARENT_PROFILE_API}?${params.toString()}`, {
+          cache: "no-store",
+          headers: { ...authHeaders() }
+        });
         const data = await response.json();
         if (!response.ok || !data || !data.ok || !data.profile) {
           throw new Error("profile_load_failed");
@@ -791,6 +821,11 @@
       ui.parentOptions.querySelectorAll("[data-parent-option]").forEach((btn) => {
         btn.addEventListener("click", () => {
           parentProfileState.answers[question.id] = btn.getAttribute("data-parent-option");
+          saveParentProfileDraft();
+          trackEvent("profile_question_answered", {
+            question_id: question.id,
+            step: parentProfileState.index + 1
+          });
           renderParentQuestion();
         });
       });
@@ -803,7 +838,19 @@
     }
 
     function startParentProfile() {
-      parentProfileState = { index: 0, answers: {}, profileId: createClientProfileId(), concernType: selectedConcernType };
+      let restored = null;
+      try {
+        const saved = JSON.parse(localStorage.getItem(PARENT_PROFILE_DRAFT_KEY) || "null");
+        if (saved && saved.profile_id && saved.answers && Object.keys(saved.answers).length) restored = saved;
+      } catch (error) {}
+      parentProfileState = restored ? {
+        index: Math.max(0, Math.min(PARENT_PROFILE.questions.length - 1, Number(restored.index || 0))),
+        answers: restored.answers || {},
+        profileId: restored.profile_id,
+        concernType: restored.concernType || selectedConcernType
+      } : { index: 0, answers: {}, profileId: createClientProfileId(), concernType: selectedConcernType };
+      currentParentAccessToken = restored && restored.access_token ? restored.access_token : "";
+      if (restored) trackEvent("profile_draft_resumed", { step: parentProfileState.index + 1 });
       renderParentQuestion();
       switchScreen("parentProfile");
     }
@@ -844,6 +891,60 @@
       if (ui.authLogoutBtn) {
         ui.authLogoutBtn.classList.toggle("hidden", !email);
       }
+      if (ui.authProfileHistory && !email) {
+        ui.authProfileHistory.classList.add("hidden");
+        ui.authProfileHistory.innerHTML = "";
+      }
+    }
+
+    function renderProfileHistory(profiles) {
+      if (!ui.authProfileHistory) return;
+      if (!currentAuthSession) {
+        ui.authProfileHistory.classList.add("hidden");
+        return;
+      }
+      const items = Array.isArray(profiles) ? profiles : [];
+      ui.authProfileHistory.classList.remove("hidden");
+      ui.authProfileHistory.innerHTML = `<h4>我的历史画像</h4>${items.length ? items.map((profile) => {
+        const title = profile.result && profile.result.type ? profile.result.type : "父母养老画像";
+        const date = profile.updated_at ? new Date(profile.updated_at).toLocaleDateString("zh-CN") : "";
+        return `<div class="auth-history-item"><span>${escapeHtml(title)}${date ? ` · ${escapeHtml(date)}` : ""}</span><button type="button" data-history-profile="${escapeHtml(profile.profile_id)}">查看</button></div>`;
+      }).join("") : "<p>登录后完成的画像会显示在这里。</p>"}`;
+      ui.authProfileHistory.querySelectorAll("[data-history-profile]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          currentParentAccessToken = "";
+          await loadParentProfileFromBackend(button.getAttribute("data-history-profile"));
+          closeAuthModal();
+          trackEvent("profile_history_opened", { source: "account" });
+        });
+      });
+    }
+
+    async function loadMyProfiles() {
+      if (!currentAuthSession || !USE_REMOTE_APIS) {
+        renderProfileHistory([]);
+        return;
+      }
+      try {
+        const response = await fetch(`${PARENT_PROFILE_API}?mine=1`, {
+          cache: "no-store",
+          headers: { ...authHeaders() }
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error("profile_history_failed");
+        renderProfileHistory(data.profiles || []);
+      } catch (error) {
+        if (ui.authProfileHistory) {
+          ui.authProfileHistory.classList.remove("hidden");
+          ui.authProfileHistory.innerHTML = "<p>历史画像暂时没有加载成功，请稍后重试。</p>";
+        }
+      }
+    }
+
+    async function attachCurrentProfileToAccount() {
+      if (!currentAuthSession || !parentProfileResult || !currentParentProfileId) return;
+      await saveParentProfileToBackend(parentProfileResult);
+      trackEvent("profile_attached_to_account", { source: "auth" });
     }
 
     async function initAuth() {
@@ -866,9 +967,17 @@
         const { data } = await supabaseClient.auth.getSession();
         currentAuthSession = data && data.session ? data.session : null;
         updateAuthUi();
-        supabaseClient.auth.onAuthStateChange((_event, session) => {
+        if (currentAuthSession) {
+          await attachCurrentProfileToAccount();
+          await loadMyProfiles();
+        }
+        supabaseClient.auth.onAuthStateChange(async (_event, session) => {
           currentAuthSession = session || null;
           updateAuthUi();
+          if (session) {
+            await attachCurrentProfileToAccount();
+            await loadMyProfiles();
+          }
         });
       } catch (error) {
         console.warn("Supabase auth is unavailable", error);
@@ -882,6 +991,7 @@
       ui.authModal.setAttribute("aria-hidden", "false");
       updateAuthUi();
       setAuthStatus(currentAuthSession ? "已登录。完成画像后会保存到当前账号。" : "", currentAuthSession ? "ok" : "");
+      if (currentAuthSession) loadMyProfiles();
       if (ui.authEmail && !currentAuthSession) ui.authEmail.focus({ preventScroll: true });
     }
 
@@ -952,6 +1062,7 @@
       result.profile_id = parentProfileState.profileId || createClientProfileId();
       parentProfileResult = result;
       currentParentProfileId = result.profile_id;
+      clearParentProfileDraft();
       saveParentProfileResult(result);
       renderParentResult(result);
       switchScreen("parentResult");
@@ -1370,6 +1481,7 @@
       const profileId = currentParentProfileId || parentProfileState.profileId || (parentProfileResult && parentProfileResult.profile_id);
       const payload = {
         profile_id: profileId,
+        access_token: currentParentAccessToken || "",
         name: ui.advisorName.value,
         phone_or_wechat: ui.advisorContact.value,
         city: ui.advisorCity.value,
@@ -1765,6 +1877,7 @@
     let parentProfileState = { index: 0, answers: {} };
     let parentProfileResult = null;
     let currentParentProfileId = "";
+    let currentParentAccessToken = "";
     let selectedConcernType = "";
     let supabaseClient = null;
     let currentAuthSession = null;
@@ -1912,7 +2025,9 @@
     fetchGlobalLeaderboard();
     playIntro();
     initAuth();
-    const bootProfileId = new URLSearchParams(window.location.search).get("profile_id");
+    const bootParams = new URLSearchParams(window.location.search);
+    const bootProfileId = bootParams.get("profile_id");
+    currentParentAccessToken = bootParams.get("profile_token") || "";
     if (bootProfileId) loadParentProfileFromBackend(bootProfileId);
     });
   </script>
@@ -3944,6 +4059,40 @@
       font-size: 14px;
       font-weight: 800;
       padding: 10px 12px;
+    }
+
+    .auth-profile-history {
+      display: grid;
+      gap: 8px;
+      border: 1px solid #cfe4df;
+      border-radius: 14px;
+      background: #f7fbf9;
+      padding: 12px;
+    }
+
+    .auth-profile-history h4 {
+      margin: 0;
+      color: #174f46;
+      font-size: 16px;
+    }
+
+    .auth-history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid #dcebe7;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+    }
+
+    .auth-history-item button {
+      border: 0;
+      background: transparent;
+      color: #08745f;
+      font-weight: 900;
+      cursor: pointer;
     }
 
     .auth-status {
@@ -6696,6 +6845,7 @@
           </div>
           <div class="auth-body">
             <div id="authUserEmail" class="auth-user-email">当前未登录</div>
+            <div id="authProfileHistory" class="auth-profile-history hidden"></div>
             <label for="authEmail">邮箱
               <input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" />
             </label>

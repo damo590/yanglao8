@@ -1,3 +1,5 @@
+import { canWriteProfile, normalizeAccessToken } from "./_lib/profile-security.js";
+
 function json(response, status, body) {
   response.statusCode = status;
   response.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -38,6 +40,7 @@ function cleanText(value, max = 120) {
 function normalizeContactPayload(body) {
   return {
     profile_id: normalizeProfileId(body.profile_id),
+    access_token: normalizeAccessToken(body.access_token),
     name: cleanText(body.name, 40),
     phone_or_wechat: cleanText(body.phone_or_wechat, 80),
     city: cleanText(body.city, 60),
@@ -47,7 +50,7 @@ function normalizeContactPayload(body) {
 
 function supabaseConfig() {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return null;
   return { url: url.replace(/\/$/, ""), key };
 }
@@ -148,9 +151,17 @@ async function handler(request, response) {
     }
     const userId = await requestUserId(request);
     const profileRows = await supabaseFetch(
-      `care_needs?select=profile_id,user_id&profile_id=eq.${encodeURIComponent(payload.profile_id)}&limit=1`
+      `care_needs?select=profile_id,user_id,access_token_hash,is_shared&profile_id=eq.${encodeURIComponent(payload.profile_id)}&limit=1`
     );
     const matchedProfile = Array.isArray(profileRows) && profileRows[0] ? profileRows[0] : null;
+    if (!matchedProfile) {
+      json(response, 404, { ok: false, error: "profile_not_found" });
+      return;
+    }
+    if (!canWriteProfile(matchedProfile, userId, payload.access_token)) {
+      json(response, 403, { ok: false, error: "profile_access_denied" });
+      return;
+    }
     const rows = await supabaseFetch("contacts", {
       method: "POST",
       headers: { Prefer: "return=representation" },
@@ -177,5 +188,6 @@ export default handler;
 export const __test = {
   normalizeProfileId,
   normalizeContactPayload,
-  requestUserId
+  requestUserId,
+  canWriteProfile
 };
