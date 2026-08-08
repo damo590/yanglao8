@@ -5868,6 +5868,189 @@
       margin: 20px auto 0;
     }
 
+    /* 养老8品牌套件：暖绿安心（2026-08） */
+    #screenHome {
+      --yl8-primary: #137a5b;
+      --yl8-primary-hover: #0e6249;
+      --yl8-heading: #123a34;
+      --yl8-text: #405f59;
+      --yl8-muted: #6b7f7a;
+      --yl8-surface: #f7faf8;
+      --yl8-surface-green: #eaf5f0;
+      --yl8-surface-policy: #eaf4fb;
+      --yl8-border: #d5e7e0;
+      --yl8-accent: #e59f32;
+      --yl8-policy: #2f6f9f;
+      color: var(--yl8-text);
+      background:
+        radial-gradient(circle at 82% 6%, rgba(229, 159, 50, .09), transparent 24%),
+        linear-gradient(180deg, var(--yl8-surface) 0%, var(--yl8-surface-green) 100%);
+    }
+
+    #screenHome .site-nav {
+      border-bottom-color: rgba(213, 231, 224, .9);
+      box-shadow: 0 6px 20px rgba(18, 58, 52, .055);
+    }
+
+    #screenHome .site-logo {
+      background: linear-gradient(145deg, var(--yl8-primary), #22906d);
+      box-shadow: 0 9px 20px rgba(19, 122, 91, .18);
+    }
+
+    #screenHome .site-name,
+    #screenHome .site-links a.active,
+    #screenHome .result-preview-card h3,
+    #screenHome .section-pill,
+    #screenHome .home-about-kicker,
+    #screenHome .home-about-subtitle,
+    #screenHome .home-explain-lines strong {
+      color: var(--yl8-primary);
+    }
+
+    #screenHome .site-links a.active { border-bottom-color: var(--yl8-primary); }
+    #screenHome .site-links a { color: var(--yl8-heading); }
+    #screenHome .site-slogan,
+    #screenHome .home-cta-note,
+    #screenHome .preview-row p,
+    #screenHome .home-section .section-copy,
+    #screenHome .home-info-card p,
+    #screenHome .concern-card p,
+    #screenHome .home-focus-card p,
+    #screenHome .home-soft-card p,
+    #screenHome .home-about-item p { color: var(--yl8-muted); }
+
+    #screenHome .home-hero {
+      border-radius: 0 0 28px 28px;
+      background:
+        radial-gradient(circle at 78% 22%, rgba(229, 159, 50, .10), transparent 22%),
+        linear-gradient(135deg, #f7fbf9 0%, var(--yl8-surface-green) 100%);
+    }
+
+    #screenHome .home-hero h1,
+    #screenHome .home-section h2,
+    #screenHome .home-info-card h3,
+    #screenHome .concern-card h3,
+    #screenHome .home-focus-card h3,
+    #screenHome .home-soft-card h3,
+    #screenHome .home-about-copy h2,
+    #screenHome .home-about-item h3,
+    #screenHome .home-about-statement,
+    #screenHome .preview-row strong { color: var(--yl8-heading); }
+
+    #screenHome .home-hero .sub { color: var(--yl8-text); }
+
+    #screenHome .home-tag,
+    #screenHome .nav-save-btn {
+      border-color: var(--yl8-border);
+      color: var(--yl8-text);
+      background: rgba(255, 255, 255, .9);
+    }
+
+    #screenHome .mini-icon,
+    #screenHome .feature-icon,
+    #screenHome .preview-icon,
+    #screenHome .concern-icon { color: var(--yl8-primary); }
+
+    #screenHome .mini-icon,
+    #screenHome .preview-icon,
+    #screenHome .concern-icon,
+    #screenHome .home-info-card .feature-icon,
+    #screenHome .section-pill,
+    #screenHome .home-about-kicker,
+    #screenHome .home-about-icon { background: var(--yl8-surface-green); }
+
+    #screenHome .home-primary-btn {
+      background: var(--yl8-primary);
+      box-shadow: 0 10px 24px rgba(19, 122, 91, .22);
+      transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+    }
+
+    #screenHome .home-primary-btn:hover {
+      transform: translateY(-2px);
+      background: var(--yl8-primary-hover);
+      box-shadow: 0 14px 30px rgba(19, 122, 91, .26);
+    }
+
+    #screenHome .home-primary-btn:focus-visible,
+    #screenHome .home-secondary-action:focus-visible,
+    #screenHome .nav-save-btn:focus-visible,
+    #screenHome .concern-card:focus-visible {
+      outline: 3px solid rgba(229, 159, 50, .38);
+      outline-offset: 3px;
+    }
+
+    #screenHome .home-primary-btn span {
+      color: var(--yl8-primary);
+    }
+
+    #screenHome .home-secondary-action,
+    #screenHome .home-about-btn {
+      border-color: var(--yl8-primary);
+      color: var(--yl8-primary);
+      background: #fff;
+    }
+
+    #screenHome .home-secondary-action:hover,
+    #screenHome .home-about-btn:hover { background: var(--yl8-surface-green); }
+
+    #screenHome .home-info-card,
+    #screenHome .concern-card,
+    #screenHome .home-focus-card,
+    #screenHome .home-soft-card,
+    #screenHome .home-about-card,
+    #screenHome .home-about-item,
+    #screenHome .result-preview-card {
+      border-color: var(--yl8-border);
+      box-shadow: 0 12px 32px rgba(18, 58, 52, .08);
+    }
+
+    #screenHome .concern-card:hover {
+      border-color: var(--yl8-primary);
+      box-shadow: 0 16px 34px rgba(19, 122, 91, .13);
+    }
+
+    #screenHome .home-info-card:nth-child(2) .feature-icon,
+    #screenHome .concern-card:nth-child(3) .concern-icon,
+    #screenHome .concern-card:nth-child(4) .concern-icon,
+    #screenHome .home-about-item:nth-child(2) .home-about-icon {
+      color: var(--yl8-accent);
+      background: #fff1d9;
+    }
+
+    #screenHome .home-info-card:nth-child(3) .feature-icon,
+    #screenHome .concern-card:nth-child(5) .concern-icon,
+    #screenHome .home-about-item:nth-child(3) .home-about-icon {
+      color: var(--yl8-policy);
+      background: var(--yl8-surface-policy);
+    }
+
+    #screenHome .home-policy-preview {
+      border-color: #d4e5f1;
+      background:
+        radial-gradient(circle at right top, rgba(47, 111, 159, .10), transparent 34%),
+        linear-gradient(135deg, var(--yl8-surface-policy), #fff 68%);
+    }
+
+    #screenHome .home-fall-section {
+      border-color: #d4e5f1;
+      background: linear-gradient(135deg, var(--yl8-surface-policy), #fff 72%);
+    }
+
+    #screenHome .home-bottom-cta {
+      background: linear-gradient(135deg, var(--yl8-primary), var(--yl8-primary-hover));
+      box-shadow: 0 -10px 30px rgba(19, 122, 91, .16);
+    }
+
+    #screenHome .home-bottom-cta .home-primary-btn { color: var(--yl8-primary); }
+    #screenHome .home-bottom-cta .home-primary-btn span {
+      color: #fff;
+      background: var(--yl8-primary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #screenHome *, #screenHome *::before, #screenHome *::after { transition: none !important; }
+    }
+
     @media (max-width: 1080px) {
       #screenHome .home-shell {
         padding: 0 0 30px;
@@ -9161,5 +9344,4 @@
   </script>
 </body>
 </html>
-
 
