@@ -5,6 +5,27 @@ function json(response, status, body) {
   response.end(JSON.stringify(body));
 }
 
+function requestId(request) {
+  const headers = request && request.headers;
+  if (!headers) return "";
+  if (typeof headers.get === "function") return headers.get("x-vercel-id") || "";
+  return headers["x-vercel-id"] || headers["X-Vercel-Id"] || "";
+}
+
+function logRequest(level, message, request, startedAt, extra = {}) {
+  const entry = {
+    level,
+    message,
+    route: "/api/profile-contact",
+    method: request && request.method,
+    requestId: requestId(request),
+    duration_ms: Date.now() - startedAt,
+    ...extra
+  };
+  const writer = level === "error" ? console.error : console.log;
+  writer(JSON.stringify(entry));
+}
+
 function normalizeProfileId(value) {
   const id = String(value || "").trim().toLowerCase();
   return /^yp_[a-z0-9]{6,24}$/.test(id) ? id : "";
@@ -38,15 +59,23 @@ async function supabaseFetch(path, options = {}) {
     error.status = 503;
     throw error;
   }
-  const response = await fetch(`${config.url}/rest/v1/${path}`, {
-    ...options,
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
-      "Content-Type": "application/json",
-      ...(options.headers || {})
-    }
-  });
+  let response;
+  try {
+    response = await fetch(`${config.url}/rest/v1/${path}`, {
+      ...options,
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+        "Content-Type": "application/json",
+        ...(options.headers || {})
+      }
+    });
+  } catch (cause) {
+    const error = new Error("supabase_unreachable");
+    error.status = 503;
+    error.cause = cause;
+    throw error;
+  }
   const text = await response.text();
   const data = text ? JSON.parse(text) : null;
   if (!response.ok) {
@@ -94,6 +123,8 @@ async function readBody(request) {
 }
 
 async function handler(request, response) {
+  const startedAt = Date.now();
+  logRequest("info", "request_started", request, startedAt);
   if (request.method === "OPTIONS") {
     response.statusCode = 204;
     response.end();
@@ -133,8 +164,10 @@ async function handler(request, response) {
         note: payload.note || null
       })
     });
+    logRequest("info", "request_completed", request, startedAt, { status: 200 });
     json(response, 200, { ok: true, contact: Array.isArray(rows) ? rows[0] : payload });
   } catch (error) {
+    logRequest("error", "request_failed", request, startedAt, { error: error.message || "contact_write_failed" });
     json(response, error.status || 500, { ok: false, error: error.message || "contact_write_failed" });
   }
 }
