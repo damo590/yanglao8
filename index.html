@@ -4,8 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>父母养老风险自测与行动清单｜yanglao8.com</title>
+  <meta name="description" content="3分钟生成父母养老画像和本周行动清单，优先梳理防摔、独居响应、照护安排、养老政策与居家照护方向。" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://yanglao8.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="养老8" />
+  <meta property="og:title" content="父母养老风险自测与行动清单｜养老8" />
+  <meta property="og:description" content="3分钟生成父母养老画像和本周行动清单，从最重要的一件事开始。" />
+  <meta property="og:url" content="https://yanglao8.com/" />
+  <meta name="twitter:card" content="summary" />
   <meta name="baidu-site-verification" content="codeva-Cfk9pYhdT0" />
   <link rel="icon" href="data:," />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "养老8",
+      "url": "https://yanglao8.com/",
+      "description": "帮助家庭生成父母养老画像、本周行动清单，并查询养老政策与居家照护方向。",
+      "inLanguage": "zh-CN"
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script defer src="/scripts/analytics.js"></script>
   <script type="text/plain" id="legacyGameScript">
     const CANONICAL_HOST = "yanglao8.com";
     const CANONICAL_REDIRECT_HOSTS = ["fall-guardian-site.vercel.app", "www.yanglao8.com", "aiyl.2hcy.com"];
@@ -23,8 +46,7 @@
     const PARENT_PROFILE_API = "/api/parent-profile";
     const PROFILE_CONTACT_API = "/api/profile-contact";
     const AI_ADVISOR_API = "/api/ai-advisor";
-    const SUPABASE_URL = "https://hunidxtixbjbtmqljeht.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_F83L1bELmgjTLGxEHx9-iA_1c2it8X_";
+    const SUPABASE_PUBLIC_CONFIG_API = "/api/supabase-public-config";
     const STATIC_PREVIEW_PORTS = new Set(["4173", "5173", "5500", "8000", "8080", "8765"]);
     const LOCAL_PREVIEW_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
     const USE_REMOTE_APIS = location.protocol.startsWith("http")
@@ -618,6 +640,12 @@
         .replace(/'/g, "&#039;");
     }
 
+    function trackEvent(name, data = {}) {
+      if (typeof window.yanglao8Track === "function") {
+        window.yanglao8Track(name, data);
+      }
+    }
+
     function saveParentProfileResult(result) {
       try {
         localStorage.setItem(PARENT_PROFILE_STORAGE_KEY, JSON.stringify({
@@ -659,6 +687,7 @@
       if (!USE_REMOTE_APIS) {
         window.history.replaceState({}, "", parentProfileUrl(profileId));
         setParentSaveStatus("已保存在本机，可用当前链接重新打开。", "ok");
+        trackEvent("profile_saved_local", { source: "static_preview" });
         return;
       }
       setParentSaveStatus("正在保存这份父母养老画像...", "pending");
@@ -685,9 +714,11 @@
         window.history.replaceState({}, "", parentProfileUrl(data.profile_id));
         renderParentResult(result);
         setParentSaveStatus("已保存到后端，可用链接重新打开。", "ok");
+        trackEvent("profile_saved_backend", { source: "parent_profile" });
       } catch (error) {
         renderParentResult(result);
         setParentSaveStatus("后端暂未保存成功，已保存在本机。", "warn");
+        trackEvent("profile_save_failed", { source: "parent_profile" });
       }
     }
 
@@ -820,14 +851,29 @@
         updateAuthUi();
         return;
       }
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-      const { data } = await supabaseClient.auth.getSession();
-      currentAuthSession = data && data.session ? data.session : null;
-      updateAuthUi();
-      supabaseClient.auth.onAuthStateChange((_event, session) => {
-        currentAuthSession = session || null;
+      if (!USE_REMOTE_APIS) {
         updateAuthUi();
-      });
+        return;
+      }
+      try {
+        const response = await fetch(SUPABASE_PUBLIC_CONFIG_API, {
+          headers: { Accept: "application/json" }
+        });
+        if (!response.ok) throw new Error("supabase_public_config_unavailable");
+        const config = await response.json();
+        if (!config.url || !config.publishableKey) throw new Error("supabase_public_config_invalid");
+        supabaseClient = window.supabase.createClient(config.url, config.publishableKey);
+        const { data } = await supabaseClient.auth.getSession();
+        currentAuthSession = data && data.session ? data.session : null;
+        updateAuthUi();
+        supabaseClient.auth.onAuthStateChange((_event, session) => {
+          currentAuthSession = session || null;
+          updateAuthUi();
+        });
+      } catch (error) {
+        console.warn("Supabase auth is unavailable", error);
+        updateAuthUi();
+      }
     }
 
     function showAuthModal() {
@@ -909,6 +955,7 @@
       saveParentProfileResult(result);
       renderParentResult(result);
       switchScreen("parentResult");
+      trackEvent("profile_completed", { profile_type: result.type || "unknown" });
       saveParentProfileToBackend(result);
     }
 
@@ -1338,6 +1385,7 @@
         const localKey = `${PARENT_PROFILE_STORAGE_KEY}_contact`;
         localStorage.setItem(localKey, JSON.stringify({ ...payload, savedAt: new Date().toISOString() }));
         ui.advisorStatus.textContent = "已先保存在本机。";
+        trackEvent("lead_saved_local", { source: "advisor_form" });
         ui.advisorSubmitBtn.disabled = false;
         return;
       }
@@ -1350,10 +1398,12 @@
         const data = await response.json();
         if (!response.ok || !data || !data.ok) throw new Error("contact_save_failed");
         ui.advisorStatus.textContent = "已提交。后续可以基于这份画像继续判断下一步。";
+        trackEvent("lead_submitted", { source: "advisor_form" });
       } catch (error) {
         const localKey = `${PARENT_PROFILE_STORAGE_KEY}_contact`;
         localStorage.setItem(localKey, JSON.stringify({ ...payload, savedAt: new Date().toISOString() }));
         ui.advisorStatus.textContent = "后端暂未保存成功，已先保存在本机。";
+        trackEvent("lead_submit_failed", { source: "advisor_form" });
       } finally {
         ui.advisorSubmitBtn.disabled = false;
       }
@@ -4973,6 +5023,10 @@
       font-weight: 950;
     }
 
+    #screenHome .home-hero h1 .nowrap {
+      white-space: nowrap;
+    }
+
     #screenHome .home-hero .sub {
       max-width: 610px;
       color: #254f48;
@@ -6159,14 +6213,14 @@
           </header>
           <div class="home-hero fg-section-inner">
             <div class="hero-copy-block">
-              <h1>3分钟生成养老画像<br />和本周行动清单</h1>
+              <h1><span class="nowrap">3分钟生成养老画像</span><br />和本周行动清单</h1>
               <p class="sub">先看清父母现在最该优先处理的问题：防摔、独居响应、照护安排、政策服务还是后续用品。测完先给你本周能做的 3 件事。</p>
               <div class="home-tags">
                 <span class="home-tag"><span class="mini-icon clock-icon"></span>约3分钟</span>
                 <span class="home-tag"><span class="mini-icon shield-icon"></span>可保存结果</span>
                 <span class="home-tag"><span class="mini-icon list-icon"></span>生成本周行动建议</span>
               </div>
-              <button id="btnStartParentProfile" class="home-primary-btn">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
+              <button id="btnStartParentProfile" class="home-primary-btn" data-analytics-event="profile_start" data-analytics-source="hero">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
               <a class="home-secondary-action care-hero-link" href="#homeFallTitle">先看低成本防摔自查</a>
               <div class="home-cta-note"><span aria-hidden="true">✓</span> 测完后会得到：父母画像类型、当前优先问题、本周行动清单。</div>
             </div>
@@ -6278,7 +6332,7 @@
                 <p>不确定现在适合居家、日间照料，还是开始看机构。</p>
               </button>
             </div>
-            <button id="btnStartParentProfileConcern" class="home-secondary-action">先测一测我家的情况</button>
+            <button id="btnStartParentProfileConcern" class="home-secondary-action" data-analytics-event="profile_start" data-analytics-source="concern_section">先测一测我家的情况</button>
           </section>
 
           <section class="home-section fg-section-inner" aria-labelledby="homeProfileTitle">
@@ -6293,7 +6347,7 @@
                   <span class="home-tag">可保存结果</span>
                   <span class="home-tag">适合发给家人一起看</span>
                 </div>
-                <button id="btnStartParentProfileHero" class="home-primary-btn">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
+                <button id="btnStartParentProfileHero" class="home-primary-btn" data-analytics-event="profile_start" data-analytics-source="profile_section">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
                 <div class="home-cta-note"><span aria-hidden="true">✓</span> 完成后会生成：父母画像类型、当前优先问题、本周行动清单。</div>
               </div>
               <div class="profile-illustration" aria-hidden="true">
@@ -6391,7 +6445,7 @@
               <h2 id="homeBottomCtaTitle">先别急着做大决定，<br />先看清爸妈现在的真实情况。</h2>
               <p class="section-copy">3分钟生成一份家庭养老行动清单，先把最重要的事做起来。</p>
             </div>
-            <button id="btnStartParentProfileBottom" class="home-primary-btn">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
+            <button id="btnStartParentProfileBottom" class="home-primary-btn" data-analytics-event="profile_start" data-analytics-source="bottom_cta">开始生成我家的养老画像 <span aria-hidden="true">›</span></button>
           </section>
 
           <div class="home-hidden-data">
@@ -6590,11 +6644,11 @@
             </div>
           </div>
           <div class="parent-next-actions">
-            <button id="parentToFallCheckBtn" class="action-btn">继续检查家里防跌风险</button>
+            <button id="parentAdvisorBtn" class="action-btn" data-analytics-event="weekly_plan_generate" data-analytics-source="profile_result">生成本周行动清单</button>
+            <button id="parentToFallCheckBtn" class="ghost-btn" data-analytics-event="fall_check_start" data-analytics-source="profile_result">继续检查家里防跌风险</button>
             <button id="parentProductsBtn" class="ghost-btn">查看我家优先用品</button>
             <button id="parentPolicyBtn" class="ghost-btn">看看可能能申请什么</button>
             <button id="parentLocalPolicyBtn" class="ghost-btn">查看本地政策服务</button>
-            <button id="parentAdvisorBtn" class="ghost-btn">生成本周行动清单</button>
             <button id="parentResultHomeBtn" class="ghost-btn">返回首页</button>
           </div>
           <div id="parentInlinePanel" class="parent-inline-panel hidden">
@@ -6611,7 +6665,7 @@
               <label class="wide">备注<textarea id="advisorNote" rows="3" placeholder="可补充父母所在区县、当前最担心的问题"></textarea></label>
             </div>
             <div class="advisor-actions">
-              <button id="advisorSubmitBtn" class="action-btn" type="button">提交</button>
+              <button id="advisorSubmitBtn" class="action-btn" type="button" data-analytics-event="lead_submit_click" data-analytics-source="advisor_form">提交</button>
               <button id="advisorCancelBtn" class="ghost-btn" type="button">收起</button>
             </div>
             <div id="advisorStatus" class="advisor-status"></div>
