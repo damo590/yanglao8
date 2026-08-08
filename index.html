@@ -6282,6 +6282,224 @@
       .hero h1 { font-size: clamp(50px, 4.2vw, 86px); }
       .danger-box strong { font-size: clamp(34px, 2.6vw, 52px); }
     }
+
+    /* 效果图还原：首屏 V2（2026-08） */
+    #screenHome .fg-nav-inner,
+    #screenHome .fg-section-inner {
+      max-width: 1488px;
+    }
+
+    #screenHome .fg-nav-inner {
+      height: 94px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #screenHome .site-brand { min-width: 290px; }
+
+    #screenHome .site-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #0f8a66, #159d72);
+      box-shadow: 0 12px 25px rgba(19, 122, 91, .19);
+    }
+
+    #screenHome .site-logo svg {
+      width: 34px;
+      height: 34px;
+      color: #fff;
+    }
+
+    #screenHome .site-name {
+      font-size: 30px;
+      color: #087454;
+    }
+
+    #screenHome .site-slogan {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    #screenHome .site-links { gap: 42px; }
+
+    #screenHome .site-links a {
+      line-height: 94px;
+      font-size: 16px;
+    }
+
+    #screenHome .nav-save-btn {
+      min-height: 48px;
+      padding: 0 21px;
+      border-radius: 14px;
+      background: #fff;
+      font-size: 15px;
+    }
+
+    #screenHome .home-hero {
+      min-height: 596px;
+      grid-template-columns: minmax(560px, .83fr) minmax(0, 1.17fr);
+      gap: 44px;
+      padding-top: 64px;
+      padding-bottom: 50px;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    #screenHome .hero-copy-block {
+      gap: 20px;
+      align-self: center;
+    }
+
+    #screenHome .home-hero h1 {
+      max-width: 650px;
+      font-size: clamp(52px, 4vw, 66px);
+      line-height: 1.16;
+      letter-spacing: -.025em;
+      color: #084a3e;
+    }
+
+    #screenHome .home-hero .sub {
+      max-width: 620px;
+      font-size: 22px;
+      line-height: 1.55;
+      color: #516c67;
+    }
+
+    #screenHome .home-hero .home-tags {
+      max-width: 650px;
+      gap: 18px;
+    }
+
+    #screenHome .home-tag {
+      min-height: 48px;
+      padding: 9px 16px;
+      font-size: 15px;
+      box-shadow: 0 8px 24px rgba(24, 78, 65, .08);
+    }
+
+    #screenHome .home-primary-btn {
+      width: 460px;
+      min-width: 0;
+      min-height: 76px;
+      border-radius: 13px;
+      font-size: 22px;
+      box-shadow: 0 18px 36px rgba(19, 122, 91, .23);
+    }
+
+    #screenHome .care-hero-link {
+      width: 460px;
+      min-height: 60px;
+      margin-top: -4px;
+      border: 1.5px solid #13805f;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .78);
+      color: #137a5b;
+      font-size: 18px;
+    }
+
+    #screenHome .home-cta-note {
+      font-size: 15px;
+      color: #59736d;
+    }
+
+    #screenHome .hero-visual-card {
+      min-height: 514px;
+      align-self: center;
+      border-radius: 30px;
+      overflow: visible;
+      background: transparent;
+    }
+
+    #screenHome .family-scene {
+      inset: 0;
+      border-radius: 30px;
+      background: #f4f3e9;
+      box-shadow: 0 22px 48px rgba(33, 81, 69, .11);
+    }
+
+    #screenHome .family-scene::before { display: none; }
+
+    #screenHome .family-hero-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 514px;
+      border-radius: inherit;
+      object-fit: cover;
+      object-position: 52% 50%;
+    }
+
+    #screenHome .result-preview-card {
+      top: 142px;
+      right: 22px;
+      width: 352px;
+      padding: 28px 26px 24px;
+      gap: 18px;
+      border: 1px solid rgba(211, 230, 222, .9);
+      border-radius: 24px;
+      box-shadow: 0 22px 50px rgba(27, 76, 65, .17);
+    }
+
+    #screenHome .result-preview-card h3 { font-size: 25px; }
+    #screenHome .preview-row strong { font-size: 18px; }
+    #screenHome .preview-row p { font-size: 14px; }
+    #screenHome .preview-icon { width: 50px; height: 50px; }
+
+    #screenHome .home-section:first-of-type {
+      margin-top: 26px;
+    }
+
+    #screenHome .home-section h2 {
+      font-size: clamp(32px, 3vw, 42px);
+    }
+
+    @media (max-width: 1540px) {
+      #screenHome .fg-nav-inner,
+      #screenHome .fg-section-inner {
+        max-width: calc(100% - 64px);
+      }
+
+      #screenHome .fg-nav-inner { padding-left: 0; padding-right: 0; }
+      #screenHome .site-links { gap: 26px; }
+      #screenHome .home-hero { grid-template-columns: minmax(520px, .9fr) minmax(0, 1.1fr); }
+      #screenHome .home-hero h1 { font-size: clamp(48px, 4vw, 60px); }
+    }
+
+    @media (max-width: 1080px) {
+      #screenHome .fg-nav-inner,
+      #screenHome .fg-section-inner { max-width: 100%; }
+      #screenHome .fg-nav-inner { height: 72px; padding: 0 18px; }
+      #screenHome .site-logo { width: 44px; height: 44px; }
+      #screenHome .site-name { font-size: 25px; }
+      #screenHome .site-links a { line-height: 72px; }
+      #screenHome .home-hero { grid-template-columns: 1fr; min-height: 0; }
+      #screenHome .hero-visual-card,
+      #screenHome .family-hero-image { min-height: 430px; }
+    }
+
+    @media (max-width: 640px) {
+      #screenHome .fg-nav-inner { padding: 0 12px; }
+      #screenHome .site-logo { width: 42px; height: 42px; border-radius: 12px; }
+      #screenHome .site-logo svg { width: 28px; height: 28px; }
+      #screenHome .site-name { font-size: 23px; }
+      #screenHome .home-hero { padding: 30px 16px 24px; gap: 26px; }
+      #screenHome .home-hero h1 { font-size: clamp(36px, 10vw, 46px); }
+      #screenHome .home-hero .sub { font-size: 18px; }
+      #screenHome .home-primary-btn,
+      #screenHome .care-hero-link { width: 100%; }
+      #screenHome .home-primary-btn { min-height: 66px; font-size: 19px; }
+      #screenHome .hero-visual-card,
+      #screenHome .family-hero-image { min-height: 330px; }
+      #screenHome .result-preview-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: calc(100% - 28px);
+        margin: 220px auto 14px;
+        padding: 18px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -6322,7 +6540,13 @@
           <header class="site-nav">
             <div class="fg-nav-inner">
               <div class="site-brand">
-                <div class="site-logo" aria-hidden="true"><span>◆</span></div>
+                <div class="site-logo" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" role="img" focusable="false">
+                    <path d="M24 39.2C17.6 34.7 10.4 29.4 10.4 20.5c0-5.2 3.8-9.2 8.9-9.2 2 0 3.8.7 4.7 2.2.9-1.5 2.7-2.2 4.7-2.2 5.1 0 8.9 4 8.9 9.2 0 8.9-7.2 14.2-13.6 18.7Z" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18.2 10.8c.5-3.2 2.3-5.2 5.8-6.1 1.2 3.7-.2 6.4-4.1 7.8" fill="none" stroke="currentColor" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M29.8 10.8c-.5-3.2-2.3-5.2-5.8-6.1" fill="none" stroke="currentColor" stroke-width="3.1" stroke-linecap="round"/>
+                  </svg>
+                </div>
                 <div>
                   <div class="site-name">养老8</div>
                   <div class="site-slogan">让父母晚年生活更安心</div>
@@ -6343,7 +6567,7 @@
           <div class="home-hero fg-section-inner">
             <div class="hero-copy-block">
               <h1>3分钟生成养老画像<br />和本周行动清单</h1>
-              <p class="sub">先看清父母现在最该优先处理的问题：防摔、独居响应、照护安排、政策服务还是后续用品。测完先给你本周能做的 3 件事。</p>
+              <p class="sub">先看清父母现在最该优先处理的问题</p>
               <div class="home-tags">
                 <span class="home-tag"><span class="mini-icon clock-icon"></span>约3分钟</span>
                 <span class="home-tag"><span class="mini-icon shield-icon"></span>可保存结果</span>
@@ -6355,13 +6579,7 @@
             </div>
             <div class="hero-visual-card" aria-label="温馨家庭养老场景">
               <div class="family-scene">
-                <div class="sun-glow"></div>
-                <div class="plant"></div>
-                <div class="person elder elder-a"><span></span></div>
-                <div class="person elder elder-b"><span></span></div>
-                <div class="person adult adult-a"><span></span></div>
-                <div class="person adult adult-b"><span></span></div>
-                <div class="phone-card"></div>
+                <img class="family-hero-image" src="./assets/yanglao8-family-hero-v2.png" alt="子女陪伴父母一起查看养老行动清单" width="1536" height="1024" decoding="async" fetchpriority="high" />
               </div>
               <div class="result-preview-card">
                 <h3>你将得到</h3>
@@ -9344,4 +9562,3 @@
   </script>
 </body>
 </html>
-
